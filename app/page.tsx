@@ -54,7 +54,19 @@ export default function PortfolioUI() {
         {/* ── SECTIONS ── */}
         <main>
           <HeroSection />
+
+          {/* SPACER: Hero → Zero Mandate */}
+          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          </div>
+
           <ZeroMandate />
+
+          {/* SPACER: Zero Mandate → Visual Audit */}
+          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          </div>
+
           <VisualAudit />
         </main>
 
