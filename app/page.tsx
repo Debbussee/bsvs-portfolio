@@ -29,13 +29,16 @@ const PortfolioUI = () => {
       <header className="fixed top-0 w-full border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="font-mono text-2xl font-bold tracking-tighter text-white">BSVS</span>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-cyan-500 animate-pulse" style={{ animationDuration: '3s' }} />
+              <span className="font-mono text-2xl font-bold tracking-tighter text-white">BSVS</span>
+            </div>
             <span className="hidden md:inline-block font-mono text-xs text-zinc-500 border-l border-zinc-800 pl-4">SYS.OP.NODE</span>
           </div>
           <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-400">
-            <a href="#index" className="hover:text-cyan-400 transition-colors">INDEX</a>
-            <a href="#mandate" className="hover:text-amber-400 transition-colors">THE ZERO MANDATE</a>
-            <a href="#audit" className="hover:text-rose-400 transition-colors">VISUAL AUDIT</a>
+            <a href="#index" className="hover:text-cyan-400 transition-colors">01. INDEX</a>
+            <a href="#mandate" className="hover:text-amber-400 transition-colors">02. THE ZERO MANDATE</a>
+            <a href="#audit" className="hover:text-rose-400 transition-colors">03. VISUAL AUDIT</a>
           </nav>
         </div>
       </header>
