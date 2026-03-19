@@ -28,24 +28,36 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="relative border-l-2 border-zinc-800 pl-8 py-2"
+      style={{
+        position: 'relative',
+        borderLeft: '2px solid #27272a',
+        paddingLeft: '32px',
+        paddingTop: '8px',
+        paddingBottom: '8px',
+      }}
       initial={{ opacity: 0, x: -32 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ delay: index * 0.18, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* animated border accent */}
       <motion.div
-        className="absolute left-[-2px] top-0 w-[2px] bg-cyan-500"
+        style={{
+          position: 'absolute',
+          left: '-2px',
+          top: 0,
+          width: '2px',
+          background: '#22d3ee',
+        }}
         initial={{ height: 0 }}
         animate={inView ? { height: '100%' } : { height: 0 }}
         transition={{ delay: index * 0.18 + 0.2, duration: 0.5, ease: 'easeOut' }}
       />
 
-      <div className="flex items-baseline gap-4 mb-3">
-        <span className="font-mono text-xs text-zinc-600">{p.num}</span>
-        <h3 className="font-mono text-sm tracking-widest text-white">{p.title}</h3>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '12px' }}>
+        <span style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}>{p.num}</span>
+        <h3 style={{ fontFamily: 'monospace', fontSize: '14px', letterSpacing: '0.1em', color: '#ffffff' }}>{p.title}</h3>
       </div>
-      <p className="text-zinc-400 text-base leading-relaxed max-w-prose">{p.body}</p>
+      <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>{p.body}</p>
     </motion.div>
   );
 }
@@ -55,21 +67,34 @@ export default function ZeroMandate() {
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <div className="w-full border-t border-zinc-800 bg-zinc-950">
-      <section id="mandate" className="py-40 px-8 md:px-16 max-w-4xl mx-auto">
+    <div style={{ width: '100%', background: '#0a0a0b' }}>
+      <section
+        id="mandate"
+        style={{
+          maxWidth: '896px',
+          margin: '0 auto',
+          padding: '80px 48px',
+        }}
+      >
         <div ref={headerRef}>
           <motion.div
-            className="flex items-center gap-4 mb-4"
+            style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-4 h-px bg-amber-500" />
-            <span className="font-mono text-xs tracking-[0.5em] text-amber-500">SECTION 02</span>
+            <div style={{ width: '16px', height: '1px', background: '#f59e0b' }} />
+            <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#f59e0b' }}>SECTION 02</span>
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-16"
+            style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 'bold',
+              letterSpacing: '-0.03em',
+              color: '#ffffff',
+              marginBottom: '64px',
+            }}
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -78,7 +103,7 @@ export default function ZeroMandate() {
           </motion.h2>
         </div>
 
-        <div className="space-y-12">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
           {protocols.map((p, i) => (
             <ProtocolCard key={p.num} p={p} index={i} />
           ))}

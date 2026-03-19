@@ -13,11 +13,11 @@ const nodes = [
 ];
 
 const statusColor: Record<string, string> = {
-  STABLE:    'text-emerald-400',
-  DEGRADING: 'text-rose-400',
-  COMPUTING: 'text-amber-400',
-  ACTIVE:    'text-cyan-400',
-  LOCKED:    'text-zinc-400',
+  STABLE:    '#34d399',
+  DEGRADING: '#fb7185',
+  COMPUTING: '#fbbf24',
+  ACTIVE:    '#22d3ee',
+  LOCKED:    '#a1a1aa',
 };
 
 function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
@@ -28,7 +28,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="relative aspect-square bg-black overflow-hidden cursor-none group"
+      style={{ position: 'relative', aspectRatio: '1', background: '#000', overflow: 'hidden', cursor: 'none' }}
       initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
       animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
       transition={{ delay: (index % 3) * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -40,7 +40,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
       <motion.img
         src={node.img}
         alt={node.title}
-        className="absolute inset-0 w-full h-full object-cover"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         animate={{
           filter: hovered
             ? 'grayscale(100%) contrast(1.2) brightness(0.35)'
@@ -51,33 +51,45 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
       />
 
       {/* node ID badge */}
-      <div className="absolute top-3 left-3 font-mono text-[10px] text-zinc-500 bg-black/70 border border-zinc-800 px-2 py-0.5 z-10">
+      <div style={{
+        position: 'absolute', top: '12px', left: '12px',
+        fontFamily: 'monospace', fontSize: '10px', color: '#71717a',
+        background: 'rgba(0,0,0,0.7)', border: '1px solid #27272a',
+        padding: '2px 8px', zIndex: 10,
+      }}>
         {node.id}
       </div>
 
       {/* hover overlay — slides up */}
       <motion.div
-        className="absolute inset-0 flex flex-col justify-end p-5 z-20"
+        style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '20px', zIndex: 20 }}
         initial={{ opacity: 0, y: 16 }}
         animate={hovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
       >
         {/* top corners */}
-        <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-cyan-500/60" />
-        <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-cyan-500/60" />
+        <div style={{ position: 'absolute', top: '12px', right: '12px', width: '16px', height: '16px', borderTop: '1px solid rgba(34,211,238,0.6)', borderRight: '1px solid rgba(34,211,238,0.6)' }} />
+        <div style={{ position: 'absolute', top: '12px', left: '12px', width: '16px', height: '16px', borderTop: '1px solid rgba(34,211,238,0.6)', borderLeft: '1px solid rgba(34,211,238,0.6)' }} />
 
-        <div className="border border-zinc-700/50 bg-black/60 backdrop-blur-sm p-4 space-y-2">
-          <h3 className="font-mono text-sm text-white tracking-widest border-b border-zinc-700 pb-2">
+        <div style={{
+          border: '1px solid rgba(63,63,70,0.5)', background: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(4px)', padding: '16px',
+        }}>
+          <h3 style={{
+            fontFamily: 'monospace', fontSize: '14px', color: '#fff',
+            letterSpacing: '0.1em', borderBottom: '1px solid #3f3f46',
+            paddingBottom: '8px', marginBottom: '8px',
+          }}>
             {node.title}
           </h3>
-          <div className="font-mono text-[10px] space-y-1 text-zinc-400">
-            <div className="flex justify-between"><span>GEO_LAT</span><span className="text-cyan-400">{node.lat}</span></div>
-            <div className="flex justify-between"><span>GEO_LON</span><span className="text-cyan-400">{node.lon}</span></div>
-            <div className="flex justify-between"><span>ISO</span><span>{node.iso}</span></div>
-            <div className="flex justify-between"><span>SHUTTER</span><span>{node.shutter}</span></div>
-            <div className="flex justify-between">
+          <div style={{ fontFamily: 'monospace', fontSize: '10px', color: '#a1a1aa', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>GEO_LAT</span><span style={{ color: '#22d3ee' }}>{node.lat}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>GEO_LON</span><span style={{ color: '#22d3ee' }}>{node.lon}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>ISO</span><span>{node.iso}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>SHUTTER</span><span>{node.shutter}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span>PHYS_STATE</span>
-              <span className={statusColor[node.status] ?? 'text-zinc-400'}>{node.status}</span>
+              <span style={{ color: statusColor[node.status] ?? '#a1a1aa' }}>{node.status}</span>
             </div>
           </div>
         </div>
@@ -91,21 +103,36 @@ export default function VisualAudit() {
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <div className="w-full border-t border-zinc-800 bg-black">
-      <section id="audit" className="py-40 px-8 md:px-16 max-w-7xl mx-auto">
-        <div ref={headerRef} className="mb-14 flex items-end justify-between border-b border-zinc-800 pb-4">
+    <div style={{ width: '100%', background: '#000' }}>
+      <section
+        id="audit"
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '80px 48px',
+        }}
+      >
+        <div ref={headerRef} style={{
+          marginBottom: '56px', display: 'flex', alignItems: 'flex-end',
+          justifyContent: 'space-between', borderBottom: '1px solid #27272a', paddingBottom: '16px',
+        }}>
           <div>
             <motion.div
-              className="flex items-center gap-4 mb-3"
+              style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}
               initial={{ opacity: 0 }}
               animate={headerInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6 }}
             >
-              <div className="w-4 h-px bg-rose-500" />
-              <span className="font-mono text-xs tracking-[0.5em] text-rose-500">SECTION 03</span>
+              <div style={{ width: '16px', height: '1px', background: '#f43f5e' }} />
+              <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#f43f5e' }}>SECTION 03</span>
             </motion.div>
             <motion.h2
-              className="text-4xl md:text-5xl font-bold tracking-tighter text-white"
+              style={{
+                fontSize: 'clamp(2rem, 5vw, 3rem)',
+                fontWeight: 'bold',
+                letterSpacing: '-0.03em',
+                color: '#ffffff',
+              }}
               initial={{ opacity: 0, y: 20 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -114,7 +141,7 @@ export default function VisualAudit() {
             </motion.h2>
           </div>
           <motion.span
-            className="font-mono text-xs text-zinc-600"
+            style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -123,7 +150,11 @@ export default function VisualAudit() {
           </motion.span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gap: '12px',
+        }}>
           {nodes.map((node, i) => (
             <NodeCard key={node.id} node={node} index={i} />
           ))}
