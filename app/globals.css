@@ -110,12 +110,12 @@ body.cursor-image #cursor-ring {
 }
 
 .glitch::before {
-  color: #f43f5e;
+  color: rgba(255,255,255,0.5);
   animation: glitch-h 2.5s infinite linear alternate-reverse;
 }
 
 .glitch::after {
-  color: #22d3ee;
+  color: rgba(255,255,255,0.35);
   animation: glitch-v 2.5s infinite linear alternate-reverse;
 }
 

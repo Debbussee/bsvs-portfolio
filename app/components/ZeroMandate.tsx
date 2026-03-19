@@ -55,33 +55,35 @@ export default function ZeroMandate() {
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="mandate" className="py-32 px-6 max-w-4xl mx-auto">
-      <div ref={headerRef}>
-        <motion.div
-          className="flex items-center gap-4 mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="w-4 h-px bg-amber-500" />
-          <span className="font-mono text-xs tracking-[0.5em] text-amber-500">SECTION 02</span>
-        </motion.div>
+    <div className="w-full border-t border-zinc-800 bg-zinc-950">
+      <section id="mandate" className="py-40 px-8 md:px-16 max-w-4xl mx-auto">
+        <div ref={headerRef}>
+          <motion.div
+            className="flex items-center gap-4 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-4 h-px bg-amber-500" />
+            <span className="font-mono text-xs tracking-[0.5em] text-amber-500">SECTION 02</span>
+          </motion.div>
 
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          THE ZERO MANDATE
-        </motion.h2>
-      </div>
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-16"
+            initial={{ opacity: 0, y: 24 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            THE ZERO MANDATE
+          </motion.h2>
+        </div>
 
-      <div className="space-y-12">
-        {protocols.map((p, i) => (
-          <ProtocolCard key={p.num} p={p} index={i} />
-        ))}
-      </div>
-    </section>
+        <div className="space-y-12">
+          {protocols.map((p, i) => (
+            <ProtocolCard key={p.num} p={p} index={i} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

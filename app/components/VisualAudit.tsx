@@ -91,42 +91,44 @@ export default function VisualAudit() {
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="audit" className="py-32 px-6 max-w-7xl mx-auto">
-      <div ref={headerRef} className="mb-14 flex items-end justify-between border-b border-zinc-800 pb-4">
-        <div>
-          <motion.div
-            className="flex items-center gap-4 mb-3"
+    <div className="w-full border-t border-zinc-800 bg-black">
+      <section id="audit" className="py-40 px-8 md:px-16 max-w-7xl mx-auto">
+        <div ref={headerRef} className="mb-14 flex items-end justify-between border-b border-zinc-800 pb-4">
+          <div>
+            <motion.div
+              className="flex items-center gap-4 mb-3"
+              initial={{ opacity: 0 }}
+              animate={headerInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-4 h-px bg-rose-500" />
+              <span className="font-mono text-xs tracking-[0.5em] text-rose-500">SECTION 03</span>
+            </motion.div>
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold tracking-tighter text-white"
+              initial={{ opacity: 0, y: 20 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              VISUAL AUDIT
+            </motion.h2>
+          </div>
+          <motion.span
+            className="font-mono text-xs text-zinc-600"
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className="w-4 h-px bg-rose-500" />
-            <span className="font-mono text-xs tracking-[0.5em] text-rose-500">SECTION 03</span>
-          </motion.div>
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold tracking-tighter text-white"
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            VISUAL AUDIT
-          </motion.h2>
+            {nodes.length} DATA NODES
+          </motion.span>
         </div>
-        <motion.span
-          className="font-mono text-xs text-zinc-600"
-          initial={{ opacity: 0 }}
-          animate={headerInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          {nodes.length} DATA NODES
-        </motion.span>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {nodes.map((node, i) => (
-          <NodeCard key={node.id} node={node} index={i} />
-        ))}
-      </div>
-    </section>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {nodes.map((node, i) => (
+            <NodeCard key={node.id} node={node} index={i} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
