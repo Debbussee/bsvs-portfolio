@@ -44,38 +44,39 @@ const PortfolioUI = () => {
       </header>
 
       {/* HERO SECTION */}
-      <section id="index" className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative overflow-hidden">
-        <div className="absolute top-20 left-6 text-zinc-800 z-10"><Crosshair size={32} /></div>
-        <div className="absolute bottom-20 right-6 text-zinc-800 z-10"><Focus size={32} /></div>
+      <section id="index" className="pt-16 w-full relative overflow-hidden border-b border-zinc-800 bg-black">
+        <div className="absolute top-24 left-6 text-zinc-800 z-10"><Crosshair size={32} /></div>
+        <div className="absolute bottom-6 right-6 text-zinc-800 z-10"><Focus size={32} /></div>
 
-        <div className="relative aspect-video w-full border border-zinc-800 bg-black overflow-hidden group">
+        <div className="relative h-[85vh] w-full overflow-hidden group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <div
-            className="absolute -inset-[20%] w-[140%] h-[140%] transition-transform duration-75 ease-out"
+            className="absolute -inset-[10%] w-[120%] h-[120%] transition-transform duration-75 ease-out"
             style={{
               transform: `translateY(${scrollY * 0.15}px)`
             }}
           >
             <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+              src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&q=80&w=2500"
               alt="Hero Architectural Placeholder"
-              className="w-full h-full object-cover grayscale contrast-125 opacity-40"
+              className="w-full h-full object-cover grayscale contrast-125 opacity-40 mix-blend-luminosity"
             />
           </div>
 
           {/* HUD OVERLAY */}
           <div className="absolute inset-0 p-6 flex flex-col justify-between pointer-events-none z-10">
-            <div className="flex justify-between font-mono text-xs text-cyan-500">
+            <div className="flex justify-between font-mono text-xs text-cyan-500 relative z-20">
               <span>REC // 00:00:00:00</span>
               <span>LUM: 45% | F/1.4</span>
             </div>
 
-            <div className="border-l-2 border-cyan-500 pl-6">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2">Be Still Visual Studio</h1>
-              <p className="font-mono text-sm text-zinc-400">FORENSIC ARCHITECTURE & KINETIC RENDERING</p>
+            {/* CENTERED TYPOGRAPHY */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <h1 className="text-[10vw] md:text-[8vw] font-bold tracking-tighter text-white/90 drop-shadow-2xl mix-blend-overlay mb-2">BE STILL VISUAL STUDIO</h1>
+              <p className="font-mono text-sm md:text-base tracking-[0.5em] text-zinc-300 drop-shadow-lg">FORENSIC VISUAL ARCHITECTURE</p>
             </div>
 
-            <div className="flex justify-between items-end font-mono text-[10px] text-zinc-600">
+            <div className="flex justify-between items-end font-mono text-[10px] text-zinc-600 relative z-20">
               <span>LAT: 33.2148° N<br />LON: 97.1331° W</span>
               <ScanLine size={16} className="text-amber-500 animate-pulse" />
             </div>
