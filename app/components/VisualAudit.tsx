@@ -5,8 +5,8 @@ import { motion, useInView } from 'framer-motion';
 
 const nodes = [
   { id: '01', title: 'KINETIC IMPACT_01',       img: '/ella_editorial_bsvs_220001.png', lat: '34.0522', lon: '-118.2437', status: 'STABLE',    iso: '800',  shutter: '1/500' },
-  { id: '02', title: 'STRUCTURAL DECAY_04',      img: '/renee_flood_bsvs_049120.png',   lat: '40.7128', lon: '-74.0060',  status: 'DEGRADING', iso: '1600', shutter: '1/250' },
-  { id: '03', title: 'FLUID DYNAMICS_11',        img: '/sienna_clktwr_bsvs_109020.png', lat: '51.5074', lon: '-0.1278',   status: 'COMPUTING', iso: '400',  shutter: '1/1000' },
+  { id: '02', title: 'STRUCTURAL DECAY_04',      img: '/sienna_clktwr_bsvs_109020.png',   lat: '40.7128', lon: '-74.0060',  status: 'DEGRADING', iso: '1600', shutter: '1/250' },
+  { id: '03', title: 'FLUID DYNAMICS_11',        img: '/renee_flood_bsvs_049120.png', lat: '51.5074', lon: '-0.1278',   status: 'COMPUTING', iso: '400',  shutter: '1/1000' },
   { id: '04', title: 'THERMAL SHIFT_09',         img: '/tae_hmlss_bsvs_071110.png',     lat: '35.6895', lon: '139.6917',  status: 'STABLE',    iso: '200',  shutter: '1/2000' },
   { id: '05', title: 'OPTICAL REFRACTION_02',    img: '/ella_water_bsvs_220001.png',    lat: '48.8566', lon: '2.3522',    status: 'ACTIVE',    iso: '640',  shutter: '1/800' },
   { id: '06', title: 'BIOMECHANICAL STRESS_07',  img: '/zm_bench_bsvs_625530.png',      lat: '37.7749', lon: '-122.4194', status: 'LOCKED',    iso: '3200', shutter: '1/60' },

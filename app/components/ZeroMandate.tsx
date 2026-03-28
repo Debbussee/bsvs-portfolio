@@ -11,13 +11,13 @@ const protocols = [
   },
   {
     num: '02',
-    title: 'SPATIAL & KINETIC LOCKDOWN',
-    body: 'Every node in the archive operates strictly under defined physics constraints. Thermodynamic drag, high Weber number fragmentation, and geometric permanence are not suggestions—they are structural mandates.',
+    title: 'Precision is the ultimate luxury.',
+    body: 'Our Visual Systems represent a commitment to deterministic output and absolute creative control. By utilizing Forensic Realism, we ensure that every texture, shadow, and material interaction aligns with a singular architectural intent.\n\nEngineered Visuals. Defined by precision.',
   },
   {
     num: '03',
-    title: 'ARCHITECTURAL ISOLATION',
-    body: 'The environment must serve the subject. Absolute voids (#000000) and aggressive aperture isolation (f/1.4) are utilized to force processing compute directly into the physical mass and kinetic state of the core geometry.',
+    title: '| ARCHITECTURAL ISOLATION',
+    body: 'The environment exists solely to anchor the subject. By utilizing absolute voids and a narrow depth of field, we strip away peripheral noise. This forces every bit of visual detail to concentrate on the physical mass and kinetic state of the subject, ensuring the viewer’s focus remains entirely on the raw tactility of the geometry.',
   },
 ];
 
@@ -57,7 +57,7 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
         <span style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}>{p.num}</span>
         <h3 style={{ fontFamily: 'monospace', fontSize: '14px', letterSpacing: '0.1em', color: '#ffffff' }}>{p.title}</h3>
       </div>
-      <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>{p.body}</p>
+      <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch', whiteSpace: 'pre-wrap' }}>{p.body}</p>
     </motion.div>
   );
 }
