@@ -10,6 +10,7 @@ const CursorRig     = dynamic(() => import('./components/CursorRig'),     { ssr:
 const HeroSection   = dynamic(() => import('./components/HeroSection'),   { ssr: false });
 import ZeroMandate from './components/ZeroMandate';
 import VisualAudit from './components/VisualAudit';
+import HookLibrary from './components/HookLibrary';
 
 export default function PortfolioUI() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -47,6 +48,7 @@ export default function PortfolioUI() {
               <a href="#index"   className="hover:text-cyan-400 transition-colors" data-hover>01. INDEX</a>
               <a href="#mandate" className="hover:text-amber-400 transition-colors" data-hover>02. ZERO MANDATE</a>
               <a href="#audit"   className="hover:text-rose-400 transition-colors" data-hover>03. VISUAL AUDIT</a>
+              <a href="#hook"    className="hover:text-violet-400 transition-colors" data-hover>04. HOOK LIBRARY</a>
             </nav>
           </div>
         </header>
@@ -68,6 +70,13 @@ export default function PortfolioUI() {
           </div>
 
           <VisualAudit />
+
+          {/* SPACER: Visual Audit → Hook Library */}
+          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          </div>
+
+          <HookLibrary />
         </main>
 
         {/* ── FOOTER ── */}
