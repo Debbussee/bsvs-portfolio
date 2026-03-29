@@ -4,9 +4,25 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const nodes = [
-  { id: '01', title: 'KINETIC IMPACT_01',       img: '/images/kinetic_toolbox_terminal_velocity_decay_bsvs_202603190803.png', lat: '34.0522', lon: '-118.2437', status: 'STABLE',    iso: '800',  shutter: '1/500', details: [] },
-  { id: '02', title: 'STRUCTURAL DECAY_04',      img: '/images/oxide_flaking_thermal_decay_macro_bsvs_202603190754.png',   lat: '40.7128', lon: '-74.0060',  status: 'DEGRADING', iso: '1600', shutter: '1/250', details: [] },
-  { id: '03', title: 'FLUID DYNAMICS_11',        img: '/images/fluid_dynamics_bsvs_202603291326.png', lat: '51.5074', lon: '-0.1278',   status: 'COMPUTING', iso: '400',  shutter: '1/1000', details: [] },
+  { id: '01', title: 'KINETIC IMPACT_01',       img: '/images/kinetic_toolbox_terminal_velocity_decay_bsvs_202603190803.png', lat: '34.0522', lon: '-118.2437', status: 'STABLE',    iso: '800',  shutter: '1/500', 
+    details: [
+      { id: '', label: 'Surface Porosity & Micro-Oxidation', description: 'Notice the granular irregularity on the wrench’s surface. Through the lens of Forensic Realism, the visual system captures the precise degradation of high-carbon steel. The erratic distribution of rust and micro-pitting suggests a tangible history, avoiding the repetitive patterns that typically betray digital origins.' },
+      { id: '', label: 'Kinetic Light Scattering', description: 'The motion blur isn\'t a uniform smear; it reflects a sophisticated understanding of light interaction. As the tool descends toward the concrete, the specularity shifts along the forged edges, creating a "shutter-accurate" representation of velocity that captures the authentic way light breaks across a moving, textured metallic plane.' }
+    ]
+  },
+  { id: '02', title: 'STRUCTURAL DECAY_04',      img: '/images/oxide_flaking_thermal_decay_macro_bsvs_202603190754.png',   lat: '40.7128', lon: '-74.0060',  status: 'DEGRADING', iso: '1600', shutter: '1/250', 
+    details: [
+      { id: '01 /', label: 'Material Stratification', description: 'The brittle, curled edges of the flaking iron oxide exhibit accurate tensile stress and structural degradation. This layering simulates exactly how physical matter fractures and separates under environmental decay.' },
+      { id: '02 /', label: 'Specular Granularity', description: 'Directional lighting casts deep, absolute shadows beneath lifted strata while catching micro-specular highlights on unoxidized metallic fragments. This interplay establishes a profound sense of tactile reality.' }
+    ]
+  },
+  { id: '03', title: 'FLUID DYNAMICS_11',        img: '/images/fluid_dynamics_bsvs_202603291326.png', lat: '51.5074', lon: '-0.1278',   status: 'COMPUTING', iso: '400',  shutter: '1/1000', 
+    details: [
+      { id: '01.', label: 'Capillary Action & Transition', description: 'The visual system accurately simulates moisture wicking upward on the canvas pant leg. The irregular, jagged border between the dry, porous grain of the fabric and the saturated, heavy tonal weight of the wet hem demonstrates a deep understanding of physical material properties.' },
+      { id: '02.', label: 'Kinetic Fluid Dynamics', description: 'The splash is a mathematically precise freeze-frame of chaos. Suspended droplets vary in volume and velocity, each acting as a microscopic optical lens where harsh, directional light refracts to create sharp, specular highlights and distinct micro-shadows.' },
+      { id: '03.', label: 'Differential Weathering', description: 'The leather boot exhibits deep structural creasing and micro-abrasions. The Engineered Visuals calculate exactly how light behaves—becoming highly reflective over the smooth, wet leather while remaining matte and absorptive where the material is scuffed.' }
+    ]
+  },
   { id: '04', title: 'THERMAL SHIFT_09',         img: '/images/cyborg_thermal_shift_bsvs_202603291346.png',     lat: '35.6895', lon: '139.6917',  status: 'STABLE',    iso: '200',  shutter: '1/2000', 
     details: [
       { id: '', label: '', description: 'The profound sense of reality in these Engineered Visuals is anchored by two critical physical details:' },
@@ -21,7 +37,13 @@ const nodes = [
       { id: '03 / .refraction', label: 'Internal Refraction', description: 'Capturing the chaotic beauty of light hitting microscopic internal fractures. The visual calculates not just the primary exit beam, but the internal structural flaws of the glass medium according to strict optical physics.' }
     ]
   },
-  { id: '06', title: 'BIOLOGICAL STRESS_07',  img: '/images/human_bio_fatigue_bsvs_202603291319.png',      lat: '37.7749', lon: '-122.4194', status: 'LOCKED',    iso: '3200', shutter: '1/60', details: [] },
+  { id: '06', title: 'BIOLOGICAL STRESS_07',  img: '/images/human_bio_fatigue_bsvs_202603291319.png',      lat: '37.7749', lon: '-122.4194', status: 'LOCKED',    iso: '3200', shutter: '1/60', 
+    details: [
+      { id: '01', label: 'Volumetric Particulate Scattering', description: 'The atmosphere is defined by precise light interaction with suspended dust. The light does not merely overlay the subject; it wraps around the anatomy and adheres to physical falloff logic, creating deep environmental authenticity.' },
+      { id: '02', label: 'Micro-Surface Fidelity', description: 'Interaction of light on the workbench demonstrates advanced material logic. Specular highlights map flawlessly to the greasy, uneven texture of the metal, creating a stark contrast against the matte, grime-layered uniform.' },
+      { id: '03', label: 'Anatomical Tension', description: 'Visual weight is anchored by the compression of the hands against the surface and the visible tension in the forearm musculature. This physical logic prevents the subject from floating, locking them into the geometry of the space.' }
+    ]
+  },
 ];
 
 const statusColor: Record<string, string> = {
