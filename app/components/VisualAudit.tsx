@@ -7,7 +7,13 @@ const nodes = [
   { id: '01', title: 'KINETIC IMPACT_01',       img: '/images/kinetic_toolbox_terminal_velocity_decay_bsvs_202603190803.png', lat: '34.0522', lon: '-118.2437', status: 'STABLE',    iso: '800',  shutter: '1/500', details: [] },
   { id: '02', title: 'STRUCTURAL DECAY_04',      img: '/images/oxide_flaking_thermal_decay_macro_bsvs_202603190754.png',   lat: '40.7128', lon: '-74.0060',  status: 'DEGRADING', iso: '1600', shutter: '1/250', details: [] },
   { id: '03', title: 'FLUID DYNAMICS_11',        img: '/images/fluid_dynamics_bsvs_202603291326.png', lat: '51.5074', lon: '-0.1278',   status: 'COMPUTING', iso: '400',  shutter: '1/1000', details: [] },
-  { id: '04', title: 'THERMAL SHIFT_09',         img: '/images/cyborg_thermal_shift_bsvs_202603291346.png',     lat: '35.6895', lon: '139.6917',  status: 'STABLE',    iso: '200',  shutter: '1/2000', details: [] },
+  { id: '04', title: 'THERMAL SHIFT_09',         img: '/images/cyborg_thermal_shift_bsvs_202603291346.png',     lat: '35.6895', lon: '139.6917',  status: 'STABLE',    iso: '200',  shutter: '1/2000', 
+    details: [
+      { id: '', label: '', description: 'The profound sense of reality in these Engineered Visuals is anchored by two critical physical details:' },
+      { id: '01', label: 'Thermal Material Degradation', description: 'The transition between the organic dermis and the internal armature exhibits advanced material logic. We see asymmetrical carbonization at the tissue\'s edge—irregular, volumetric curling that mimics high-intensity heat exposure—juxtaposed with the metallic "heat-tinting" (oxidation gradients of blue and purple) on the core cylinder.' },
+      { id: '02', label: 'Subsurface Light Transport', description: 'The luminescence from the wrist cavity isn\'t a flat overlay. It utilizes precise subsurface scattering, where light bleeds through the translucent layers of the surrounding tissue. This interaction creates a warm, internal glow that obeys the laws of organic physics, correctly calculating shadow falloff across the underside of the digits and sleeve fabric.' }
+    ]
+  },
   { id: '05', title: 'OPTICAL REFRACTION_02',    img: '/images/prism_light_optical_refraction_202603291351.png',    lat: '48.8566', lon: '2.3522',    status: 'ACTIVE',    iso: '640',  shutter: '1/800', 
     details: [
       { id: '01 / .density', label: 'Particulate Density', description: 'The realism is anchored by micro-abrasions, structural chips along the glass edge, and the exact scattering of settled dust on the front plane. This grounds the object in a physical, tangible environment rather than a sterile digital vacuum.' },
@@ -106,7 +112,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
               textTransform: 'uppercase', letterSpacing: '0.1em'
             }}
           >
-            [ READ MORE ]
+            [ THE FORENSIC WHY ]
           </button>
         </div>
       </motion.div>
@@ -125,10 +131,12 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
           {node.details && node.details.length > 0 ? (
             node.details.map((d, idx) => (
               <div key={idx} style={{ marginBottom: idx === node.details.length - 1 ? 0 : '16px' }}>
-                <h3 style={{ fontFamily: 'monospace', fontSize: '12px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px', fontWeight: 'bold' }}>
-                  {d.id} <br />
-                  <span style={{ color: '#a1a1aa' }}>{d.label}</span>
-                </h3>
+                {(d.id || d.label) && (
+                  <h3 style={{ fontFamily: 'monospace', fontSize: '12px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px', fontWeight: 'bold' }}>
+                    {d.id} {d.id && d.label && <br />}
+                    <span style={{ color: '#a1a1aa' }}>{d.label}</span>
+                  </h3>
+                )}
                 <p style={{ fontSize: '12px', color: '#d4d4d8', lineHeight: '1.6' }}>
                   {d.description}
                 </p>
