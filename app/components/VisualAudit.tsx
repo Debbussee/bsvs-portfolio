@@ -44,6 +44,13 @@ const nodes = [
       { id: '03', label: 'Anatomical Tension', description: 'Visual weight is anchored by the compression of the hands against the surface and the visible tension in the forearm musculature. This physical logic prevents the subject from floating, locking them into the geometry of the space.' }
     ]
   },
+  { id: '08', title: 'COGNITIVE ISOLATION', img: '/images/watching_tv_alone_bsvs_202603300737.png', lat: '41.8781', lon: '-87.6298', status: 'ACTIVE', iso: '800', shutter: '1/30', 
+    details: [
+      { id: '01', label: 'Skin & Specularity', description: 'The complex interaction of the harsh, cool screen light with the subject\'s skin demonstrates exacting lighting accuracy. Engineered Visuals produce precise specular highlights mimicking natural moisture on the forehead and legs, alongside accurate subsurface scattering.' },
+      { id: '02', label: 'Atmospheric Logic', description: 'The illumination does not merely strike surfaces; it interacts with the space between. The rendering of suspended particulate matter (dust motes) caught in the monitor\'s glow showcases advanced photometric light simulation.' },
+      { id: '03', label: 'Material Weight', description: 'The upholstery of the armchair exhibits extreme high fidelity. These Visual Systems capture the raised woven tapestry pattern and the structural logic of the fabric\'s compression on the armrest through deep ambient occlusion.' }
+    ]
+  },
 ];
 
 const statusColor: Record<string, string> = {
@@ -78,8 +85,10 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
         alt={node.title}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         animate={{
-          filter: hovered || detailsActive
-            ? 'grayscale(100%) contrast(1.2) brightness(0.25)'
+          filter: hovered && !detailsActive
+            ? 'grayscale(0%) contrast(1.1) brightness(0.8)'
+            : detailsActive
+            ? 'grayscale(0%) contrast(1.1) brightness(0.4)'
             : 'grayscale(100%) contrast(1.15) brightness(0.65)',
           scale: hovered || detailsActive ? 1.04 : 1,
         }}
