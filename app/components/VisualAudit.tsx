@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const nodes = [
   { id: '01', title: 'KINETIC IMPACT_01',       img: '/images/kinetic_toolbox_terminal_velocity_decay_bsvs_202603190803.png', lat: '34.0522', lon: '-118.2437', status: 'STABLE',    iso: '800',  shutter: '1/500', 
@@ -61,7 +61,7 @@ const statusColor: Record<string, string> = {
   LOCKED:    '#a1a1aa',
 };
 
-function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
+function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index: number; onImageClick: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const [hovered, setHovered] = useState(false);
@@ -76,7 +76,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
       transition={{ delay: (index % 3) * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setDetailsActive(false); }}
-      onClick={() => setDetailsActive(!detailsActive)}
+      onClick={() => onImageClick()}
       data-img-hover
     >
       {/* image */}
@@ -135,6 +135,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
           
           <button 
             onMouseEnter={() => setDetailsActive(true)}
+            onClick={(e) => { e.stopPropagation(); setDetailsActive(!detailsActive); }}
             style={{
               marginTop: '12px', width: '100%', padding: '6px', 
               border: '1px solid #22d3ee', color: '#22d3ee', 
@@ -155,6 +156,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: detailsActive ? 1 : 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
+        onClick={(e) => e.stopPropagation()}
       >
         <div 
           style={{ background: 'rgba(0,0,0,0.7)', padding: '20px', borderLeft: '2px solid #fff', backdropFilter: 'blur(8px)', overflowY: 'auto', maxHeight: '100%' }}
@@ -187,6 +189,7 @@ function NodeCard({ node, index }: { node: typeof nodes[0]; index: number }) {
 export default function VisualAudit() {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
+  const [fullScreenNode, setFullScreenNode] = useState<typeof nodes[0] | null>(null);
 
   return (
     <div style={{ width: '100%', background: '#000' }}>
@@ -242,10 +245,68 @@ export default function VisualAudit() {
           gap: '12px',
         }}>
           {nodes.map((node, i) => (
-            <NodeCard key={node.id} node={node} index={i} />
+            <NodeCard key={node.id} node={node} index={i} onImageClick={() => setFullScreenNode(node)} />
           ))}
         </div>
       </section>
+
+      {/* FULL SCREEN MODAL */}
+      <AnimatePresence>
+        {fullScreenNode && (
+          <motion.div
+            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(12px)' }}
+            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 9999,
+              background: 'rgba(0,0,0,0.85)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'zoom-out',
+            }}
+            onClick={() => setFullScreenNode(null)}
+          >
+            <motion.img
+              src={fullScreenNode.img}
+              alt={fullScreenNode.title}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                maxWidth: '96vw',
+                maxHeight: '96vh',
+                objectFit: 'contain',
+                boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
+              }}
+            />
+            {/* Close instruction */}
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              style={{ position: 'absolute', top: '24px', right: '24px', fontFamily: 'monospace', fontSize: '12px', color: '#a1a1aa', border: '1px solid #3f3f46', padding: '8px 16px', background: 'rgba(0,0,0,0.5)' }}
+            >
+              [ CLICK TO CLOSE ]
+            </motion.div>
+            {/* Context ID */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              style={{ position: 'absolute', bottom: '24px', left: '24px', fontFamily: 'monospace', fontSize: '12px', color: '#fff', borderLeft: '2px solid #22d3ee', paddingLeft: '12px', background: 'rgba(0,0,0,0.5)' }}
+            >
+              NODE_ID: {fullScreenNode.id} <br/>
+              <span style={{ color: '#22d3ee' }}>{fullScreenNode.title}</span><br/>
+              <span style={{ fontSize: '10px', color: '#71717a' }}>{fullScreenNode.lat} / {fullScreenNode.lon}</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
