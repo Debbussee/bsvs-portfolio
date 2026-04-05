@@ -12,7 +12,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-zinc-400 flex flex-col items-center justify-center p-8 md:p-24 selection:bg-zinc-800 selection:text-zinc-100">
+    <div className="min-h-screen bg-black text-zinc-400 flex flex-col items-center justify-start px-8 pt-[25vh] pb-24 md:px-24 selection:bg-zinc-800 selection:text-zinc-100">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -25,11 +25,23 @@ export default function AboutPage() {
       </motion.div>
       
       <motion.main 
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, delay: 0.2 }}
+        transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="max-w-[700px] mx-auto flex flex-col w-full"
       >
+        {/* ABOUT TITLE */}
+        <div className="mb-16 md:mb-20 flex flex-col items-center">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-4 h-px bg-zinc-600" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-zinc-500">SECTION 05</span>
+            <div className="w-4 h-px bg-zinc-600" />
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tighter text-white uppercase" style={{ letterSpacing: '-0.03em' }}>
+            ABOUT
+          </h1>
+        </div>
+
         <div className="space-y-8 md:space-y-10 font-serif text-[15px] md:text-[17px] leading-[2.2] md:leading-[2.4] text-zinc-400 text-justify tracking-wide font-light w-full">
           <p>
             Every aircraft that has ever flown did so inside a mathematical framework with a hole in it.
@@ -64,7 +76,7 @@ export default function AboutPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.8 }}
-        className="mt-24 md:mt-32 mb-16 flex flex-col items-center space-y-8"
+        className="mt-24 md:mt-32 flex flex-col items-center space-y-8"
       >
         <div className="w-12 h-px bg-zinc-800" />
 
