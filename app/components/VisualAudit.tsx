@@ -53,6 +53,37 @@ const nodes = [
   },
 ];
 
+const advancedNodes = [
+  { id: '09', title: 'HEMODYNAMIC COUPLING', img: '/images/sienna_nearmiss_bsvs_202604050904.png', lat: '41.8781', lon: '-87.6298', status: 'ACTIVE', iso: '800', shutter: '1/8000', 
+    details: [
+      { id: '01 .', label: 'Translational Kinetic Blur Optical Artifact', description: 'The supersonic projectile exhibits distinct translational attenuation along its trajectory axis due to exposure limits exceeded by high-velocity transit. This kinetic artifact diffuses the trailing edge particulate density, smearing metallic specular highlights into a continuous gradient. The perceived spatial elongation implies extreme environmental shear forces acting upon the localized atmospheric medium during the capture interval.' },
+      { id: '02 .', label: 'Acoustic Impedance Shockwave', description: 'Rapid displacement of ambient atmospheric volume generates a high-pressure gradient, resulting in pronounced refractive distortion at the primary epidermal interface. This localized acoustic impedance disparity subjects the organic substrate to transient structural fatigue, manifesting as a compressive topological ripple. The thermal consequence of this adiabatic compression further alters the surrounding refractive index, creating an observable localized lensing effect.' },
+      { id: '03.', label: 'Corneal Specular Irregularity', description: 'The highly convex geometry of the biological ocular surface induces severe specular irregularity, compressing incident environmental illumination into a distorted hemispherical projection. This reflective impedance maps rectilinear external light sources onto a curved topological plane, obscuring surrounding particulate density through non-uniform localized attenuation. The resulting focal variance indicates a disruption in the standard optical phase boundary caused by the ambient fluid-film interaction.' }
+    ]
+  },
+  { id: '10', title: 'VOLUMETRIC CONSERVATION', img: '/images/sienna_event_bsvs_202604050904.png', lat: '41.8781', lon: '-87.6298', status: 'COMPUTING', iso: '800', shutter: '1/8000', 
+    details: [
+      { id: '01|', label: 'Structural Fatigue', description: 'The primary kinetic event exhibits a profound specular irregularity where high-viscosity fluid transitions into a rigid geometric lattice suggesting a localized phase transition. This phenomenon indicates internal structural fatigue that results in a calculated integrity rather than stochastic fragmentation of the medium. Internal algorithmic impedance maintains this coherence despite high-velocity kinetic energy release and localized thermal consequence.' },
+      { id: '02|', label: 'Substrate Impedance', description: 'Internal cavitation demonstrates significant volumetric attenuation as the projectile penetrates the semi-solid medium revealing a sudden shift in the refractive index profile. The visible stress patterns within the block indicate localized thermal consequence and structural fatigue where molecular bonds fail under hyper-velocity impact. The resulting optical profile suggests an impedance mismatch consistent with high-density synthetic polymers subjected to specific spectroscopic doping.' },
+      { id: '03|', label: 'Optical Impedance', description: 'The image exhibits an optical inconsistency where the shutter speed required to freeze the particulate density was insufficient to resolve high-frequency vibrations of the splashing medium. This resulting blur indicates a massive kinetic flux that exceeds the temporal resolution of the capture high-fidelity medium creating a visual smear. The grounded perspective is maintained by the predictable failure of the mechanical shutter to resolve hyper-velocity particulate dynamics.' }
+    ]
+  },
+  { id: '11', title: 'ENERGY TRANSFER LIMITS', img: '/images/sienna_hematoma_bsvs_202604050946.png', lat: '41.8781', lon: '-87.6298', status: 'DEGRADING', iso: '800', shutter: '1/8000', 
+    details: [
+      { id: '1 / .', label: 'Viscoelastic Hysteresis Mechanical Deformation', description: 'The ballistic event induced a high-velocity kinetic transfer resulting in localized viscoelastic hysteresis within the hydrogel matrix, yielding a persistent vacuum-voided permanent cavity. This structural fatigue is characterized by the radial dissipation of energy that exceeded the polymer\'s elastic threshold, manifesting as non-reversible tract disruptions and secondary fracturing.' },
+      { id: '2 / .', label: 'Mie Scattering', description: 'The suspension of high-density particulate matter within the central cavitation zone facilitates significant Mie scattering, attenuating the coherent transmission of incident light. This increase in optical impedance creates a localized region of high extinction coefficients, where the concentration of organic-simulant debris disrupts the refractive continuity of the medium.' },
+      { id: '3 / .', label: 'Specular Dioptric Refraction', description: 'The interface between the ambient atmosphere and the rectangular gelatinous block induces specular dioptric refraction, distorting the spatial geometry of the background lab instrumentation. Variations in the refractive index at the block\'s boundaries lead to lateral chromatic aberration and focal shifts, complicating the volumetric assessment of the internal projectile trajectory.' }
+    ]
+  },
+  { id: '12', title: 'KINETIC DEFORMATION', img: '/images/sienna_robot_bsvs_202604050951.png', lat: '41.8781', lon: '-87.6298', status: 'LOCKED', iso: '800', shutter: '1/8000', 
+    details: [
+      { id: '01 / .', label: 'StructuralFatigue Kinetic Deformation', description: 'The cranium of the synthetic entity exhibits acute structural fatigue characterized by deep radial stress fractures and ductile deformation at the primary impact epicenter. This catastrophic tensile failure indicates a massive transfer of kinetic energy that exceeded the material yield strength, resulting in localized geometric collapse. The visible impedance mismatch between the striking biological mass and the metallic substrate facilitated optimal force propagation directly into the underlying structural matrix.' },
+      { id: '02 / .', label: 'TemporalDisplacement Optical Velocity Smearing', description: 'Pronounced optical smearing is localized around the cervical articulation of the synthetic unit, evidencing extreme angular acceleration resulting from the ballistic impact. This temporal displacement artifact occurs when the targeted physical velocity significantly exceeds the integration time of the capturing optical system, blurring the mechanical striations along the rotational axis. The localized kinetic blur mathematically corroborates the violent kinetic transfer and immediate spatial displacement away from the primary force vector.' },
+      { id: '03 / .', label: 'SpecularIrregularity', description: 'The metallic chassis demonstrates profound specular irregularity where the ambient overhead illumination interacts with the newly deformed topological features. High-intensity anisotropic reflections map the topography of the structural depressions, confirming an acute and chaotic alteration in the surface normal vectors. This localized photon scattering attenuates sharply along the jagged edges of the stress fractures, providing precise optical validation of the compromised material density.' }
+    ]
+  }
+];
+
 const statusColor: Record<string, string> = {
   STABLE:    '#34d399',
   DEGRADING: '#fb7185',
@@ -245,6 +276,24 @@ export default function VisualAudit() {
           gap: '12px',
         }}>
           {nodes.map((node, i) => (
+            <NodeCard key={node.id} node={node} index={i} onImageClick={() => setFullScreenNode(node)} />
+          ))}
+        </div>
+
+        {/* ADVANCED KINETIC AUDITS */}
+        <div style={{ marginTop: '80px', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ width: '16px', height: '1px', background: '#f43f5e' }} />
+          <h3 style={{ fontFamily: 'monospace', fontSize: '14px', letterSpacing: '0.2em', color: '#f43f5e' }}>
+            ADVANCED KINETIC AUDITS
+          </h3>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gap: '12px',
+        }}>
+          {advancedNodes.map((node, i) => (
             <NodeCard key={node.id} node={node} index={i} onImageClick={() => setFullScreenNode(node)} />
           ))}
         </div>

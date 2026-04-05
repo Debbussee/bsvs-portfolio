@@ -116,7 +116,7 @@ export default function HookLibrary() {
             QUESTIONS?
           </h3>
           <a
-            href="mailto:hello@bestillvisualstudio.com"
+            href="mailto:mkd@bestillvisualstudio.com"
             style={{
               padding: '16px 32px',
               border: '1px solid #a78bfa',
