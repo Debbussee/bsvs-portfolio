@@ -11,11 +11,10 @@ const HeroSection   = dynamic(() => import('./components/HeroSection'),   { ssr:
 import ZeroMandate from './components/ZeroMandate';
 import VisualAudit from './components/VisualAudit';
 import HookLibrary from './components/HookLibrary';
-import AboutModal from './components/AboutModal';
 
 export default function PortfolioUI() {
   const [introComplete, setIntroComplete] = useState(false);
-  const [isAboutOpen, setAboutOpen] = useState(false);
+
   const handleIntroComplete = useCallback(() => setIntroComplete(true), []);
 
   useEffect(() => {
@@ -29,8 +28,7 @@ export default function PortfolioUI() {
       {/* CURSOR */}
       <CursorRig />
 
-      {/* ABOUT OVERLAY MODAL */}
-      <AboutModal isOpen={isAboutOpen} onClose={() => setAboutOpen(false)} />
+
 
       {/* INTRO */}
       <IntroSequence onComplete={handleIntroComplete} />
@@ -55,18 +53,11 @@ export default function PortfolioUI() {
               </span>
             </div>
 
-            <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-500 items-center">
+            <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-500">
               <a href="#index"   className="hover:text-cyan-400 transition-colors" data-hover>01. INDEX</a>
               <a href="#mandate" className="hover:text-amber-400 transition-colors" data-hover>02. ZERO MANDATE</a>
               <a href="#audit"   className="hover:text-rose-400 transition-colors" data-hover>03. VISUAL AUDIT</a>
               <a href="#hook"    className="hover:text-violet-400 transition-colors" data-hover>04. HOOK LIBRARY</a>
-              <button 
-                onClick={() => setAboutOpen(true)}
-                className="hover:text-white transition-colors bg-transparent border-none cursor-pointer uppercase font-mono tracking-widest"
-                data-hover
-              >
-                [ ABOUT ]
-              </button>
             </nav>
           </div>
         </header>

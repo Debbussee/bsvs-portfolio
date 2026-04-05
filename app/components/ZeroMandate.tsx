@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import AboutModal from './AboutModal';
 
 const protocols = [
   {
@@ -17,7 +18,7 @@ const protocols = [
   {
     num: '03',
     title: '| ARCHITECTURAL ISOLATION',
-    body: 'The environment exists solely to anchor the subject. By utilizing absolute voids and a narrow depth of field, we strip away peripheral noise. This forces every bit of visual detail to concentrate on the physical mass and kinetic state of the subject, ensuring the viewer’s focus remains entirely on the raw tactility of the geometry.',
+    body: 'The environment exists solely to anchor the subject. By utilizing absolute voids and a narrow depth of field, we strip away peripheral noise. This forces every bit of visual detail to concentrate on the physical mass and kinetic state of the subject, ensuring the viewer\'s focus remains entirely on the raw tactility of the geometry.',
   },
 ];
 
@@ -65,6 +66,9 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
 export default function ZeroMandate() {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const aboutBtnRef = useRef<HTMLDivElement>(null);
+  const aboutBtnInView = useInView(aboutBtnRef, { once: true, margin: '-60px' });
 
   return (
     <div style={{ width: '100%', background: '#0a0a0b' }}>
@@ -108,7 +112,47 @@ export default function ZeroMandate() {
             <ProtocolCard key={p.num} p={p} index={i} />
           ))}
         </div>
+
+        {/* ABOUT LINK */}
+        <motion.div
+          ref={aboutBtnRef}
+          style={{ marginTop: '64px', display: 'flex', justifyContent: 'center' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={aboutBtnInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          <button
+            onClick={() => setAboutOpen(true)}
+            style={{
+              padding: '12px 32px',
+              border: '1px solid #f59e0b',
+              color: '#f59e0b',
+              fontSize: '11px',
+              fontFamily: 'monospace',
+              background: 'transparent',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = 'rgba(245, 158, 11, 0.08)';
+              e.currentTarget.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.15)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+            data-hover
+          >
+            [ ABOUT ]
+          </button>
+        </motion.div>
       </section>
+
+      {/* ABOUT MODAL OVERLAY */}
+      <AboutModal isOpen={aboutOpen} onClose={() => setAboutOpen(false)} />
     </div>
   );
 }
+
