@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const CursorRig = dynamic(() => import('../components/CursorRig'), { ssr: false });
 
 export default function AboutPage() {
   useEffect(() => {
@@ -16,6 +19,7 @@ export default function AboutPage() {
       className="bg-black text-zinc-400 flex flex-col items-center justify-start px-8 pb-24 md:px-24 selection:bg-zinc-800 selection:text-zinc-100"
       style={{ minHeight: '100vh', paddingTop: '25vh' }}
     >
+      <CursorRig />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -45,14 +49,12 @@ export default function AboutPage() {
           </h1>
         </div>
 
-        <div className="space-y-4 font-serif text-[15px] md:text-[17px] leading-normal text-zinc-400 text-justify tracking-wide font-light w-full">
+        <div className="space-y-8 font-serif text-[15px] md:text-[17px] leading-normal text-zinc-400 text-justify tracking-wide font-light w-full">
           <p>
             Every aircraft that has ever flown did so inside a mathematical framework with a hole in it.
           </p>
           <p>
-            The Navier-Stokes equations describe the motion of viscous fluids. They are the fundamental laws governing everything from weather forecasts to hemodynamics and the air moving over a wing.
-          </p>
-          <p>
+            The Navier-Stokes equations describe the motion of viscous fluids. They are the fundamental laws governing everything from weather forecasts to hemodynamics and the air moving over a wing.<br/>
             The hole is the Clay Mathematics Institute’s Millennium Prize problem. A million dollars has been on the table since the year 2000 because, in three dimensions, nobody has proved that smooth, globally-defined solutions exist for all time. It remains one of the seven great unsolved problems in mathematics.
           </p>
           <p>
@@ -67,7 +69,7 @@ export default function AboutPage() {
           <p>
             This is not a story about fluids. It is a story about how working systems actually work. Biological systems, economies, generative models, and creative practices—none of them wait for complete theories before operating. They run on correctly structured constraints inside partial understanding. The scaffolding does the work. Completeness is a mathematical aesthetic, not a precondition for building.
           </p>
-          <div className="pt-12 pb-4">
+          <div className="pt-8 pb-4">
             <p className="text-zinc-200 font-sans font-medium text-center uppercase tracking-[0.25em] text-[10px] md:text-[11px] leading-loose">
               Stop waiting for closed-form understanding before you build.<br/>The constraint structure is the product.
             </p>
