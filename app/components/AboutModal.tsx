@@ -126,6 +126,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                         loop
                         muted
                         playsInline
+                        controls
                         style={{
                           width: '100%',
                           display: 'block',
