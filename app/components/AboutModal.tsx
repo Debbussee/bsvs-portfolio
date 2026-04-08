@@ -92,20 +92,48 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
             {/* Paragraphs — styled like protocol cards */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {paragraphs.map((text, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + i * 0.06, duration: 0.6, ease: 'easeOut' }}
-                  style={{
-                    borderLeft: '2px solid #27272a',
-                    paddingLeft: '24px',
-                  }}
-                >
-                  <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>
-                    {text}
-                  </p>
-                </motion.div>
+                <div key={i}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 + i * 0.06, duration: 0.6, ease: 'easeOut' }}
+                    style={{
+                      borderLeft: '2px solid #27272a',
+                      paddingLeft: '24px',
+                    }}
+                  >
+                    <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>
+                      {text}
+                    </p>
+                  </motion.div>
+
+                  {/* Video embed after the "constraint structure" paragraph */}
+                  {i === 4 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6, duration: 0.8, ease: 'easeOut' }}
+                      style={{
+                        marginTop: '40px',
+                        border: '1px solid #27272a',
+                        background: '#000',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <video
+                        src="/images/video_bsvs_040820261135.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{
+                          width: '100%',
+                          display: 'block',
+                        }}
+                      />
+                    </motion.div>
+                  )}
+                </div>
               ))}
             </div>
 
