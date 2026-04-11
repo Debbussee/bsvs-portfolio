@@ -54,6 +54,13 @@ const nodes = [
 ];
 
 const advancedNodes = [
+  { id: '09', title: 'HEMODYNAMIC COUPLING', img: '/images/sienna_nearmiss_bsvs_202604050905.png', lat: '41.8781', lon: '-87.6298', status: 'ACTIVE', iso: '800', shutter: '1/8000', 
+    details: [
+      { id: '01 .', label: 'Translational Kinetic Blur Optical Artifact', description: 'The supersonic projectile exhibits distinct translational attenuation along its trajectory axis due to exposure limits exceeded by high-velocity transit. This kinetic artifact diffuses the trailing edge particulate density, smearing metallic specular highlights into a continuous gradient. The perceived spatial elongation implies extreme environmental shear forces acting upon the localized atmospheric medium during the capture interval.' },
+      { id: '02 .', label: 'Acoustic Impedance Shockwave', description: 'Rapid displacement of ambient atmospheric volume generates a high-pressure gradient, resulting in pronounced refractive distortion at the primary epidermal interface. This localized acoustic impedance disparity subjects the organic substrate to transient structural fatigue, manifesting as a compressive topological ripple. The thermal consequence of this adiabatic compression further alters the surrounding refractive index, creating an observable localized lensing effect.' },
+      { id: '03.', label: 'Corneal Specular Irregularity', description: 'The highly convex geometry of the biological ocular surface induces severe specular irregularity, compressing incident environmental illumination into a distorted hemispherical projection. This reflective impedance maps rectilinear external light sources onto a curved topological plane, obscuring surrounding particulate density through non-uniform localized attenuation. The resulting focal variance indicates a disruption in the standard optical phase boundary caused by the ambient fluid-film interaction.' }
+    ]
+  },
   { id: '10', title: 'VOLUMETRIC CONSERVATION', img: '/images/sienna_event_bsvs_202604050904.png', lat: '41.8781', lon: '-87.6298', status: 'COMPUTING', iso: '800', shutter: '1/8000', 
     details: [
       { id: '01|', label: 'Structural Fatigue', description: 'The primary kinetic event exhibits a profound specular irregularity where high-viscosity fluid transitions into a rigid geometric lattice suggesting a localized phase transition. This phenomenon indicates internal structural fatigue that results in a calculated integrity rather than stochastic fragmentation of the medium. Internal algorithmic impedance maintains this coherence despite high-velocity kinetic energy release and localized thermal consequence.' },
