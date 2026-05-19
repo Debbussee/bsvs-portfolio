@@ -114,6 +114,9 @@ function SlideCard({
           playsInline
           preload="metadata"
           className="slide-video"
+          controlsList="nodownload noremoteplayback"
+          disablePictureInPicture
+          onContextMenu={(e) => e.preventDefault()}
         >
           <source src={slide.src} type="video/mp4" />
           Your browser does not support embedded video.
@@ -183,6 +186,20 @@ function TOC() {
    PAGE
    ───────────────────────────────────────────── */
 export default function VideoSlidesPage() {
+  useEffect(() => {
+    // Restore normal cursor (globals.css sets cursor:none for CursorRig)
+    document.body.style.cursor = 'default';
+
+    // Block right-click across entire page
+    const block = (e: MouseEvent) => e.preventDefault();
+    document.addEventListener('contextmenu', block);
+
+    return () => {
+      document.body.style.cursor = '';
+      document.removeEventListener('contextmenu', block);
+    };
+  }, []);
+
   return (
     <>
       <style>{pageStyles}</style>
@@ -260,6 +277,7 @@ export default function VideoSlidesPage() {
 const pageStyles = /* css */ `
 /* ── RESET & BASE ── */
 html { scroll-behavior: smooth; }
+body { cursor: default !important; }
 
 /* ── HEADER ── */
 .vs-header {
