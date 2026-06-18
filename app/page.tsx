@@ -8,12 +8,14 @@ import dynamic from 'next/dynamic';
 const IntroSequence = dynamic(() => import('./components/IntroSequence'), { ssr: false });
 const CursorRig     = dynamic(() => import('./components/CursorRig'),     { ssr: false });
 const HeroSection   = dynamic(() => import('./components/HeroSection'),   { ssr: false });
+const AboutModal    = dynamic(() => import('./components/AboutModal'),    { ssr: false });
 import ZeroMandate from './components/ZeroMandate';
 import VisualAudit from './components/VisualAudit';
 import HookLibrary from './components/HookLibrary';
 
 export default function PortfolioUI() {
   const [introComplete, setIntroComplete] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleIntroComplete = useCallback(() => setIntroComplete(true), []);
 
@@ -95,11 +97,22 @@ export default function PortfolioUI() {
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
               <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
             </div>
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => setAboutOpen(true)}
+                className="font-mono text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors uppercase cursor-pointer bg-transparent border-0"
+              >
+                [ DESIGN MANIFESTO ]
+              </button>
+            </div>
             <div className="font-mono text-[10px] text-zinc-700">
               &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL PROTOCOLS ENFORCED.
             </div>
           </div>
         </footer>
+
+        {/* ABOUT MANIFESTO MODAL */}
+        <AboutModal isOpen={aboutOpen} onClose={() => setAboutOpen(false)} />
       </motion.div>
     </div>
   );
