@@ -98,8 +98,8 @@ export default function TransparencyPage() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-16 h-[1px] bg-cyan-500" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-cyan-400 uppercase">TRANSPARENCY AUDIT</span>
+            <div className="w-24 h-[3px] bg-lime-400" />
+            <span className="font-mono text-[10px] tracking-[0.3em] text-lime-400 uppercase">TRANSPARENCY AUDIT // Spaced-Out V2</span>
           </motion.div>
 
           <motion.h1
