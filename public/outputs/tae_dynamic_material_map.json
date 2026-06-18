@@ -1,0 +1,42 @@
+{
+  "target_persona": "Tae",
+  "material_map_version": "1.0.0",
+  "surface_telemetry": [
+    {
+      "radial_distance_mm": 0.0,
+      "applied_stress_mpa": 2371.3,
+      "computed_specular_roughness": 0.0576,
+      "tissue_blanching_factor": 0.9484
+    },
+    {
+      "radial_distance_mm": 0.1419,
+      "applied_stress_mpa": 2323.39,
+      "computed_specular_roughness": 0.0595,
+      "tissue_blanching_factor": 0.9452
+    },
+    {
+      "radial_distance_mm": 0.2838,
+      "applied_stress_mpa": 2173.33,
+      "computed_specular_roughness": 0.0658,
+      "tissue_blanching_factor": 0.9339
+    },
+    {
+      "radial_distance_mm": 0.4257,
+      "applied_stress_mpa": 1897.04,
+      "computed_specular_roughness": 0.0791,
+      "tissue_blanching_factor": 0.9066
+    },
+    {
+      "radial_distance_mm": 0.5676,
+      "applied_stress_mpa": 1422.78,
+      "computed_specular_roughness": 0.1084,
+      "tissue_blanching_factor": 0.8311
+    },
+    {
+      "radial_distance_mm": 0.7095,
+      "applied_stress_mpa": 0.0,
+      "computed_specular_roughness": 0.28,
+      "tissue_blanching_factor": 0.0
+    }
+  ]
+}

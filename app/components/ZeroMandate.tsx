@@ -97,7 +97,7 @@ export default function ZeroMandate() {
               fontWeight: 'bold',
               letterSpacing: '-0.03em',
               color: '#ffffff',
-              marginBottom: '64px',
+              marginBottom: '20px',
             }}
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -105,6 +105,43 @@ export default function ZeroMandate() {
           >
             THE ZERO MANDATE
           </motion.h2>
+
+          <motion.p
+            style={{
+              fontFamily: 'monospace',
+              fontSize: '11px',
+              lineHeight: '1.8',
+              color: '#a1a1aa',
+              marginBottom: '48px',
+              maxWidth: '65ch',
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Operational Status: The Zero Mandate Engine is a proprietary architecture engineered, owned, and operated by Be Still Visual Studio LLC. For raw repository access, developer telemetry logs, and complete system documentation schemas, visit our core developer hub{' '}
+            <a
+              href="/thezeromandate"
+              style={{
+                color: '#22d3ee',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                borderBottom: '1px solid rgba(34, 211, 238, 0.3)',
+                paddingBottom: '1px',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.color = '#67e8f9';
+                e.currentTarget.style.borderBottomColor = '#67e8f9';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.color = '#22d3ee';
+                e.currentTarget.style.borderBottomColor = 'rgba(34, 211, 238, 0.3)';
+              }}
+            >
+              [HERE]
+            </a>.
+          </motion.p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>

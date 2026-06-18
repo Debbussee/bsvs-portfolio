@@ -1,0 +1,29 @@
+{
+  "identity_persistence_version": "1.0.0",
+  "personas": {
+    "Chuntae_Core": {
+      "biological_continuity_constraints": {
+        "epidermal_melanin_index": 0.64,
+        "pore_distribution_density_cm2": 1420,
+        "base_specular_roughness": 0.0576,
+        "vascular_capillary_depth_mm": 0.185
+      },
+      "invariant_geometric_anchors": {
+        "interpupillary_distance_mm": 63.5,
+        "nasal_bridge_angle_deg": 114.2,
+        "mandibular_inter_node_count": 512
+      }
+    },
+    "Target_Persona_Alpha": {
+      "biological_markers": {
+        "facial_symmetry_ratio": 0.985,
+        "interpupillary_distance_mm": 63.5,
+        "melanin_index": 0.64
+      },
+      "surface_topology": {
+        "pore_density_microns": 120,
+        "specular_roughness_base": 0.28
+      }
+    }
+  }
+}

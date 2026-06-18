@@ -1,0 +1,28 @@
+{
+  "engine_metadata": {
+    "project_name": "Zero Mandate Engine",
+    "layer_version": "1.0.0",
+    "deterministic_mode": true
+  },
+  "hardware_allocations": {
+    "target_device": "cuda",
+    "precision_mode": "float16",
+    "allow_tf32": true
+  },
+  "pipeline_constraints": {
+    "output_resolution": {
+      "width": 3840,
+      "height": 2160
+    },
+    "forensic_physics": {
+      "inverse_square_law": true,
+      "hertzian_contact_stress": true,
+      "sub_mesh_injection": false
+    }
+  },
+  "system_paths": {
+    "core_root": "/workspace/zero_mandate/core",
+    "config_root": "/workspace/zero_mandate/config",
+    "output_root": "/workspace/zero_mandate/outputs"
+  }
+}
