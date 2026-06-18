@@ -27,7 +27,7 @@ function TimelineItem({
   return (
     <motion.div
       ref={ref}
-      className="relative pl-8 md:pl-10 py-2"
+      className="relative pl-10 md:pl-14 py-4"
       initial={{ opacity: 0, x: -24 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -42,13 +42,13 @@ function TimelineItem({
         transition={{ delay: index * 0.1 + 0.2, duration: 0.5, ease: 'easeOut' }}
       />
 
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-4">
         <span className="font-mono text-[9px] px-2 py-0.5 border border-zinc-800 bg-zinc-900/60 text-zinc-500 uppercase tracking-widest">
           {badge}
         </span>
       </div>
 
-      <h3 className="font-mono text-sm font-bold text-white uppercase mb-3 tracking-wide">{title}</h3>
+      <h3 className="font-mono text-sm font-bold text-white uppercase mb-4 tracking-wide">{title}</h3>
       <p className="font-sans text-xs md:text-sm text-zinc-400 leading-relaxed max-w-3xl whitespace-pre-wrap">{body}</p>
     </motion.div>
   );
@@ -88,12 +88,12 @@ export default function TransparencyPage() {
       </header>
 
       {/* ── MAIN CONTENT ── */}
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-24 relative z-10">
+      <main className="max-w-5xl mx-auto pl-12 pr-8 sm:pl-20 sm:pr-12 md:pl-28 md:pr-16 lg:pl-36 lg:pr-20 pt-40 pb-32 relative z-10">
         
         {/* Intro / Header */}
-        <div ref={headerRef} className="mb-20">
+        <div ref={headerRef} className="mb-28">
           <motion.div
-            className="flex items-center gap-3 mb-6"
+            className="flex items-center gap-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -103,7 +103,7 @@ export default function TransparencyPage() {
           </motion.div>
 
           <motion.h1
-            className="font-mono text-3xl md:text-5xl font-bold tracking-tighter text-white mb-8 uppercase leading-none"
+            className="font-mono text-3xl md:text-5xl font-bold tracking-tighter text-white mb-12 uppercase leading-none"
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -112,7 +112,7 @@ export default function TransparencyPage() {
           </motion.h1>
 
           <motion.p
-            className="font-mono text-xs md:text-sm text-zinc-400 leading-relaxed max-w-3xl border-l border-zinc-800 pl-6 py-2"
+            className="font-mono text-xs md:text-sm text-zinc-400 leading-relaxed max-w-3xl border-l-2 border-zinc-800 pl-8 py-3"
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -122,7 +122,7 @@ export default function TransparencyPage() {
         </div>
 
         {/* ── LEADERSHIP PROFILES ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-36">
           
           {/* Marvin DeBouse */}
           <motion.div
@@ -130,7 +130,7 @@ export default function TransparencyPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="border border-zinc-800 bg-zinc-950 p-8 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
+            className="border border-zinc-800 bg-zinc-950 p-10 md:p-12 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
           >
             {/* HUD Bounding Corner Brackets */}
             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
@@ -139,7 +139,7 @@ export default function TransparencyPage() {
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
 
             <div>
-              <div className="flex justify-between items-start mb-8">
+              <div className="flex justify-between items-start mb-10">
                 <div>
                   <h2 className="font-mono text-lg font-bold text-white uppercase tracking-wide">Marvin DeBouse</h2>
                   <p className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest mt-1">Founder & Technical Director</p>
@@ -155,7 +155,7 @@ export default function TransparencyPage() {
                 </a>
               </div>
 
-              <div className="space-y-6 font-mono text-[11px] text-zinc-400">
+              <div className="space-y-8 font-mono text-[11px] text-zinc-400">
                 <div>
                   <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Core Mandate ]</span>
                   <p className="text-zinc-300 leading-relaxed">Systems architecture, Zero Mandate Engine Core development, and forensic AI pipeline design.</p>
@@ -167,7 +167,7 @@ export default function TransparencyPage() {
               </div>
             </div>
 
-            <div className="border-t border-zinc-905 mt-8 pt-4 flex items-center gap-2">
+            <div className="border-t border-zinc-800 mt-10 pt-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></span>
               <span className="font-mono text-[8px] text-zinc-600">NODE: ZME_CORE_ARCHITECT</span>
             </div>
@@ -179,7 +179,7 @@ export default function TransparencyPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="border border-zinc-800 bg-zinc-950 p-8 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
+            className="border border-zinc-800 bg-zinc-950 p-10 md:p-12 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
           >
             {/* HUD Bounding Corner Brackets */}
             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
@@ -188,7 +188,7 @@ export default function TransparencyPage() {
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
 
             <div>
-              <div className="flex justify-between items-start mb-8">
+              <div className="flex justify-between items-start mb-10">
                 <div>
                   <h2 className="font-mono text-lg font-bold text-white uppercase tracking-wide">La Chaunia DeBouse</h2>
                   <p className="font-mono text-[10px] text-amber-500 uppercase tracking-widest mt-1">Partner & Operations Review</p>
@@ -204,7 +204,7 @@ export default function TransparencyPage() {
                 </a>
               </div>
 
-              <div className="space-y-6 font-mono text-[11px] text-zinc-400">
+              <div className="space-y-8 font-mono text-[11px] text-zinc-400">
                 <div>
                   <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Core Mandate ]</span>
                   <p className="text-zinc-300 leading-relaxed">Managing the studio's corporate legal infrastructure, fiscal compliance, and enterprise market deployment.</p>
@@ -216,7 +216,7 @@ export default function TransparencyPage() {
               </div>
             </div>
 
-            <div className="border-t border-zinc-905 mt-8 pt-4 flex items-center gap-2">
+            <div className="border-t border-zinc-800 mt-10 pt-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
               <span className="font-mono text-[8px] text-zinc-600">NODE: GOV_CORP_OFFICER</span>
             </div>
@@ -230,21 +230,21 @@ export default function TransparencyPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-24"
+          className="mb-36"
         >
-          <div className="flex items-center gap-4 mb-8 border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-4 mb-12 border-b border-zinc-800 pb-6">
             <Cpu className="text-cyan-500 animate-pulse" size={20} />
             <h2 className="font-mono text-base tracking-widest text-white uppercase">Technical & Corporate Timeline</h2>
             <div className="flex-1 h-[1px] bg-zinc-800 ml-4"></div>
             <span className="font-mono text-xs text-zinc-500">TIMELINE_LOG</span>
           </div>
 
-          <p className="font-mono text-[11px] text-zinc-500 mb-12">
+          <p className="font-mono text-[11px] text-zinc-500 mb-16">
             The cross-disciplinary expertise that defines the studio's operational framework spans technical precision, engineering discipline, and corporate governance:
           </p>
 
           {/* Vertical Timeline with ProtocolCard style items */}
-          <div className="space-y-12">
+          <div className="space-y-20">
             
             <TimelineItem 
               index={0}
@@ -300,10 +300,10 @@ export default function TransparencyPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="border border-zinc-800 bg-zinc-950 p-6 font-mono text-[10px] text-zinc-500 leading-relaxed mb-6 relative"
+          className="border border-zinc-800 bg-zinc-950 p-8 md:p-10 font-mono text-[10px] text-zinc-500 leading-relaxed mb-16 relative"
         >
-          <div className="text-zinc-400 font-bold mb-2 flex items-center gap-2">
-            <span className="w-1 h-1 bg-emerald-500 inline-block rounded-full"></span>
+          <div className="text-zinc-400 font-bold mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-emerald-500 inline-block rounded-full"></span>
             GOVERNANCE_NODE // ZME_ENTITY_REGISTRY
           </div>
           Corporate Governance Node: Be Still Visual Studio LLC is a legally registered corporate entity in the State of Texas, USA. Technical operations, bare-metal container orchestration pipelines, and deterministic asset validation schemas are maintained under active Texas LLC filing matrices.
@@ -313,12 +313,12 @@ export default function TransparencyPage() {
 
       {/* ── FOOTER ── */}
       <footer className="border-t border-zinc-900 bg-black relative z-10">
-        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto px-8 md:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-600">
             <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
             <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
           </div>
-          <div className="font-mono text-[10px] text-zinc-750">
+          <div className="font-mono text-[10px] text-zinc-500">
             &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL PROTOCOLS ENFORCED.
           </div>
         </div>
