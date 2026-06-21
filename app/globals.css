@@ -139,3 +139,13 @@ body.cursor-image #cursor-ring {
 
 /* ── SELECTION ── */
 ::selection { background: rgba(34,211,238,0.2); color: #e4e4e7; }
+
+/* ── TELEMETRY BENCHMARKS — responsive grid ── */
+.telemetry-split-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .telemetry-split-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
