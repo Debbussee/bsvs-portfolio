@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const statements = [
   {
@@ -18,75 +18,9 @@ const statements = [
   },
 ];
 
-const DOMAINS = [
-  'Autonomous Navigation',
-  'Sim-to-Real Robotics',
-  'Material Stress Testing',
-  'Kinetic/Fluid Simulation',
-  'Optical Physics Rendering',
-  'Deterministic Environment Design',
-];
-
-/* ── shared input style ── */
-const inputBase: React.CSSProperties = {
-  width: '100%',
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid #27272a',
-  color: '#e4e4e7',
-  fontFamily: 'monospace',
-  fontSize: '13px',
-  padding: '12px 16px',
-  outline: 'none',
-  transition: 'border-color 0.3s, box-shadow 0.3s',
-  letterSpacing: '0.04em',
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: 'monospace',
-  fontSize: '11px',
-  letterSpacing: '0.25em',
-  color: '#a78bfa',
-  marginBottom: '8px',
-  display: 'block',
-};
-
-const fieldWrap: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column' as const,
-};
-
 export default function HookLibrary() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
-
-  /* ── form state ── */
-  const [designation, setDesignation]     = useState('');
-  const [domain, setDomain]               = useState('');
-  const [bottleneck, setBottleneck]       = useState('');
-  const [acknowledged, setAcknowledged]   = useState(false);
-  const [submitted, setSubmitted]         = useState(false);
-  const [submitting, setSubmitting]       = useState(false);
-  const [focusedField, setFocusedField]   = useState<string | null>(null);
-
-  const canSubmit = designation.trim() && domain && bottleneck.trim().length >= 20 && acknowledged;
-
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (!canSubmit) return;
-    setSubmitting(true);
-
-    // Simulate uplink transmission delay
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 2200);
-  }, [canSubmit]);
-
-  const focusBorder = (field: string): React.CSSProperties => ({
-    ...inputBase,
-    borderColor: focusedField === field ? '#a78bfa' : '#27272a',
-    boxShadow: focusedField === field ? '0 0 12px rgba(167,139,250,0.15)' : 'none',
-  });
 
   return (
     <div style={{ width: '100%', background: '#000', padding: '80px 0' }}>
@@ -172,10 +106,10 @@ export default function HookLibrary() {
         </motion.div>
 
         {/* ─────────────────────────────────────────────
-            SYS.INTAKE_PROTOCOL — Client Rejection Gate
+            CONTACT BSVS — Direct Communication Channel
             ───────────────────────────────────────────── */}
         <motion.div
-          id="intake"
+          id="contact"
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.85, duration: 0.8 }}
@@ -206,7 +140,7 @@ export default function HookLibrary() {
                 color: '#a78bfa',
                 fontWeight: 'bold',
               }}>
-                SYS.INTAKE_PROTOCOL
+                CONTACT BSVS
               </span>
             </div>
             <span style={{
@@ -215,7 +149,7 @@ export default function HookLibrary() {
               color: '#52525b',
               letterSpacing: '0.15em',
             }}>
-              v4.2.1 // UPLINK ACTIVE
+              DIRECT CHANNEL // ACTIVE
             </span>
           </div>
 
@@ -251,298 +185,119 @@ export default function HookLibrary() {
                 marginBottom: '32px',
                 lineHeight: '1.8',
               }}>
-                <span style={{ color: '#a78bfa' }}>&gt;</span> INITIATING CLIENT INTAKE AUDIT...<br />
-                <span style={{ color: '#a78bfa' }}>&gt;</span> ALL FIELDS REQUIRED. INCOMPLETE SUBMISSIONS WILL BE REJECTED.<br />
-                <span style={{ color: '#a78bfa' }}>&gt;</span> PROVIDE DETERMINISTIC DATA ONLY.<br />
+                <span style={{ color: '#a78bfa' }}>&gt;</span> DIRECT COMMUNICATION CHANNEL ACTIVE...<br />
+                <span style={{ color: '#a78bfa' }}>&gt;</span> FOR ENTERPRISE INQUIRIES, CLOUD PARTNERSHIPS, OR TECHNICAL AUDITS.<br />
+                <span style={{ color: '#a78bfa' }}>&gt;</span> DETERMINISTIC RESPONSES ONLY. NO PROBABILISTIC HALLUCINATION.<br />
               </div>
 
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  /* ── SUCCESS STATE ── */
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', padding: '40px 0' }}
+              {/* Email addresses */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+                {/* Primary */}
+                <div style={{
+                  borderLeft: '2px solid #a78bfa',
+                  paddingLeft: '20px',
+                }}>
+                  <div style={{
+                    fontFamily: 'monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.25em',
+                    color: '#52525b',
+                    marginBottom: '8px',
+                    textTransform: 'uppercase',
+                  }}>
+                    <span style={{ color: '#a78bfa', marginRight: '8px' }}>01</span>
+                    PRIMARY CHANNEL
+                  </div>
+                  <a
+                    href="mailto:mkd@bestillvisualstudio.com"
+                    data-hover
+                    style={{
+                      fontFamily: 'monospace',
+                      fontSize: '16px',
+                      color: '#e4e4e7',
+                      letterSpacing: '0.04em',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      padding: '8px 0',
+                      borderBottom: '1px solid #27272a',
+                      transition: 'color 0.3s, border-color 0.3s',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.target as HTMLElement).style.color = '#a78bfa';
+                      (e.target as HTMLElement).style.borderColor = '#a78bfa';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.target as HTMLElement).style.color = '#e4e4e7';
+                      (e.target as HTMLElement).style.borderColor = '#27272a';
+                    }}
                   >
-                    <div style={{
-                      width: '48px', height: '48px',
-                      border: '2px solid #22d3ee',
-                      borderRadius: '50%',
-                      margin: '0 auto 24px',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      boxShadow: '0 0 24px rgba(34,211,238,0.3)',
-                    }}>
-                      <span style={{ color: '#22d3ee', fontSize: '20px', fontFamily: 'monospace' }}>✓</span>
-                    </div>
-                    <div style={{
+                    mkd@bestillvisualstudio.com
+                  </a>
+                </div>
+
+                {/* Secondary */}
+                <div style={{
+                  borderLeft: '2px solid #a78bfa',
+                  paddingLeft: '20px',
+                }}>
+                  <div style={{
+                    fontFamily: 'monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.25em',
+                    color: '#52525b',
+                    marginBottom: '8px',
+                    textTransform: 'uppercase',
+                  }}>
+                    <span style={{ color: '#a78bfa', marginRight: '8px' }}>02</span>
+                    ZERO MANDATE ENGINE DIRECT
+                  </div>
+                  <a
+                    href="mailto:marvin@thezeromandate.com"
+                    data-hover
+                    style={{
                       fontFamily: 'monospace',
-                      fontSize: '14px',
-                      letterSpacing: '0.25em',
-                      color: '#22d3ee',
-                      marginBottom: '12px',
-                    }}>
-                      UPLINK ESTABLISHED
-                    </div>
-                    <div style={{
-                      fontFamily: 'monospace',
-                      fontSize: '11px',
-                      color: '#52525b',
-                      lineHeight: '1.8',
-                    }}>
-                      INTAKE PACKET RECEIVED. AUDIT QUEUE POSITION ASSIGNED.<br />
-                      THE ARCHITECT WILL RESPOND WITHIN 48-72 HOURS.<br />
-                      <span style={{ color: '#a78bfa' }}>PROTOCOL STATUS: ACTIVE</span>
-                    </div>
-                  </motion.div>
-                ) : (
-                  /* ── FORM ── */
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                      fontSize: '16px',
+                      color: '#e4e4e7',
+                      letterSpacing: '0.04em',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      padding: '8px 0',
+                      borderBottom: '1px solid #27272a',
+                      transition: 'color 0.3s, border-color 0.3s',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.target as HTMLElement).style.color = '#a78bfa';
+                      (e.target as HTMLElement).style.borderColor = '#a78bfa';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.target as HTMLElement).style.color = '#e4e4e7';
+                      (e.target as HTMLElement).style.borderColor = '#27272a';
+                    }}
                   >
-                    {/* CLIENT DESIGNATION */}
-                    <div style={fieldWrap}>
-                      <label htmlFor="intake-designation" style={labelStyle}>
-                        <span style={{ color: '#52525b', marginRight: '8px' }}>01</span>
-                        CLIENT DESIGNATION
-                      </label>
-                      <input
-                        id="intake-designation"
-                        type="text"
-                        placeholder="Name / Organization"
-                        value={designation}
-                        onChange={(e) => setDesignation(e.target.value)}
-                        onFocus={() => setFocusedField('designation')}
-                        onBlur={() => setFocusedField(null)}
-                        style={{
-                          ...focusBorder('designation'),
-                          cursor: 'text',
-                        }}
-                        required
-                      />
-                    </div>
+                    marvin@thezeromandate.com
+                  </a>
+                </div>
+              </div>
 
-                    {/* ENVIRONMENTAL PARAMETERS */}
-                    <div style={fieldWrap}>
-                      <label htmlFor="intake-domain" style={labelStyle}>
-                        <span style={{ color: '#52525b', marginRight: '8px' }}>02</span>
-                        ENVIRONMENTAL PARAMETERS
-                      </label>
-                      <div style={{ position: 'relative' }}>
-                        <select
-                          id="intake-domain"
-                          value={domain}
-                          onChange={(e) => setDomain(e.target.value)}
-                          onFocus={() => setFocusedField('domain')}
-                          onBlur={() => setFocusedField(null)}
-                          required
-                          style={{
-                            ...focusBorder('domain'),
-                            appearance: 'none',
-                            cursor: 'pointer',
-                            color: domain ? '#e4e4e7' : '#52525b',
-                          }}
-                        >
-                          <option value="" disabled>Select operational domain...</option>
-                          {DOMAINS.map(d => (
-                            <option key={d} value={d} style={{ background: '#09090b', color: '#e4e4e7' }}>
-                              {d}
-                            </option>
-                          ))}
-                        </select>
-                        {/* Dropdown arrow */}
-                        <div style={{
-                          position: 'absolute',
-                          right: '16px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          pointerEvents: 'none',
-                          color: '#a78bfa',
-                          fontFamily: 'monospace',
-                          fontSize: '10px',
-                        }}>
-                          ▼
-                        </div>
-                      </div>
-                    </div>
+              {/* Divider */}
+              <div style={{
+                width: '100%',
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
+                margin: '32px 0',
+              }} />
 
-                    {/* THE PHYSICAL BOTTLENECK */}
-                    <div style={fieldWrap}>
-                      <label htmlFor="intake-bottleneck" style={labelStyle}>
-                        <span style={{ color: '#52525b', marginRight: '8px' }}>03</span>
-                        THE PHYSICAL BOTTLENECK
-                      </label>
-                      <div style={{
-                        fontFamily: 'monospace',
-                        fontSize: '10px',
-                        color: '#3f3f46',
-                        marginBottom: '8px',
-                        lineHeight: '1.6',
-                        letterSpacing: '0.03em',
-                      }}>
-                        DIRECTIVE: Define the exact physical or material interaction your current simulation models are failing to resolve.
-                      </div>
-                      <textarea
-                        id="intake-bottleneck"
-                        placeholder="e.g., non-Newtonian boundary layers, high-velocity optical refraction, deformable collision meshes under thermal stress..."
-                        value={bottleneck}
-                        onChange={(e) => setBottleneck(e.target.value)}
-                        onFocus={() => setFocusedField('bottleneck')}
-                        onBlur={() => setFocusedField(null)}
-                        rows={4}
-                        required
-                        style={{
-                          ...focusBorder('bottleneck'),
-                          resize: 'vertical',
-                          minHeight: '100px',
-                          lineHeight: '1.7',
-                        }}
-                      />
-                      {bottleneck.length > 0 && bottleneck.trim().length < 20 && (
-                        <div style={{
-                          fontFamily: 'monospace',
-                          fontSize: '10px',
-                          color: '#ef4444',
-                          marginTop: '6px',
-                          letterSpacing: '0.1em',
-                        }}>
-                          ⚠ INSUFFICIENT DATA — MINIMUM 20 CHARACTERS REQUIRED
-                        </div>
-                      )}
-                    </div>
-
-                    {/* DIVIDER */}
-                    <div style={{
-                      width: '100%',
-                      height: '1px',
-                      background: 'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
-                    }} />
-
-                    {/* THE MANDATE ACKNOWLEDGMENT */}
-                    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                      <div
-                        onClick={() => setAcknowledged(!acknowledged)}
-                        style={{
-                          width: '18px',
-                          height: '18px',
-                          minWidth: '18px',
-                          border: `1px solid ${acknowledged ? '#a78bfa' : '#3f3f46'}`,
-                          background: acknowledged ? 'rgba(167,139,250,0.15)' : 'transparent',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          transition: 'all 0.25s ease',
-                          marginTop: '2px',
-                          boxShadow: acknowledged ? '0 0 10px rgba(167,139,250,0.2)' : 'none',
-                        }}
-                      >
-                        {acknowledged && (
-                          <motion.span
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            style={{ color: '#a78bfa', fontSize: '12px', fontFamily: 'monospace', lineHeight: 1 }}
-                          >
-                            ✓
-                          </motion.span>
-                        )}
-                      </div>
-                      <label
-                        onClick={() => setAcknowledged(!acknowledged)}
-                        style={{
-                          fontFamily: 'monospace',
-                          fontSize: '11px',
-                          color: '#71717a',
-                          lineHeight: '1.7',
-                          cursor: 'pointer',
-                          letterSpacing: '0.02em',
-                          userSelect: 'none',
-                        }}
-                      >
-                        <span style={{ color: '#a78bfa', letterSpacing: '0.2em', fontSize: '10px', display: 'block', marginBottom: '6px' }}>
-                          MANDATE ACKNOWLEDGMENT <span style={{ color: '#ef4444' }}>*</span>
-                        </span>
-                        I acknowledge that Be Still Visual Studio does not generate subjective or aesthetic media.
-                        We engineer deterministic visual physics. If this request requires probabilistic hallucination,
-                        the uplink will be rejected.
-                      </label>
-                    </div>
-
-                    {/* SUBMIT */}
-                    <motion.button
-                      type="submit"
-                      disabled={!canSubmit || submitting}
-                      whileHover={canSubmit && !submitting ? { scale: 1.01 } : {}}
-                      whileTap={canSubmit && !submitting ? { scale: 0.98 } : {}}
-                      style={{
-                        width: '100%',
-                        padding: '18px 32px',
-                        border: `1px solid ${canSubmit ? '#a78bfa' : '#27272a'}`,
-                        background: canSubmit ? 'rgba(167,139,250,0.08)' : 'transparent',
-                        color: canSubmit ? '#a78bfa' : '#3f3f46',
-                        fontFamily: 'monospace',
-                        fontSize: '13px',
-                        letterSpacing: '0.3em',
-                        textTransform: 'uppercase' as const,
-                        cursor: canSubmit && !submitting ? 'pointer' : 'not-allowed',
-                        transition: 'all 0.35s ease',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        boxShadow: canSubmit ? '0 0 20px rgba(167,139,250,0.1)' : 'none',
-                      }}
-                    >
-                      {submitting ? (
-                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-                          <motion.span
-                            animate={{ opacity: [1, 0.3, 1] }}
-                            transition={{ duration: 1.2, repeat: Infinity }}
-                          >
-                            ◈
-                          </motion.span>
-                          TRANSMITTING UPLINK...
-                        </span>
-                      ) : (
-                        '[ INITIATE UPLINK ]'
-                      )}
-
-                      {/* Animated border scan on hover */}
-                      {canSubmit && !submitting && (
-                        <motion.div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: '-100%',
-                            width: '100%',
-                            height: '100%',
-                            background: 'linear-gradient(90deg, transparent, rgba(167,139,250,0.06), transparent)',
-                          }}
-                          animate={{ left: ['−100%', '200%'] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                        />
-                      )}
-                    </motion.button>
-
-                    {/* Status line */}
-                    <div style={{
-                      fontFamily: 'monospace',
-                      fontSize: '10px',
-                      color: '#27272a',
-                      textAlign: 'center',
-                      letterSpacing: '0.15em',
-                    }}>
-                      {canSubmit
-                        ? '▸ ALL PARAMETERS VALIDATED — READY FOR UPLINK'
-                        : '▸ AWAITING COMPLETE PARAMETER INPUT'}
-                    </div>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+              {/* Status line */}
+              <div style={{
+                fontFamily: 'monospace',
+                fontSize: '10px',
+                color: '#27272a',
+                textAlign: 'center',
+                letterSpacing: '0.15em',
+              }}>
+                ▸ ALL CHANNELS MONITORED — DETERMINISTIC RESPONSES WITHIN 48-72 HOURS
+              </div>
             </div>
           </div>
         </motion.div>

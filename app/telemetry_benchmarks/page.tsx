@@ -470,6 +470,9 @@ function VideoViewport({
         autoPlay
         loop
         playsInline
+        controlsList="nodownload noremoteplayback"
+        disablePictureInPicture
+        onContextMenu={(e) => e.preventDefault()}
         style={{
           width: '100%',
           display: 'block',
@@ -834,6 +837,19 @@ export default function TelemetryBenchmarksPage() {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
       }, 600);
     }
+  }, []);
+
+  /* Block right-click, copy, paste */
+  useEffect(() => {
+    const block = (e: Event) => e.preventDefault();
+    document.addEventListener('contextmenu', block);
+    document.addEventListener('copy', block);
+    document.addEventListener('paste', block);
+    return () => {
+      document.removeEventListener('contextmenu', block);
+      document.removeEventListener('copy', block);
+      document.removeEventListener('paste', block);
+    };
   }, []);
 
   const formatUptime = (s: number) => {

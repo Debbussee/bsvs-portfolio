@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { ArrowLeft, Cpu, ShieldCheck, Linkedin, Briefcase, Award, Crosshair } from 'lucide-react';
@@ -62,6 +62,18 @@ function TimelineItem({
 export default function TransparencyPage() {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' });
+
+  useEffect(() => {
+    const block = (e: Event) => e.preventDefault();
+    document.addEventListener('contextmenu', block);
+    document.addEventListener('copy', block);
+    document.addEventListener('paste', block);
+    return () => {
+      document.removeEventListener('contextmenu', block);
+      document.removeEventListener('copy', block);
+      document.removeEventListener('paste', block);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-zinc-100 selection:bg-cyan-900 selection:text-cyan-50 relative overflow-hidden scanlines noise">

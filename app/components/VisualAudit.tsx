@@ -44,13 +44,7 @@ const nodes = [
       { id: '03', label: 'Anatomical Tension', description: 'Visual weight is anchored by the compression of the hands against the surface and the visible tension in the forearm musculature. This physical logic prevents the subject from floating, locking them into the geometry of the space.' }
     ]
   },
-  { id: '08', title: 'COGNITIVE ISOLATION', img: '/images/watching_tv_alone_bsvs_202603300737.png', lat: '41.8781', lon: '-87.6298', status: 'ACTIVE', iso: '800', shutter: '1/30', 
-    details: [
-      { id: '01', label: 'Skin & Specularity', description: 'The complex interaction of the harsh, cool screen light with the subject\'s skin demonstrates exacting lighting accuracy. Engineered Visuals produce precise specular highlights mimicking natural moisture on the forehead and legs, alongside accurate subsurface scattering.' },
-      { id: '02', label: 'Atmospheric Logic', description: 'The illumination does not merely strike surfaces; it interacts with the space between. The rendering of suspended particulate matter (dust motes) caught in the monitor\'s glow showcases advanced photometric light simulation.' },
-      { id: '03', label: 'Material Weight', description: 'The upholstery of the armchair exhibits extreme high fidelity. These Visual Systems capture the raised woven tapestry pattern and the structural logic of the fabric\'s compression on the armrest through deep ambient occlusion.' }
-    ]
-  },
+
 ];
 
 const advancedNodes = [
@@ -96,13 +90,7 @@ const advancedNodes = [
       { id: '03.', label: 'SpatialFrequencyDecay', description: 'The rapid decay of spatial frequency beyond the primary plane of focus simulates atmospheric attenuation and lens-induced focal divergence. This optical phenomenon artificially enforces three-dimensional volume by reducing the textural fidelity of distal background elements, grounding the foreground through deliberate manipulation of light scattering.' }
     ]
   },
-  { id: '15', title: 'BIOMETRIC BALLISTICS', img: '/images/kinetic_transfer_bsvs_202604102021.png', lat: '41.8781', lon: '-87.6298', status: 'DEGRADING', iso: '800', shutter: '1/8000', 
-    details: [
-      { id: '01.', label: 'Particulate Luminescence Optical Artifact', description: 'The exhaled plume exhibits anomalous particulate density and localized luminosity that does not correspond to standard thermal dissipation patterns in a low-temperature forest environment. The lack of isotropic scattering and the distinct chromatic temperature of the vapor suggest a non-natural origin or a failure in atmospheric attenuation modeling.' },
-      { id: '02.', label: 'Specular Rim Highlighting', description: 'The dorsal surfaces exhibit high-frequency specular irregularity where the incident light from the lunar source causes extreme contrast across the sebaceous coating of the fur. This creates a distinct visual separation from the background, though the subsurface scattering within the dense coat appears underdeveloped relative to the intensity of the peripheral irradiance.' },
-      { id: '03.', label: 'Temporal Motion Artifact', description: 'There is a notable discrepancy between the frozen anatomical state of the canine and the directional motion blur observed in the terrestrial foliage. The lack of secondary kinematic distortion in the distal extremities suggests a shutter speed that would typically preclude the visibility of the low-luminance environmental details present in the frame.' }
-    ]
-  }
+
 ];
 
 const statusColor: Record<string, string> = {

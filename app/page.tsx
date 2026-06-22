@@ -51,6 +51,7 @@ export default function PortfolioUI() {
               <a href="#mandate" className="hover:text-amber-400 transition-colors" data-hover>02. ZERO MANDATE</a>
               <a href="#audit"   className="hover:text-rose-400 transition-colors" data-hover>03. VISUAL AUDIT</a>
               <a href="#hook"    className="hover:text-violet-400 transition-colors" data-hover>04. HOOK LIBRARY</a>
+              <a href="/telemetry_benchmarks" className="hover:text-emerald-400 transition-colors" data-hover>05. TELEMETRY</a>
             </nav>
           </div>
         </header>
