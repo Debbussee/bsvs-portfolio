@@ -112,7 +112,7 @@ export default function HeroSection() {
           transition={{ type: 'spring', stiffness: 120, damping: 30 }}
         >
           <motion.h1
-            className="glitch text-[11vw] font-bold tracking-tighter text-white leading-none"
+            className="glitch text-[5.5vw] font-bold tracking-tighter text-white leading-none whitespace-nowrap"
             data-text="BE STILL VISUAL STUDIO"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 // Dynamic imports to avoid SSR issues with browser APIs
-const IntroSequence = dynamic(() => import('./components/IntroSequence'), { ssr: false });
 const CursorRig     = dynamic(() => import('./components/CursorRig'),     { ssr: false });
 const HeroSection   = dynamic(() => import('./components/HeroSection'),   { ssr: false });
 const AboutModal    = dynamic(() => import('./components/AboutModal'),    { ssr: false });
@@ -14,10 +13,7 @@ import VisualAudit from './components/VisualAudit';
 import HookLibrary from './components/HookLibrary';
 
 export default function PortfolioUI() {
-  const [introComplete, setIntroComplete] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-
-  const handleIntroComplete = useCallback(() => setIntroComplete(true), []);
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
@@ -30,15 +26,10 @@ export default function PortfolioUI() {
       {/* CURSOR */}
       <CursorRig />
 
-
-
-      {/* INTRO */}
-      <IntroSequence onComplete={handleIntroComplete} />
-
       {/* SITE CONTENT */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={introComplete ? { opacity: 1 } : {}}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
         {/* ── HEADER / NAV ── */}
@@ -117,3 +108,4 @@ export default function PortfolioUI() {
     </div>
   );
 }
+

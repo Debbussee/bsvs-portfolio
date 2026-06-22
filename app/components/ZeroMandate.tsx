@@ -117,29 +117,43 @@ export default function ZeroMandate() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            Operational Status: The Zero Mandate Engine is a proprietary architecture engineered, owned, and operated by Be Still Visual Studio LLC. For raw repository access, developer telemetry logs, and complete system documentation schemas, visit our core developer hub{' '}
+            Operational Status: The Zero Mandate Engine is a proprietary architecture engineered, owned, and operated by Be Still Visual Studio LLC. For raw repository access, developer telemetry logs, and complete system documentation schemas, visit our core developer hub.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
             <a
               href="/thezeromandate"
               style={{
+                display: 'inline-block',
+                padding: '12px 32px',
+                border: '1px solid #22d3ee',
                 color: '#22d3ee',
+                fontSize: '11px',
+                fontFamily: 'monospace',
+                background: 'transparent',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
                 textDecoration: 'none',
-                fontWeight: 'bold',
-                borderBottom: '1px solid rgba(34, 211, 238, 0.3)',
-                paddingBottom: '1px',
-                transition: 'all 0.2s ease',
+                transition: 'all 0.3s ease',
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.color = '#67e8f9';
-                e.currentTarget.style.borderBottomColor = '#67e8f9';
+                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.08)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(34, 211, 238, 0.15)';
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.color = '#22d3ee';
-                e.currentTarget.style.borderBottomColor = 'rgba(34, 211, 238, 0.3)';
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              [HERE]
-            </a>.
-          </motion.p>
+              [ZERO MANDATE ENGINE — DEVELOPER HUB]
+            </a>
+          </motion.div>
+          <div style={{ marginBottom: '64px' }} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -149,7 +163,7 @@ export default function ZeroMandate() {
         </div>
 
         {/* EXECUTIVE LEADERSHIP & ORIGIN HISTORY */}
-        <div ref={aboutBtnRef} style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+        <div ref={aboutBtnRef} style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
           <motion.h2
             style={{
               fontSize: 'clamp(2rem, 5vw, 3rem)',
