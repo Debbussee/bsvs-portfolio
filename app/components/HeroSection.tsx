@@ -54,8 +54,8 @@ export default function HeroSection() {
         transition={{ type: 'spring', stiffness: 80, damping: 20 }}
       >
         <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2400"
-          alt="Architectural hero"
+          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=2400"
+          alt="Data center server corridor"
           className="w-full h-full object-cover grayscale contrast-125 opacity-35"
           data-img-hover
         />
