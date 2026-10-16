@@ -39,14 +39,14 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.14, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Top bronze architectural rule */}
+      {/* Top accent architectural rule */}
       <motion.div
         style={{
           position: 'absolute',
           left: 0,
           top: 0,
           height: '3px',
-          background: 'linear-gradient(90deg, #A65E2E, #C87A48, transparent)',
+          background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), transparent)',
         }}
         initial={{ width: 0 }}
         animate={inView ? { width: '100%' } : { width: 0 }}
@@ -58,9 +58,9 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '11px',
-            color: '#A65E2E',
-            background: 'rgba(166, 94, 46, 0.1)',
-            border: '1px solid rgba(166, 94, 46, 0.28)',
+            color: 'var(--accent-primary)',
+            background: 'var(--accent-glow)',
+            border: '1px solid var(--border-accent)',
             padding: '4px 12px',
             borderRadius: '9999px',
             fontWeight: 600,
@@ -74,7 +74,7 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
             fontSize: '24px',
             fontWeight: 600,
             letterSpacing: '0.01em',
-            color: '#141413',
+            color: 'var(--text-primary)',
           }}
         >
           {p.title}
@@ -82,7 +82,7 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
       </div>
       <p
         style={{
-          color: '#4A4843',
+          color: 'var(--text-secondary)',
           fontSize: '16px',
           lineHeight: '1.85',
           maxWidth: '68ch',
@@ -132,7 +132,7 @@ export default function ZeroMandate() {
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
-                  background: '#A65E2E',
+                  background: 'var(--accent-primary)',
                 }}
               />
               <span
@@ -140,7 +140,7 @@ export default function ZeroMandate() {
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10px',
                   letterSpacing: '0.35em',
-                  color: '#A65E2E',
+                  color: 'var(--accent-primary)',
                   fontWeight: 600,
                 }}
               >
@@ -155,7 +155,7 @@ export default function ZeroMandate() {
               fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               lineHeight: 1.05,
               marginBottom: '24px',
             }}
@@ -170,7 +170,7 @@ export default function ZeroMandate() {
             style={{
               fontSize: '16px',
               lineHeight: '1.85',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               marginBottom: '36px',
               maxWidth: '68ch',
             }}
@@ -219,8 +219,7 @@ export default function ZeroMandate() {
             gap: '24px',
             position: 'relative',
             overflow: 'hidden',
-            background: '#EBE6DC',
-            border: '1px solid rgba(20, 20, 19, 0.14)',
+            background: 'var(--bg-secondary)',
           }}
           initial={{ opacity: 0, y: 28 }}
           animate={aboutBtnInView ? { opacity: 1, y: 0 } : {}}
@@ -232,7 +231,7 @@ export default function ZeroMandate() {
               fontSize: 'clamp(1.85rem, 3.8vw, 2.6rem)',
               fontWeight: 600,
               letterSpacing: '-0.015em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               textTransform: 'uppercase',
               margin: 0,
             }}

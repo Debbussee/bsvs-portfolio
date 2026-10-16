@@ -10,6 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
   <link rel="stylesheet" href="/thezeromandate/src/style.css" />
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('bsvs-theme');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+    function toggleZmeTheme() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('bsvs-theme', next);
+      var btn = document.getElementById('zme-theme-btn');
+      if (btn) btn.textContent = next === 'light' ? '☾ DARK' : '☀ LIGHT';
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var btn = document.getElementById('zme-theme-btn');
+      if (btn) btn.textContent = cur === 'light' ? '☾ DARK' : '☀ LIGHT';
+    });
+  </script>
 </head>
 <body>
   <!-- Ambient background glow effects -->
@@ -27,6 +50,7 @@
         <span class="diagnostic-pill">DEVICE: <span class="cyan-text font-mono">CUDA:0</span></span>
         <span class="diagnostic-pill">PRECISION: <span class="cyan-text font-mono">FLOAT32</span></span>
         <span class="diagnostic-pill">MODE: <span class="amber-text font-mono">DETERMINISTIC</span></span>
+        <button id="zme-theme-btn" onclick="toggleZmeTheme()" class="diagnostic-pill font-mono" style="cursor:pointer;font-weight:600;">☾ DARK</button>
       </div>
     </header>
 

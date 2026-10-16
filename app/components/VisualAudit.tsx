@@ -92,11 +92,11 @@ const advancedNodes = [
 ];
 
 const statusColor: Record<string, string> = {
-  STABLE:    '#2D6A4F',
-  DEGRADING: '#B43E3E',
-  COMPUTING: '#A65E2E',
-  ACTIVE:    '#1D5B79',
-  LOCKED:    '#6C6860',
+  STABLE:    'var(--status-ok)',
+  DEGRADING: 'var(--status-rec)',
+  COMPUTING: 'var(--accent-primary)',
+  ACTIVE:    'var(--accent-primary)',
+  LOCKED:    'var(--text-muted)',
 };
 
 function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index: number; onImageClick: () => void }) {
@@ -108,17 +108,12 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
   return (
     <motion.div
       ref={ref}
+      className="cinematic-glass-interactive"
       style={{
         position: 'relative',
-        background: '#FAF8F5',
         borderRadius: '14px',
         padding: '12px 12px 16px 12px',
         cursor: 'pointer',
-        border: hovered ? '1px solid rgba(166, 94, 46, 0.45)' : '1px solid rgba(20, 20, 19, 0.12)',
-        boxShadow: hovered
-          ? '0 24px 48px rgba(20, 20, 19, 0.12), 0 4px 12px rgba(166, 94, 46, 0.08)'
-          : '0 8px 24px rgba(20, 20, 19, 0.05)',
-        transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -156,7 +151,7 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         />
 
-        {/* Top Warm Ivory Badges: Node ID & Status Pill */}
+        {/* Top Badges: Node ID & Status Pill */}
         <div
           style={{
             position: 'absolute',
@@ -175,10 +170,10 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10px',
               fontWeight: 600,
-              color: '#141413',
-              background: 'rgba(250, 248, 245, 0.92)',
+              color: 'var(--text-primary)',
+              background: 'var(--bg-nav-scrolled)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(20, 20, 19, 0.15)',
+              border: '1px solid var(--border-subtle)',
               padding: '3px 10px',
               borderRadius: '9999px',
             }}
@@ -195,10 +190,10 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
               fontSize: '9px',
               fontWeight: 600,
               letterSpacing: '0.12em',
-              color: statusColor[node.status] ?? '#4A4843',
-              background: 'rgba(250, 248, 245, 0.92)',
+              color: statusColor[node.status] ?? 'var(--text-secondary)',
+              background: 'var(--bg-nav-scrolled)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(20, 20, 19, 0.15)',
+              border: '1px solid var(--border-subtle)',
               padding: '3px 10px',
               borderRadius: '9999px',
             }}
@@ -208,14 +203,14 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
                 width: '5px',
                 height: '5px',
                 borderRadius: '50%',
-                background: statusColor[node.status] ?? '#4A4843',
+                background: statusColor[node.status] ?? 'var(--text-secondary)',
               }}
             />
             {node.status}
           </div>
         </div>
 
-        {/* Warm Editorial Hover Inspection Card */}
+        {/* Hover Inspection Card */}
         <motion.div
           style={{
             position: 'absolute',
@@ -234,19 +229,19 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
           <div
             style={{
               borderRadius: '10px',
-              border: '1px solid rgba(20, 20, 19, 0.16)',
-              background: 'rgba(250, 248, 245, 0.95)',
+              border: '1px solid var(--border-strong)',
+              background: 'var(--bg-nav-scrolled)',
               backdropFilter: 'blur(14px)',
               WebkitBackdropFilter: 'blur(14px)',
               padding: '14px 16px',
-              boxShadow: '0 14px 32px rgba(20, 20, 19, 0.22)',
+              boxShadow: 'var(--card-shadow)',
             }}
           >
             <div
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#4A4843',
+                color: 'var(--text-secondary)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '4px',
@@ -254,32 +249,30 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
             >
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>GEO_LAT</span>
-                <span style={{ color: '#141413', fontWeight: 600 }}>{node.lat}</span>
+                <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{node.lat}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>GEO_LON</span>
-                <span style={{ color: '#141413', fontWeight: 600 }}>{node.lon}</span>
+                <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{node.lon}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>PHYS_STATE</span>
-                <span style={{ color: statusColor[node.status] ?? '#4A4843', fontWeight: 600 }}>{node.status}</span>
+                <span style={{ color: statusColor[node.status] ?? 'var(--text-secondary)', fontWeight: 600 }}>{node.status}</span>
               </div>
             </div>
 
             <button
               onMouseEnter={() => setDetailsActive(true)}
               onClick={(e) => { e.stopPropagation(); setDetailsActive(!detailsActive); }}
+              className="cinematic-btn-primary"
               style={{
                 marginTop: '12px',
                 width: '100%',
                 padding: '8px 12px',
                 borderRadius: '9999px',
-                border: '1px solid #141413',
-                color: '#FAF8F5',
                 fontSize: '10px',
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontWeight: 600,
-                background: '#141413',
                 cursor: 'pointer',
                 textTransform: 'uppercase',
                 letterSpacing: '0.14em',
@@ -291,7 +284,7 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
           </div>
         </motion.div>
 
-        {/* Forensic Details Overlay (Warm Parchment Dossier) */}
+        {/* Forensic Details Overlay */}
         <motion.div
           className="absolute inset-0 p-3 flex flex-col justify-end z-30"
           style={{ pointerEvents: detailsActive ? 'auto' : 'none' }}
@@ -302,15 +295,15 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
         >
           <div
             style={{
-              background: 'rgba(250, 248, 245, 0.97)',
+              background: 'var(--bg-nav-scrolled)',
               padding: '18px',
               borderRadius: '10px',
-              border: '1px solid rgba(20, 20, 19, 0.18)',
-              borderLeft: '3px solid #A65E2E',
+              border: '1px solid var(--border-strong)',
+              borderLeft: '3px solid var(--accent-primary)',
               backdropFilter: 'blur(16px)',
               overflowY: 'auto',
               maxHeight: '100%',
-              boxShadow: '0 16px 40px rgba(20, 20, 19, 0.25)',
+              boxShadow: 'var(--card-shadow)',
             }}
           >
             {node.details && node.details.length > 0 ? (
@@ -321,7 +314,7 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
                       style={{
                         fontFamily: 'var(--font-geist-mono), monospace',
                         fontSize: '10.5px',
-                        color: '#A65E2E',
+                        color: 'var(--accent-primary)',
                         textTransform: 'uppercase',
                         letterSpacing: '0.08em',
                         marginBottom: '4px',
@@ -329,16 +322,16 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
                       }}
                     >
                       {d.id} {d.id && d.label && ' '}
-                      <span style={{ color: '#141413' }}>{d.label}</span>
+                      <span style={{ color: 'var(--text-primary)' }}>{d.label}</span>
                     </h4>
                   )}
-                  <p style={{ fontSize: '12px', color: '#4A4843', lineHeight: '1.6' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
                     {d.description}
                   </p>
                 </div>
               ))
             ) : (
-              <div style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '12px', color: '#78746C', textAlign: 'center', padding: '20px 0' }}>
+              <div style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '12px', color: 'var(--text-muted)', textAlign: 'center', padding: '20px 0' }}>
                 FORENSIC DATA UNAVAILABLE FOR THIS NODE.
               </div>
             )}
@@ -360,7 +353,7 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
           style={{
             fontSize: '13px',
             fontWeight: 600,
-            color: '#141413',
+            color: 'var(--text-primary)',
             letterSpacing: '0.06em',
           }}
         >
@@ -370,7 +363,7 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '10px',
-            color: '#78746C',
+            color: 'var(--text-muted)',
           }}
         >
           ISO {node.iso} · {node.shutter}
@@ -402,7 +395,7 @@ export default function VisualAudit() {
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'space-between',
-            borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+            borderBottom: '1px solid var(--border-subtle)',
             paddingBottom: '24px',
             flexWrap: 'wrap',
             gap: '16px',
@@ -429,7 +422,7 @@ export default function VisualAudit() {
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    background: '#A65E2E',
+                    background: 'var(--accent-primary)',
                   }}
                 />
                 <span
@@ -437,7 +430,7 @@ export default function VisualAudit() {
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
                     letterSpacing: '0.35em',
-                    color: '#A65E2E',
+                    color: 'var(--accent-primary)',
                     fontWeight: 600,
                   }}
                 >
@@ -451,7 +444,7 @@ export default function VisualAudit() {
                 fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
                 fontWeight: 600,
                 letterSpacing: '-0.02em',
-                color: '#141413',
+                color: 'var(--text-primary)',
                 lineHeight: 1.05,
               }}
               initial={{ opacity: 0, y: 20 }}
@@ -466,7 +459,7 @@ export default function VisualAudit() {
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '11px',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               padding: '6px 14px',
               fontWeight: 600,
             }}
@@ -498,7 +491,7 @@ export default function VisualAudit() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+            borderBottom: '1px solid var(--border-subtle)',
             paddingBottom: '20px',
             flexWrap: 'wrap',
             gap: '12px',
@@ -510,7 +503,7 @@ export default function VisualAudit() {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                background: '#A65E2E',
+                background: 'var(--accent-primary)',
               }}
             />
             <h3
@@ -519,7 +512,7 @@ export default function VisualAudit() {
                 fontSize: '26px',
                 fontWeight: 600,
                 letterSpacing: '0.06em',
-                color: '#141413',
+                color: 'var(--text-primary)',
                 textTransform: 'uppercase',
               }}
             >
@@ -531,7 +524,7 @@ export default function VisualAudit() {
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '11px',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               padding: '6px 14px',
               fontWeight: 600,
             }}
@@ -565,7 +558,7 @@ export default function VisualAudit() {
               position: 'fixed',
               inset: 0,
               zIndex: 9999,
-              background: 'rgba(244, 241, 234, 0.94)',
+              background: 'var(--bg-overlay)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -585,10 +578,10 @@ export default function VisualAudit() {
                 maxHeight: '86vh',
                 objectFit: 'contain',
                 borderRadius: '12px',
-                background: '#FAF8F5',
+                background: 'var(--bg-card)',
                 padding: '12px',
-                border: '1px solid rgba(20, 20, 19, 0.16)',
-                boxShadow: '0 32px 80px rgba(20, 20, 19, 0.22)',
+                border: '1px solid var(--border-strong)',
+                boxShadow: 'var(--card-shadow)',
               }}
             />
             {/* Close instruction */}
@@ -605,7 +598,7 @@ export default function VisualAudit() {
                 fontSize: '11px',
                 fontWeight: 600,
                 letterSpacing: '0.12em',
-                color: '#141413',
+                color: 'var(--text-primary)',
                 padding: '10px 20px',
                 borderRadius: '9999px',
               }}
@@ -624,16 +617,16 @@ export default function VisualAudit() {
                 left: '28px',
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '12px',
-                color: '#141413',
-                borderLeft: '3px solid #A65E2E',
+                color: 'var(--text-primary)',
+                borderLeft: '3px solid var(--accent-primary)',
                 padding: '14px 20px',
                 borderRadius: '12px',
               }}
             >
               NODE_ID: {fullScreenNode.id} <br />
-              <span style={{ color: '#A65E2E', fontWeight: 600 }}>{fullScreenNode.title}</span>
+              <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{fullScreenNode.title}</span>
               <br />
-              <span style={{ fontSize: '10px', color: '#78746C' }}>
+              <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
                 {fullScreenNode.lat} / {fullScreenNode.lon}
               </span>
             </motion.div>

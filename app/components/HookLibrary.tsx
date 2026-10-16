@@ -55,7 +55,7 @@ export default function HookLibrary() {
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
-                  background: '#A65E2E',
+                  background: 'var(--accent-primary)',
                 }}
               />
               <span
@@ -63,7 +63,7 @@ export default function HookLibrary() {
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10px',
                   letterSpacing: '0.35em',
-                  color: '#A65E2E',
+                  color: 'var(--accent-primary)',
                   fontWeight: 600,
                 }}
               >
@@ -78,7 +78,7 @@ export default function HookLibrary() {
               fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               lineHeight: 1.05,
             }}
             initial={{ opacity: 0, y: 24 }}
@@ -112,14 +112,14 @@ export default function HookLibrary() {
                   left: 0,
                   right: 0,
                   height: '3px',
-                  background: 'linear-gradient(90deg, #A65E2E, transparent)',
+                  background: 'linear-gradient(90deg, var(--accent-primary), transparent)',
                 }}
               />
               <h3
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '11px',
-                  color: '#A65E2E',
+                  color: 'var(--accent-primary)',
                   letterSpacing: '0.16em',
                   marginBottom: '14px',
                   fontWeight: 600,
@@ -127,7 +127,7 @@ export default function HookLibrary() {
               >
                 {s.title}
               </h3>
-              <p style={{ color: '#4A4843', fontSize: '15.5px', lineHeight: '1.8' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '15.5px', lineHeight: '1.8' }}>
                 {s.body}
               </p>
             </motion.div>
@@ -143,9 +143,8 @@ export default function HookLibrary() {
             marginBottom: '64px',
             position: 'relative',
             overflow: 'hidden',
-            background: '#EBE6DC',
-            border: '1px solid rgba(20, 20, 19, 0.14)',
-            borderLeft: '4px solid #A65E2E',
+            background: 'var(--bg-secondary)',
+            borderLeft: '4px solid var(--accent-primary)',
           }}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -154,7 +153,7 @@ export default function HookLibrary() {
           <p
             className="font-editorial"
             style={{
-              color: '#141413',
+              color: 'var(--text-primary)',
               fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
               lineHeight: '1.6',
               fontWeight: 500,
@@ -186,8 +185,8 @@ export default function HookLibrary() {
           {/* Header Bar */}
           <div
             style={{
-              background: '#EBE6DC',
-              borderBottom: '1px solid rgba(20, 20, 19, 0.12)',
+              background: 'var(--bg-secondary)',
+              borderBottom: '1px solid var(--border-subtle)',
               padding: '20px 36px',
               display: 'flex',
               alignItems: 'center',
@@ -201,7 +200,7 @@ export default function HookLibrary() {
                 style={{
                   width: '8px',
                   height: '8px',
-                  background: '#A65E2E',
+                  background: 'var(--accent-primary)',
                   borderRadius: '50%',
                 }}
               />
@@ -209,7 +208,7 @@ export default function HookLibrary() {
                 style={{
                   fontSize: '14px',
                   letterSpacing: '0.24em',
-                  color: '#141413',
+                  color: 'var(--text-primary)',
                   fontWeight: 700,
                 }}
               >
@@ -221,7 +220,7 @@ export default function HookLibrary() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#A65E2E',
+                color: 'var(--accent-primary)',
                 letterSpacing: '0.15em',
                 padding: '4px 12px',
                 fontWeight: 600,
@@ -236,7 +235,7 @@ export default function HookLibrary() {
             <div
               style={{
                 fontSize: '13px',
-                color: '#4A4843',
+                color: 'var(--text-secondary)',
                 marginBottom: '36px',
                 lineHeight: '1.85',
                 display: 'flex',
@@ -245,9 +244,9 @@ export default function HookLibrary() {
                 fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
-              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>DIRECT COMMUNICATION CHANNEL ACTIVE...</div>
-              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>FOR ENTERPRISE INQUIRIES, CLOUD PARTNERSHIPS, OR TECHNICAL AUDITS.</div>
-              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>DETERMINISTIC RESPONSES ONLY. NO PROBABILISTIC HALLUCINATION.</div>
+              <div><span style={{ color: 'var(--accent-primary)', marginRight: '8px' }}>▸</span>DIRECT COMMUNICATION CHANNEL ACTIVE...</div>
+              <div><span style={{ color: 'var(--accent-primary)', marginRight: '8px' }}>▸</span>FOR ENTERPRISE INQUIRIES, CLOUD PARTNERSHIPS, OR TECHNICAL AUDITS.</div>
+              <div><span style={{ color: 'var(--accent-primary)', marginRight: '8px' }}>▸</span>DETERMINISTIC RESPONSES ONLY. NO PROBABILISTIC HALLUCINATION.</div>
             </div>
 
             {/* Email cards */}
@@ -256,24 +255,12 @@ export default function HookLibrary() {
               <a
                 href="mailto:mkd@bestillvisualstudio.com"
                 data-hover
+                className="cinematic-glass-interactive"
                 style={{
                   textDecoration: 'none',
                   padding: '24px 28px',
                   borderRadius: '14px',
-                  background: '#F4F1EA',
-                  border: '1px solid rgba(20, 20, 19, 0.14)',
-                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   display: 'block',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#A65E2E';
-                  e.currentTarget.style.background = '#EBE6DC';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(20, 20, 19, 0.14)';
-                  e.currentTarget.style.background = '#F4F1EA';
-                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <div
@@ -281,19 +268,19 @@ export default function HookLibrary() {
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
                     letterSpacing: '0.22em',
-                    color: '#78746C',
+                    color: 'var(--text-muted)',
                     marginBottom: '10px',
                     textTransform: 'uppercase',
                   }}
                 >
-                  <span style={{ color: '#A65E2E', marginRight: '8px', fontWeight: 600 }}>01</span>
+                  <span style={{ color: 'var(--accent-primary)', marginRight: '8px', fontWeight: 600 }}>01</span>
                   PRIMARY CHANNEL
                 </div>
                 <div
                   style={{
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '15px',
-                    color: '#141413',
+                    color: 'var(--text-primary)',
                     fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
@@ -306,24 +293,12 @@ export default function HookLibrary() {
               <a
                 href="mailto:marvin@thezeromandate.com"
                 data-hover
+                className="cinematic-glass-interactive"
                 style={{
                   textDecoration: 'none',
                   padding: '24px 28px',
                   borderRadius: '14px',
-                  background: '#F4F1EA',
-                  border: '1px solid rgba(20, 20, 19, 0.14)',
-                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   display: 'block',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#A65E2E';
-                  e.currentTarget.style.background = '#EBE6DC';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(20, 20, 19, 0.14)';
-                  e.currentTarget.style.background = '#F4F1EA';
-                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <div
@@ -331,19 +306,19 @@ export default function HookLibrary() {
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
                     letterSpacing: '0.22em',
-                    color: '#78746C',
+                    color: 'var(--text-muted)',
                     marginBottom: '10px',
                     textTransform: 'uppercase',
                   }}
                 >
-                  <span style={{ color: '#A65E2E', marginRight: '8px', fontWeight: 600 }}>02</span>
+                  <span style={{ color: 'var(--accent-primary)', marginRight: '8px', fontWeight: 600 }}>02</span>
                   ZERO MANDATE ENGINE DIRECT
                 </div>
                 <div
                   style={{
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '15px',
-                    color: '#141413',
+                    color: 'var(--text-primary)',
                     fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
@@ -358,7 +333,7 @@ export default function HookLibrary() {
               style={{
                 width: '100%',
                 height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(20,20,19,0.16), transparent)',
+                background: 'var(--border-subtle)',
                 margin: '32px 0 24px 0',
               }}
             />
@@ -368,7 +343,7 @@ export default function HookLibrary() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#78746C',
+                color: 'var(--text-muted)',
                 textAlign: 'center',
                 letterSpacing: '0.15em',
               }}

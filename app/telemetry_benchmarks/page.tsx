@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { ArrowLeft, Terminal, Activity, Radio, Cpu, ShieldCheck } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import ThemeToggle from '../components/ThemeToggle';
 
 const CursorRig = dynamic(() => import('../components/CursorRig'), { ssr: false });
 
@@ -115,7 +116,6 @@ const SECTIONS = [
       { label: 'ID_LOCK', value: '1.000' },
       { label: 'DRIFT', value: 'NONE', pass: true },
     ],
-    accent: '#A65E2E',
   },
   {
     id: 'audio2emotion-02',
@@ -142,7 +142,6 @@ const SECTIONS = [
       { label: 'SPEC_CEIL', value: '0.880' },
       { label: 'BILAB_MATCH', value: '0.994' },
     ],
-    accent: '#141413',
   },
   {
     id: 'audio2emotion-03',
@@ -165,12 +164,11 @@ const SECTIONS = [
       { label: 'INFERENCE', value: '3.41ms' },
       { label: 'TENSOR_UTIL', value: '94.7%' },
     ],
-    accent: '#2D6A4F',
   },
 ];
 
 /* ═══════════════════════════════════════════════════════════════
-   UTILITY — JSON Syntax Highlighting (Warm Editorial Palette)
+   UTILITY — JSON Syntax Highlighting (Adaptive Theme Variables)
    ═══════════════════════════════════════════════════════════════ */
 
 function syntaxHighlight(json: string): string {
@@ -182,22 +180,21 @@ function syntaxHighlight(json: string): string {
   return escaped.replace(
     /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g,
     (match) => {
-      let style = 'color:#2D6A4F;font-weight:600'; // numbers → forest green
+      let style = 'color:var(--status-ok);font-weight:600';
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
-          style = 'color:#141413;font-weight:600'; // keys → obsidian
+          style = 'color:var(--text-primary);font-weight:600';
         } else if (match.includes('PASSED')) {
-          style =
-            'color:#2D6A4F;font-weight:700';
+          style = 'color:var(--status-ok);font-weight:700';
         } else {
-          style = 'color:#A65E2E'; // strings → bronze
+          style = 'color:var(--accent-primary)';
         }
       } else if (/true/.test(match)) {
-        style = 'color:#2D6A4F;font-weight:600';
+        style = 'color:var(--status-ok);font-weight:600';
       } else if (/false/.test(match)) {
-        style = 'color:#B43E3E;font-weight:600';
+        style = 'color:var(--status-rec);font-weight:600';
       } else if (/null/.test(match)) {
-        style = 'color:#78746C';
+        style = 'color:var(--text-muted)';
       }
       return `<span style="${style}">${match}</span>`;
     },
@@ -211,11 +208,9 @@ function syntaxHighlight(json: string): string {
 function TerminalPanel({
   title,
   data,
-  accent,
 }: {
   title: string;
   data: object;
-  accent: string;
 }) {
   const jsonStr = JSON.stringify(data, null, 2);
   const lines = jsonStr.split('\n');
@@ -239,22 +234,22 @@ function TerminalPanel({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '14px 20px',
-          background: '#EBE6DC',
-          borderBottom: '1px solid rgba(20, 20, 19, 0.12)',
+          background: 'var(--bg-secondary)',
+          borderBottom: '1px solid var(--border-subtle)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{ display: 'flex', gap: '6px' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(20,20,19,0.2)' }} />
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(20,20,19,0.2)' }} />
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: accent }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--border-strong)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--border-strong)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-primary)' }} />
           </div>
-          <Terminal size={12} style={{ color: '#4A4843' }} />
+          <Terminal size={12} style={{ color: 'var(--text-secondary)' }} />
           <span
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10.5px',
-              color: '#141413',
+              color: 'var(--text-primary)',
               fontWeight: 600,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
@@ -267,7 +262,7 @@ function TerminalPanel({
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '9px',
-            color: '#78746C',
+            color: 'var(--text-muted)',
           }}
         >
           {lines.length} LINES
@@ -280,7 +275,7 @@ function TerminalPanel({
           flex: 1,
           overflow: 'auto',
           padding: '18px 0',
-          background: '#FAF8F5',
+          background: 'var(--bg-code)',
         }}
       >
         <pre
@@ -289,7 +284,7 @@ function TerminalPanel({
             fontSize: '11.5px',
             lineHeight: '1.75',
             margin: 0,
-            color: '#4A4843',
+            color: 'var(--text-secondary)',
           }}
         >
           {highlighted.map((line, i) => (
@@ -307,7 +302,7 @@ function TerminalPanel({
                   minWidth: '32px',
                   textAlign: 'right',
                   marginRight: '20px',
-                  color: '#A5A096',
+                  color: 'var(--text-muted)',
                   userSelect: 'none',
                   fontSize: '10px',
                 }}
@@ -327,8 +322,8 @@ function TerminalPanel({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 20px',
-          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
-          background: '#EBE6DC',
+          borderTop: '1px solid var(--border-subtle)',
+          background: 'var(--bg-secondary)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -338,7 +333,7 @@ function TerminalPanel({
               width: '7px',
               height: '7px',
               borderRadius: '50%',
-              background: '#2D6A4F',
+              background: 'var(--status-ok)',
               animationDuration: '2s',
             }}
           />
@@ -346,7 +341,7 @@ function TerminalPanel({
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10px',
-              color: '#2D6A4F',
+              color: 'var(--status-ok)',
               letterSpacing: '0.1em',
               fontWeight: 600,
             }}
@@ -358,7 +353,7 @@ function TerminalPanel({
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '9.5px',
-            color: '#78746C',
+            color: 'var(--text-muted)',
           }}
         >
           SCHEMA V1.0
@@ -375,11 +370,9 @@ function TerminalPanel({
 function VideoViewport({
   src,
   label,
-  accent,
 }: {
   src: string;
   label: string;
-  accent: string;
 }) {
   return (
     <div
@@ -399,7 +392,7 @@ function VideoViewport({
           left: 0,
           right: 0,
           height: '3px',
-          background: `linear-gradient(90deg, ${accent}, transparent)`,
+          background: 'linear-gradient(90deg, var(--accent-primary), transparent)',
           zIndex: 3,
         }}
       />
@@ -433,12 +426,12 @@ function VideoViewport({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Radio size={11} style={{ color: accent }} />
+          <Radio size={11} style={{ color: 'var(--accent-primary)' }} />
           <span
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10px',
-              color: '#141413',
+              color: 'var(--text-primary)',
               fontWeight: 600,
               letterSpacing: '0.06em',
             }}
@@ -451,7 +444,7 @@ function VideoViewport({
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '9px',
-            color: '#4A4843',
+            color: 'var(--text-secondary)',
             padding: '2px 10px',
           }}
         >
@@ -489,7 +482,7 @@ function MetricBadge({
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '9.5px',
-          color: '#78746C',
+          color: 'var(--text-muted)',
           letterSpacing: '0.06em',
         }}
       >
@@ -499,7 +492,7 @@ function MetricBadge({
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '10px',
-          color: pass ? '#2D6A4F' : '#141413',
+          color: pass ? 'var(--status-ok)' : 'var(--text-primary)',
           fontWeight: 600,
           letterSpacing: '0.04em',
         }}
@@ -550,9 +543,9 @@ function BenchmarkSection({
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '11px',
-              color: section.accent,
-              background: `${section.accent}18`,
-              border: `1px solid ${section.accent}44`,
+              color: 'var(--accent-primary)',
+              background: 'var(--accent-glow)',
+              border: '1px solid var(--border-accent)',
               padding: '4px 12px',
               borderRadius: '9999px',
               fontWeight: 600,
@@ -566,7 +559,7 @@ function BenchmarkSection({
             style={{
               fontSize: 'clamp(1.65rem, 3vw, 2.35rem)',
               fontWeight: 600,
-              color: '#141413',
+              color: 'var(--text-primary)',
               letterSpacing: '-0.015em',
               margin: 0,
             }}
@@ -588,7 +581,7 @@ function BenchmarkSection({
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10px',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               padding: '4px 12px',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
@@ -610,7 +603,7 @@ function BenchmarkSection({
                 width: '6px',
                 height: '6px',
                 borderRadius: '50%',
-                background: '#2D6A4F',
+                background: 'var(--status-ok)',
                 animationDuration: '2.5s',
               }}
             />
@@ -618,7 +611,7 @@ function BenchmarkSection({
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '9.5px',
-                color: '#2D6A4F',
+                color: 'var(--status-ok)',
                 letterSpacing: '0.12em',
                 fontWeight: 600,
               }}
@@ -631,7 +624,7 @@ function BenchmarkSection({
         <p
           style={{
             fontSize: '15.5px',
-            color: '#4A4843',
+            color: 'var(--text-secondary)',
             lineHeight: '1.8',
             maxWidth: '78ch',
             marginBottom: '24px',
@@ -680,7 +673,6 @@ function BenchmarkSection({
                 key={v.src}
                 src={v.src}
                 label={v.label}
-                accent={section.accent}
               />
             ))}
           </div>
@@ -690,7 +682,6 @@ function BenchmarkSection({
             <TerminalPanel
               title={section.telemetryTitle}
               data={section.telemetry}
-              accent={section.accent}
             />
           </div>
         </div>
@@ -717,8 +708,7 @@ function SystemDivider() {
         style={{
           flex: 1,
           height: '1px',
-          background:
-            'linear-gradient(90deg, transparent, rgba(20, 20, 19, 0.14) 20%, rgba(20, 20, 19, 0.14) 80%, transparent)',
+          background: 'var(--border-subtle)',
         }}
       />
     </div>
@@ -784,11 +774,14 @@ export default function TelemetryBenchmarksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F1EA] text-[#141413] selection:bg-[#A65E2E]/20 selection:text-[#141413] relative overflow-hidden arch-grid noise">
+    <div
+      className="min-h-screen relative overflow-hidden arch-grid noise"
+      style={{ background: 'var(--bg-canvas)', color: 'var(--text-primary)' }}
+    >
       <CursorRig />
 
       {/* ══════════════════════════════════════════
-          FLOATING WARM STONE HEADER / NAV
+          FLOATING HEADER / NAV
           ══════════════════════════════════════════ */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
         <div
@@ -798,11 +791,11 @@ export default function TelemetryBenchmarksPage() {
             height: '62px',
             padding: '0 24px',
             borderRadius: '9999px',
-            background: 'rgba(244, 241, 234, 0.88)',
+            background: 'var(--bg-nav)',
             backdropFilter: 'blur(20px) saturate(140%)',
             WebkitBackdropFilter: 'blur(20px) saturate(140%)',
-            border: '1px solid rgba(20, 20, 19, 0.12)',
-            boxShadow: '0 12px 32px rgba(20, 20, 19, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--card-shadow)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -810,21 +803,27 @@ export default function TelemetryBenchmarksPage() {
         >
           <div className="flex items-center gap-3">
             <div
-              className="w-2 h-2 bg-[#A65E2E] rounded-full"
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--accent-primary)' }}
             />
             <Link
               href="/"
-              className="font-editorial text-2xl font-bold tracking-tight text-[#141413] uppercase no-underline"
+              className="font-editorial text-2xl font-bold tracking-tight uppercase no-underline"
+              style={{ color: 'var(--text-primary)' }}
               data-hover
             >
               BSVS
             </Link>
-            <span className="hidden md:inline font-mono text-[10px] tracking-[0.18em] text-[#78746C] border-l border-[#141413]/15 pl-3 ml-1">
+            <span
+              className="hidden md:inline font-mono text-[10px] tracking-[0.18em] pl-3 ml-1"
+              style={{ color: 'var(--text-muted)', borderLeft: '1px solid var(--border-subtle)' }}
+            >
               SYS.OP.NODE // TELEMETRY_BENCHMARKS
             </span>
           </div>
 
-          <nav className="flex gap-8 font-mono text-xs tracking-widest">
+          <nav className="flex items-center gap-3 font-mono text-xs tracking-widest">
+            <ThemeToggle />
             <Link
               href="/"
               className="cinematic-btn cinematic-btn-secondary"
@@ -874,7 +873,7 @@ export default function TelemetryBenchmarksPage() {
                   width: '7px',
                   height: '7px',
                   borderRadius: '50%',
-                  background: '#B43E3E',
+                  background: 'var(--status-rec)',
                   animationDuration: '1.5s',
                 }}
               />
@@ -882,7 +881,7 @@ export default function TelemetryBenchmarksPage() {
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10px',
-                  color: '#B43E3E',
+                  color: 'var(--status-rec)',
                   letterSpacing: '0.14em',
                   fontWeight: 600,
                 }}
@@ -894,7 +893,7 @@ export default function TelemetryBenchmarksPage() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#78746C',
+                color: 'var(--text-muted)',
               }}
             >
               UPTIME {formatUptime(uptime)}
@@ -906,18 +905,18 @@ export default function TelemetryBenchmarksPage() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#78746C',
+                color: 'var(--text-muted)',
               }}
             >
               UTC {utcTime}
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <ShieldCheck size={12} style={{ color: '#2D6A4F' }} />
+              <ShieldCheck size={12} style={{ color: 'var(--status-ok)' }} />
               <span
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10px',
-                  color: '#2D6A4F',
+                  color: 'var(--status-ok)',
                   letterSpacing: '0.08em',
                   fontWeight: 600,
                 }}
@@ -950,13 +949,13 @@ export default function TelemetryBenchmarksPage() {
                 gap: '8px',
               }}
             >
-              <Activity size={13} style={{ color: '#A65E2E' }} />
+              <Activity size={13} style={{ color: 'var(--accent-primary)' }} />
               <span
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10px',
                   letterSpacing: '0.35em',
-                  color: '#A65E2E',
+                  color: 'var(--accent-primary)',
                   fontWeight: 600,
                 }}
               >
@@ -978,7 +977,7 @@ export default function TelemetryBenchmarksPage() {
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               marginBottom: '28px',
               textTransform: 'uppercase',
               lineHeight: '1.06',
@@ -1000,9 +999,9 @@ export default function TelemetryBenchmarksPage() {
             style={{
               fontSize: '15.5px',
               lineHeight: '1.85',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               maxWidth: '78ch',
-              borderLeft: '3px solid #A65E2E',
+              borderLeft: '3px solid var(--accent-primary)',
               paddingLeft: '24px',
             }}
           >
@@ -1038,7 +1037,7 @@ export default function TelemetryBenchmarksPage() {
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '10.5px',
-                  color: '#141413',
+                  color: 'var(--text-primary)',
                   fontWeight: 600,
                   padding: '8px 18px',
                   letterSpacing: '0.06em',
@@ -1071,8 +1070,7 @@ export default function TelemetryBenchmarksPage() {
             borderRadius: '18px',
             padding: '32px 36px',
             marginTop: '64px',
-            background: '#EBE6DC',
-            border: '1px solid rgba(20, 20, 19, 0.14)',
+            background: 'var(--bg-secondary)',
           }}
         >
           <div
@@ -1083,12 +1081,12 @@ export default function TelemetryBenchmarksPage() {
               marginBottom: '12px',
             }}
           >
-            <Cpu size={14} style={{ color: '#A65E2E' }} />
+            <Cpu size={14} style={{ color: 'var(--accent-primary)' }} />
             <span
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '11px',
-                color: '#141413',
+                color: 'var(--text-primary)',
                 fontWeight: 600,
                 letterSpacing: '0.12em',
               }}
@@ -1099,7 +1097,7 @@ export default function TelemetryBenchmarksPage() {
           <p
             style={{
               fontSize: '13.5px',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               lineHeight: '1.8',
               maxWidth: '90ch',
             }}
@@ -1119,19 +1117,20 @@ export default function TelemetryBenchmarksPage() {
           ══════════════════════════════════════════ */}
       <footer
         style={{
-          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
-          background: '#EBE6DC',
+          borderTop: '1px solid var(--border-subtle)',
+          background: 'var(--bg-secondary)',
         }}
         className="relative z-10"
       >
         <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em] text-[#4A4843]">
+          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em]" style={{ color: 'var(--text-secondary)' }}>
             <div
-              className="w-2 h-2 bg-[#2D6A4F] rounded-full"
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--status-ok)' }}
             />
             <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
           </div>
-          <div className="font-mono text-[10px] tracking-[0.12em] text-[#78746C]">
+          <div className="font-mono text-[10px] tracking-[0.12em]" style={{ color: 'var(--text-muted)' }}>
             &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL
             PROTOCOLS ENFORCED.
           </div>

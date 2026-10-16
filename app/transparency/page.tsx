@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { ArrowLeft, Cpu, Linkedin } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import ThemeToggle from '../components/ThemeToggle';
 
 const CursorRig = dynamic(() => import('../components/CursorRig'), { ssr: false });
 
@@ -13,13 +14,11 @@ function TimelineItem({
   title, 
   body, 
   index, 
-  glowColor = '#A65E2E' 
 }: { 
   badge: string; 
   title: string; 
   body: string; 
   index: number; 
-  glowColor?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
@@ -37,14 +36,14 @@ function TimelineItem({
         overflow: 'hidden',
       }}
     >
-      {/* Animated Top Bronze Rule */}
+      {/* Animated Top Rule */}
       <motion.div
         style={{
           position: 'absolute',
           left: 0,
           top: 0,
           height: '3px',
-          background: `linear-gradient(90deg, ${glowColor}, transparent)`,
+          background: 'linear-gradient(90deg, var(--accent-primary), transparent)',
         }}
         initial={{ width: 0 }}
         animate={inView ? { width: '100%' } : { width: 0 }}
@@ -58,9 +57,9 @@ function TimelineItem({
             fontSize: '10px',
             padding: '4px 12px',
             borderRadius: '9999px',
-            border: `1px solid ${glowColor}55`,
-            backgroundColor: `${glowColor}14`,
-            color: glowColor,
+            border: '1px solid var(--border-accent)',
+            backgroundColor: 'var(--accent-glow)',
+            color: 'var(--accent-primary)',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
             fontWeight: 600,
@@ -75,14 +74,14 @@ function TimelineItem({
         style={{
           fontSize: '23px',
           fontWeight: 600,
-          color: '#141413',
+          color: 'var(--text-primary)',
           marginBottom: '12px',
           letterSpacing: '-0.01em',
         }}
       >
         {title}
       </h3>
-      <p style={{ color: '#4A4843', fontSize: '15.5px', lineHeight: '1.8', maxWidth: '72ch', whiteSpace: 'pre-wrap' }}>
+      <p style={{ color: 'var(--text-secondary)', fontSize: '15.5px', lineHeight: '1.8', maxWidth: '72ch', whiteSpace: 'pre-wrap' }}>
         {body}
       </p>
     </motion.div>
@@ -106,11 +105,13 @@ export default function TransparencyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4F1EA] text-[#141413] selection:bg-[#A65E2E]/20 selection:text-[#141413] relative overflow-hidden arch-grid noise">
-      
+    <div
+      className="min-h-screen relative overflow-hidden arch-grid noise"
+      style={{ background: 'var(--bg-canvas)', color: 'var(--text-primary)' }}
+    >
       <CursorRig />
 
-      {/* ── FLOATING WARM STONE HEADER / NAV ── */}
+      {/* ── FLOATING HEADER / NAV ── */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
         <div
           style={{
@@ -119,11 +120,11 @@ export default function TransparencyPage() {
             height: '62px',
             padding: '0 24px',
             borderRadius: '9999px',
-            background: 'rgba(244, 241, 234, 0.88)',
+            background: 'var(--bg-nav)',
             backdropFilter: 'blur(20px) saturate(140%)',
             WebkitBackdropFilter: 'blur(20px) saturate(140%)',
-            border: '1px solid rgba(20, 20, 19, 0.12)',
-            boxShadow: '0 12px 32px rgba(20, 20, 19, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--card-shadow)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -131,17 +132,27 @@ export default function TransparencyPage() {
         >
           <div className="flex items-center gap-3">
             <div
-              className="w-2 h-2 bg-[#A65E2E] rounded-full"
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--accent-primary)' }}
             />
-            <Link href="/" className="font-editorial text-2xl font-bold tracking-tight text-[#141413] uppercase no-underline" data-hover>
+            <Link
+              href="/"
+              className="font-editorial text-2xl font-bold tracking-tight uppercase no-underline"
+              style={{ color: 'var(--text-primary)' }}
+              data-hover
+            >
               BSVS
             </Link>
-            <span className="hidden md:inline font-mono text-[10px] tracking-[0.18em] text-[#78746C] border-l border-[#141413]/15 pl-3 ml-1">
+            <span
+              className="hidden md:inline font-mono text-[10px] tracking-[0.18em] pl-3 ml-1"
+              style={{ color: 'var(--text-muted)', borderLeft: '1px solid var(--border-subtle)' }}
+            >
               SYS.OP.NODE // TRANSPARENCY
             </span>
           </div>
 
-          <nav className="flex gap-8 font-mono text-xs tracking-widest">
+          <nav className="flex items-center gap-3 font-mono text-xs tracking-widest">
+            <ThemeToggle />
             <Link
               href="/"
               className="cinematic-btn cinematic-btn-secondary"
@@ -189,10 +200,10 @@ export default function TransparencyPage() {
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
-                  background: '#A65E2E',
+                  background: 'var(--accent-primary)',
                 }}
               />
-              <span style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '10px', letterSpacing: '0.35em', color: '#A65E2E', fontWeight: 600 }}>
+              <span style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '10px', letterSpacing: '0.35em', color: 'var(--accent-primary)', fontWeight: 600 }}>
                 TRANSPARENCY AUDIT
               </span>
             </div>
@@ -207,7 +218,7 @@ export default function TransparencyPage() {
               fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)',
               fontWeight: 600,
               letterSpacing: '-0.02em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               marginBottom: '32px',
               textTransform: 'uppercase',
               lineHeight: '1.05',
@@ -223,9 +234,9 @@ export default function TransparencyPage() {
             style={{
               fontSize: '16px',
               lineHeight: '1.85',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               maxWidth: '72ch',
-              borderLeft: '3px solid #A65E2E',
+              borderLeft: '3px solid var(--accent-primary)',
               paddingLeft: '24px',
             }}
           >
@@ -261,15 +272,17 @@ export default function TransparencyPage() {
                 left: 0,
                 right: 0,
                 height: '3px',
-                background: 'linear-gradient(90deg, #A65E2E, transparent)',
+                background: 'linear-gradient(90deg, var(--accent-primary), transparent)',
               }}
             />
 
             <div>
               <div className="flex justify-between items-start" style={{ marginBottom: '32px' }}>
                 <div>
-                  <h2 className="font-editorial text-2xl font-bold text-[#141413] tracking-tight">Marvin DeBouse</h2>
-                  <p className="font-mono text-[11px] text-[#A65E2E] font-semibold uppercase tracking-[0.18em] mt-1.5">
+                  <h2 className="font-editorial text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                    Marvin DeBouse
+                  </h2>
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] mt-1.5" style={{ color: 'var(--accent-primary)' }}>
                     Founder &amp; Technical Director
                   </p>
                 </div>
@@ -277,7 +290,7 @@ export default function TransparencyPage() {
                   href="https://www.linkedin.com/in/marvin-debouse-148a673b9/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-[#141413]/15 flex items-center justify-center text-[#4A4843] hover:text-[#A65E2E] hover:border-[#A65E2E] transition-all bg-[#F4F1EA]"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all cinematic-pill"
                   data-hover
                 >
                   <Linkedin size={15} />
@@ -286,29 +299,30 @@ export default function TransparencyPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <div>
-                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                  <span className="block font-mono uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold" style={{ color: 'var(--text-muted)' }}>
                     CORE MANDATE
                   </span>
-                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Systems architecture, Zero Mandate Engine Core development, and forensic AI pipeline design.
                   </p>
                 </div>
                 <div>
-                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                  <span className="block font-mono uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold" style={{ color: 'var(--text-muted)' }}>
                     SPECIALIZATION
                   </span>
-                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     High-scale GPU compute orchestration, hardware-level simulation logic, and the eradication of subjective generative drift through deterministic physical laws.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-[#141413]/10 mt-10 pt-6 flex items-center gap-2.5">
+            <div className="mt-10 pt-6 flex items-center gap-2.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
               <span
-                className="w-2 h-2 bg-[#A65E2E] rounded-full"
+                className="w-2 h-2 rounded-full"
+                style={{ background: 'var(--accent-primary)' }}
               />
-              <span className="font-mono text-[10px] tracking-[0.15em] text-[#78746C] font-medium">
+              <span className="font-mono text-[10px] tracking-[0.15em] font-medium" style={{ color: 'var(--text-muted)' }}>
                 NODE: ZME_CORE_ARCHITECT
               </span>
             </div>
@@ -333,15 +347,17 @@ export default function TransparencyPage() {
                 left: 0,
                 right: 0,
                 height: '3px',
-                background: 'linear-gradient(90deg, #141413, transparent)',
+                background: 'linear-gradient(90deg, var(--accent-secondary), transparent)',
               }}
             />
 
             <div>
               <div className="flex justify-between items-start" style={{ marginBottom: '32px' }}>
                 <div>
-                  <h2 className="font-editorial text-2xl font-bold text-[#141413] tracking-tight">La Chaunia DeBouse</h2>
-                  <p className="font-mono text-[11px] text-[#A65E2E] font-semibold uppercase tracking-[0.18em] mt-1.5">
+                  <h2 className="font-editorial text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                    La Chaunia DeBouse
+                  </h2>
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] mt-1.5" style={{ color: 'var(--accent-primary)' }}>
                     Partner &amp; Operations Review
                   </p>
                 </div>
@@ -349,7 +365,7 @@ export default function TransparencyPage() {
                   href="https://www.linkedin.com/in/la-chaunia-debouse-05756a47/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-[#141413]/15 flex items-center justify-center text-[#4A4843] hover:text-[#A65E2E] hover:border-[#A65E2E] transition-all bg-[#F4F1EA]"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all cinematic-pill"
                   data-hover
                 >
                   <Linkedin size={15} />
@@ -358,29 +374,30 @@ export default function TransparencyPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <div>
-                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                  <span className="block font-mono uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold" style={{ color: 'var(--text-muted)' }}>
                     CORE MANDATE
                   </span>
-                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Managing the studio&apos;s corporate legal infrastructure, fiscal compliance, and enterprise market deployment.
                   </p>
                 </div>
                 <div>
-                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                  <span className="block font-mono uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold" style={{ color: 'var(--text-muted)' }}>
                     SPECIALIZATION
                   </span>
-                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Structuring institutional joint ventures, risk mitigation, human capital optimization, and operational scalability.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-[#141413]/10 mt-10 pt-6 flex items-center gap-2.5">
+            <div className="mt-10 pt-6 flex items-center gap-2.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
               <span
-                className="w-2 h-2 bg-[#141413] rounded-full"
+                className="w-2 h-2 rounded-full"
+                style={{ background: 'var(--accent-secondary)' }}
               />
-              <span className="font-mono text-[10px] tracking-[0.15em] text-[#78746C] font-medium">
+              <span className="font-mono text-[10px] tracking-[0.15em] font-medium" style={{ color: 'var(--text-muted)' }}>
                 NODE: GOV_CORP_OFFICER
               </span>
             </div>
@@ -402,17 +419,17 @@ export default function TransparencyPage() {
               justifyContent: 'space-between',
               gap: '16px',
               marginBottom: '28px',
-              borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+              borderBottom: '1px solid var(--border-subtle)',
               paddingBottom: '20px',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Cpu className="text-[#A65E2E]" size={20} />
-              <h2 className="font-editorial" style={{ fontSize: '26px', fontWeight: 600, letterSpacing: '0.04em', color: '#141413', textTransform: 'uppercase' }}>
+              <Cpu style={{ color: 'var(--accent-primary)' }} size={20} />
+              <h2 className="font-editorial" style={{ fontSize: '26px', fontWeight: 600, letterSpacing: '0.04em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                 Technical &amp; Corporate Timeline
               </h2>
             </div>
-            <span className="cinematic-pill font-mono text-[10px] text-[#4A4843] font-semibold px-3 py-1">
+            <span className="cinematic-pill font-mono text-[10px] font-semibold px-3 py-1" style={{ color: 'var(--text-secondary)' }}>
               TIMELINE_LOG
             </span>
           </div>
@@ -420,7 +437,7 @@ export default function TransparencyPage() {
           <p 
             style={{
               fontSize: '15.5px',
-              color: '#4A4843',
+              color: 'var(--text-secondary)',
               marginBottom: '36px',
             }}
           >
@@ -455,7 +472,6 @@ export default function TransparencyPage() {
               badge="Corporate Matrix" 
               title="Strategic Enterprise & Human Capital Operations" 
               body="La Chaunia DeBouse establishes an extensive operational footprint across high-stakes corporate environments. Her background includes driving Human Resource Operations for the Dallas Independent School District, managing complex liability frameworks as a Claims Adjuster for State Farm Mutual Insurance, and steering asset administration as an Associate Manager for the Tivoli Apartment Community." 
-              glowColor="#141413"
             />
 
             <TimelineItem 
@@ -463,7 +479,6 @@ export default function TransparencyPage() {
               badge="Academic Matrix" 
               title="Institutional Alignment & Communications Governance" 
               body="La Chaunia completes her Bachelor’s degree in Communications at Dallas Baptist University, cementing an executive skill set tailored for high-authority negotiation, strategic organizational scaling, and institutional partnership structures." 
-              glowColor="#141413"
             />
 
             <TimelineItem 
@@ -471,7 +486,6 @@ export default function TransparencyPage() {
               badge="Current Epoch" 
               title="Consolidation: Be Still Visual Studio LLC" 
               body="The lifetimes of engineering rigor, network infrastructure, corporate liability management, and systemic design converge. Marvin DeBouse steps into the role of Founder & Technical Director to engineer the Zero Mandate Engine Core and pilot GPU compute orchestration. La Chaunia DeBouse assumes command of Corporate Governance, Entity Operations, & Strategic Partnership Management, establishing the legal, fiscal, and enterprise runway for the studio's deployments." 
-              glowColor="#2D6A4F"
             />
           </div>
         </motion.div>
@@ -486,17 +500,17 @@ export default function TransparencyPage() {
           style={{
             padding: '32px 36px',
             borderRadius: '18px',
-            background: '#EBE6DC',
-            border: '1px solid rgba(20, 20, 19, 0.14)',
+            background: 'var(--bg-secondary)',
           }}
         >
-          <div className="font-mono text-xs text-[#141413] font-semibold mb-3 flex items-center gap-2.5 tracking-wider">
+          <div className="font-mono text-xs font-semibold mb-3 flex items-center gap-2.5 tracking-wider" style={{ color: 'var(--text-primary)' }}>
             <span
-              className="w-2 h-2 bg-[#2D6A4F] inline-block rounded-full"
+              className="w-2 h-2 inline-block rounded-full"
+              style={{ background: 'var(--status-ok)' }}
             />
             GOVERNANCE_NODE // ZME_ENTITY_REGISTRY
           </div>
-          <p className="text-sm text-[#4A4843] leading-relaxed">
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Corporate Governance Node: Be Still Visual Studio LLC is a legally registered corporate entity in the State of Texas, USA. Technical operations, bare-metal container orchestration pipelines, and deterministic asset validation schemas are maintained under active Texas LLC filing matrices.
           </p>
         </motion.div>
@@ -505,19 +519,20 @@ export default function TransparencyPage() {
       {/* ── FOOTER ── */}
       <footer
         style={{
-          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
-          background: '#EBE6DC',
+          borderTop: '1px solid var(--border-subtle)',
+          background: 'var(--bg-secondary)',
         }}
         className="relative z-10"
       >
         <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em] text-[#4A4843]">
+          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em]" style={{ color: 'var(--text-secondary)' }}>
             <div
-              className="w-2 h-2 bg-[#2D6A4F] rounded-full"
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--status-ok)' }}
             />
             <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
           </div>
-          <div className="font-mono text-[10px] tracking-[0.12em] text-[#78746C]">
+          <div className="font-mono text-[10px] tracking-[0.12em]" style={{ color: 'var(--text-muted)' }}>
             &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL PROTOCOLS ENFORCED.
           </div>
         </div>

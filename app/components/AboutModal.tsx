@@ -31,7 +31,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            background: 'rgba(244, 241, 234, 0.94)',
+            background: 'var(--bg-overlay)',
             overflowY: 'auto',
           }}
           onClick={onClose}
@@ -51,7 +51,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
               fontSize: '11px',
               fontWeight: 600,
               letterSpacing: '0.14em',
-              color: '#141413',
+              color: 'var(--text-primary)',
               padding: '10px 22px',
               borderRadius: '9999px',
               cursor: 'pointer',
@@ -77,8 +77,6 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                 padding: 'clamp(32px, 6vw, 64px)',
                 position: 'relative',
                 overflow: 'hidden',
-                background: '#FAF8F5',
-                border: '1px solid rgba(20, 20, 19, 0.14)',
               }}
             >
               {/* Section tag */}
@@ -102,7 +100,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                       width: '6px',
                       height: '6px',
                       borderRadius: '50%',
-                      background: '#A65E2E',
+                      background: 'var(--accent-primary)',
                     }}
                   />
                   <span
@@ -110,7 +108,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                       fontFamily: 'var(--font-geist-mono), monospace',
                       fontSize: '10px',
                       letterSpacing: '0.35em',
-                      color: '#A65E2E',
+                      color: 'var(--accent-primary)',
                       fontWeight: 600,
                     }}
                   >
@@ -129,7 +127,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                   fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
                   fontWeight: 600,
                   letterSpacing: '-0.02em',
-                  color: '#141413',
+                  color: 'var(--text-primary)',
                   marginBottom: '48px',
                 }}
               >
@@ -145,14 +143,14 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.25 + i * 0.05, duration: 0.6, ease: 'easeOut' }}
                       style={{
-                        borderLeft: i === 0 || i === 3 || i === 7 ? '3px solid #A65E2E' : '2px solid rgba(20, 20, 19, 0.14)',
+                        borderLeft: i === 0 || i === 3 || i === 7 ? '3px solid var(--accent-primary)' : '2px solid var(--border-subtle)',
                         paddingLeft: '24px',
                       }}
                     >
                       <p
                         className={i === 0 || i === 3 || i === 7 ? 'font-editorial' : undefined}
                         style={{
-                          color: i === 0 || i === 3 || i === 7 ? '#141413' : '#4A4843',
+                          color: i === 0 || i === 3 || i === 7 ? 'var(--text-primary)' : 'var(--text-secondary)',
                           fontWeight: i === 0 || i === 3 || i === 7 ? 600 : 400,
                           fontSize: i === 0 || i === 3 || i === 7 ? '22px' : '16.5px',
                           lineHeight: '1.8',
@@ -172,11 +170,11 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                         style={{
                           marginTop: '36px',
                           borderRadius: '14px',
-                          border: '1px solid rgba(20, 20, 19, 0.16)',
-                          background: '#EBE6DC',
+                          border: '1px solid var(--border-subtle)',
+                          background: 'var(--bg-secondary)',
                           padding: '10px',
                           overflow: 'hidden',
-                          boxShadow: '0 20px 48px rgba(20, 20, 19, 0.12)',
+                          boxShadow: 'var(--card-shadow)',
                         }}
                       >
                         <video
@@ -206,7 +204,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                 style={{
                   marginTop: '64px',
                   paddingTop: '32px',
-                  borderTop: '1px solid rgba(20, 20, 19, 0.12)',
+                  borderTop: '1px solid var(--border-subtle)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'flex-start',
@@ -218,7 +216,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                     fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
                     letterSpacing: '0.22em',
-                    color: '#78746C',
+                    color: 'var(--text-muted)',
                     textTransform: 'uppercase',
                   }}
                 >
@@ -231,7 +229,7 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
                     fontSize: '14px',
                     fontWeight: 600,
                     letterSpacing: '0.06em',
-                    color: '#A65E2E',
+                    color: 'var(--accent-primary)',
                     textDecoration: 'none',
                   }}
                 >

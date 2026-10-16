@@ -21,7 +21,7 @@ const editorialSerif = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Be Still Visual Studio | Forensic Architecture & Kinetic Rendering",
-  description: "Architectural Warm Studio portfolio enforcing absolute forensic truth in architectural visualization.",
+  description: "Architectural portfolio enforcing absolute forensic truth in architectural visualization.",
   keywords: ["portfolio", "3d", "architecture", "forensic", "kinetic rendering", "be still visual studio"],
   openGraph: {
     title: "Be Still Visual Studio",
@@ -47,7 +47,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('bsvs-theme');
+                  if (t === 'dark' || t === 'light') {
+                    document.documentElement.setAttribute('data-theme', t);
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} antialiased`}
       >
@@ -56,4 +72,3 @@ export default function RootLayout({
     </html>
   );
 }
-
