@@ -28,36 +28,69 @@ function ProtocolCard({ p, index }: { p: typeof protocols[0]; index: number }) {
   return (
     <motion.div
       ref={ref}
+      className="cinematic-glass-interactive"
       style={{
         position: 'relative',
-        borderLeft: '2px solid #27272a',
-        paddingLeft: '32px',
-        paddingTop: '8px',
-        paddingBottom: '8px',
+        borderRadius: '16px',
+        padding: '38px 42px',
+        overflow: 'hidden',
       }}
-      initial={{ opacity: 0, x: -32 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ delay: index * 0.18, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.14, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* animated border accent */}
+      {/* Top bronze architectural rule */}
       <motion.div
         style={{
           position: 'absolute',
-          left: '-2px',
+          left: 0,
           top: 0,
-          width: '2px',
-          background: '#22d3ee',
+          height: '3px',
+          background: 'linear-gradient(90deg, #A65E2E, #C87A48, transparent)',
         }}
-        initial={{ height: 0 }}
-        animate={inView ? { height: '100%' } : { height: 0 }}
-        transition={{ delay: index * 0.18 + 0.2, duration: 0.5, ease: 'easeOut' }}
+        initial={{ width: 0 }}
+        animate={inView ? { width: '100%' } : { width: 0 }}
+        transition={{ delay: index * 0.14 + 0.25, duration: 0.8, ease: 'easeOut' }}
       />
 
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '12px' }}>
-        <span style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}>{p.num}</span>
-        <h3 style={{ fontFamily: 'monospace', fontSize: '14px', letterSpacing: '0.1em', color: '#ffffff' }}>{p.title}</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '18px' }}>
+        <span
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '11px',
+            color: '#A65E2E',
+            background: 'rgba(166, 94, 46, 0.1)',
+            border: '1px solid rgba(166, 94, 46, 0.28)',
+            padding: '4px 12px',
+            borderRadius: '9999px',
+            fontWeight: 600,
+          }}
+        >
+          {p.num}
+        </span>
+        <h3
+          className="font-editorial"
+          style={{
+            fontSize: '24px',
+            fontWeight: 600,
+            letterSpacing: '0.01em',
+            color: '#141413',
+          }}
+        >
+          {p.title}
+        </h3>
       </div>
-      <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch', whiteSpace: 'pre-wrap' }}>{p.body}</p>
+      <p
+        style={{
+          color: '#4A4843',
+          fontSize: '16px',
+          lineHeight: '1.85',
+          maxWidth: '68ch',
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {p.body}
+      </p>
     </motion.div>
   );
 }
@@ -69,33 +102,62 @@ export default function ZeroMandate() {
   const aboutBtnInView = useInView(aboutBtnRef, { once: true, margin: '-60px' });
 
   return (
-    <div style={{ width: '100%', background: '#0a0a0b' }}>
+    <div style={{ width: '100%' }}>
       <section
         id="mandate"
         style={{
-          maxWidth: '896px',
+          maxWidth: '1020px',
           margin: '0 auto',
-          padding: '80px 48px',
+          padding: '88px 32px',
         }}
       >
         <div ref={headerRef}>
           <motion.div
-            style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div style={{ width: '16px', height: '1px', background: '#f59e0b' }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#f59e0b' }}>SECTION 02</span>
+            <div
+              className="cinematic-pill"
+              style={{
+                padding: '5px 14px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#A65E2E',
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '10px',
+                  letterSpacing: '0.35em',
+                  color: '#A65E2E',
+                  fontWeight: 600,
+                }}
+              >
+                SECTION 02
+              </span>
+            </div>
           </motion.div>
 
           <motion.h2
+            className="font-editorial"
             style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              fontWeight: 'bold',
-              letterSpacing: '-0.03em',
-              color: '#ffffff',
-              marginBottom: '20px',
+              fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: '#141413',
+              lineHeight: 1.05,
+              marginBottom: '24px',
             }}
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -106,12 +168,11 @@ export default function ZeroMandate() {
 
           <motion.p
             style={{
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              lineHeight: '1.8',
-              color: '#a1a1aa',
-              marginBottom: '48px',
-              maxWidth: '65ch',
+              fontSize: '16px',
+              lineHeight: '1.85',
+              color: '#4A4843',
+              marginBottom: '36px',
+              maxWidth: '68ch',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -127,95 +188,68 @@ export default function ZeroMandate() {
           >
             <a
               href="/thezeromandate"
-              style={{
-                display: 'inline-block',
-                padding: '12px 32px',
-                border: '1px solid #22d3ee',
-                color: '#22d3ee',
-                fontSize: '11px',
-                fontFamily: 'monospace',
-                background: 'transparent',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.08)';
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(34, 211, 238, 0.15)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
+              data-hover
+              className="cinematic-btn cinematic-btn-primary"
             >
-              [ZERO MANDATE ENGINE — DEVELOPER HUB]
+              <span>ZERO MANDATE ENGINE — DEVELOPER HUB</span>
+              <span style={{ fontSize: '14px', lineHeight: 1 }}>→</span>
             </a>
           </motion.div>
-          <div style={{ marginBottom: '64px' }} />
+          <div style={{ marginBottom: '56px' }} />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {protocols.map((p, i) => (
             <ProtocolCard key={p.num} p={p} index={i} />
           ))}
         </div>
 
         {/* EXECUTIVE LEADERSHIP & ORIGIN HISTORY */}
-        <div ref={aboutBtnRef} style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
-          <motion.h2
+        <motion.div
+          ref={aboutBtnRef}
+          className="cinematic-glass"
+          style={{
+            marginTop: '64px',
+            padding: '44px 42px',
+            borderRadius: '18px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            gap: '24px',
+            position: 'relative',
+            overflow: 'hidden',
+            background: '#EBE6DC',
+            border: '1px solid rgba(20, 20, 19, 0.14)',
+          }}
+          initial={{ opacity: 0, y: 28 }}
+          animate={aboutBtnInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h2
+            className="font-editorial"
             style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              fontWeight: 'bold',
-              letterSpacing: '-0.03em',
-              color: '#ffffff',
-              marginBottom: '24px',
+              fontSize: 'clamp(1.85rem, 3.8vw, 2.6rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.015em',
+              color: '#141413',
               textTransform: 'uppercase',
+              margin: 0,
             }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={aboutBtnInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            EXECUTIVE LEADERSHIP & ORIGIN HISTORY
-          </motion.h2>
+            EXECUTIVE LEADERSHIP &amp; ORIGIN HISTORY
+          </h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={aboutBtnInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
+          <a
+            href="/transparency"
+            data-hover
+            className="cinematic-btn cinematic-btn-secondary"
           >
-            <a
-              href="/transparency"
-              style={{
-                display: 'inline-block',
-                padding: '12px 32px',
-                border: '1px solid #ffffff',
-                color: '#ffffff',
-                fontSize: '11px',
-                fontFamily: 'monospace',
-                background: 'transparent',
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.15)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              [FOUNDER AND CORE TEAM]
-            </a>
-          </motion.div>
-        </div>
+            <span>FOUNDER AND CORE TEAM</span>
+            <span style={{ fontSize: '14px', lineHeight: 1 }}>→</span>
+          </a>
+        </motion.div>
       </section>
     </div>
   );
 }
-

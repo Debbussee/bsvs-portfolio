@@ -44,7 +44,6 @@ const nodes = [
       { id: '03', label: 'Anatomical Tension', description: 'Visual weight is anchored by the compression of the hands against the surface and the visible tension in the forearm musculature. This physical logic prevents the subject from floating, locking them into the geometry of the space.' }
     ]
   },
-
 ];
 
 const advancedNodes = [
@@ -90,15 +89,14 @@ const advancedNodes = [
       { id: '03.', label: 'SpatialFrequencyDecay', description: 'The rapid decay of spatial frequency beyond the primary plane of focus simulates atmospheric attenuation and lens-induced focal divergence. This optical phenomenon artificially enforces three-dimensional volume by reducing the textural fidelity of distal background elements, grounding the foreground through deliberate manipulation of light scattering.' }
     ]
   },
-
 ];
 
 const statusColor: Record<string, string> = {
-  STABLE:    '#34d399',
-  DEGRADING: '#fb7185',
-  COMPUTING: '#fbbf24',
-  ACTIVE:    '#22d3ee',
-  LOCKED:    '#a1a1aa',
+  STABLE:    '#2D6A4F',
+  DEGRADING: '#B43E3E',
+  COMPUTING: '#A65E2E',
+  ACTIVE:    '#1D5B79',
+  LOCKED:    '#6C6860',
 };
 
 function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index: number; onImageClick: () => void }) {
@@ -110,118 +108,274 @@ function NodeCard({ node, index, onImageClick }: { node: typeof nodes[0]; index:
   return (
     <motion.div
       ref={ref}
-      style={{ position: 'relative', aspectRatio: '1', background: '#000', overflow: 'hidden', cursor: 'pointer' }}
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-      transition={{ delay: (index % 3) * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        position: 'relative',
+        background: '#FAF8F5',
+        borderRadius: '14px',
+        padding: '12px 12px 16px 12px',
+        cursor: 'pointer',
+        border: hovered ? '1px solid rgba(166, 94, 46, 0.45)' : '1px solid rgba(20, 20, 19, 0.12)',
+        boxShadow: hovered
+          ? '0 24px 48px rgba(20, 20, 19, 0.12), 0 4px 12px rgba(166, 94, 46, 0.08)'
+          : '0 8px 24px rgba(20, 20, 19, 0.05)',
+        transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: (index % 3) * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setDetailsActive(false); }}
       onClick={() => onImageClick()}
       data-img-hover
     >
-      {/* image */}
-      <motion.img
-        src={node.img}
-        alt={node.title}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-        animate={{
-          filter: hovered && !detailsActive
-            ? 'grayscale(0%) contrast(1.1) brightness(0.8)'
-            : detailsActive
-            ? 'grayscale(0%) contrast(1.1) brightness(0.4)'
-            : 'grayscale(100%) contrast(1.15) brightness(0.65)',
-          scale: hovered || detailsActive ? 1.04 : 1,
+      {/* Square Archival Plate Viewport */}
+      <div
+        style={{
+          position: 'relative',
+          aspectRatio: '1',
+          width: '100%',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          background: '#141413',
         }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-      />
-
-      {/* node ID badge */}
-      <div style={{
-        position: 'absolute', top: '12px', left: '12px',
-        fontFamily: 'monospace', fontSize: '10px', color: '#71717a',
-        background: 'rgba(0,0,0,0.7)', border: '1px solid #27272a',
-        padding: '2px 8px', zIndex: 10,
-      }}>
-        {node.id}
-      </div>
-
-      {/* hover overlay — slides up */}
-      <motion.div
-        style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '20px', zIndex: 20, pointerEvents: detailsActive ? 'none' : 'auto' }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={hovered && !detailsActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
       >
-        {/* top corners */}
-        <div style={{ position: 'absolute', top: '12px', right: '12px', width: '16px', height: '16px', borderTop: '1px solid rgba(34,211,238,0.6)', borderRight: '1px solid rgba(34,211,238,0.6)' }} />
-        <div style={{ position: 'absolute', top: '12px', left: '12px', width: '16px', height: '16px', borderTop: '1px solid rgba(34,211,238,0.6)', borderLeft: '1px solid rgba(34,211,238,0.6)' }} />
+        <motion.img
+          src={node.img}
+          alt={node.title}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          animate={{
+            filter: detailsActive
+              ? 'contrast(1.04) brightness(0.45) saturate(0.9)'
+              : hovered
+              ? 'contrast(1.06) brightness(1.0) saturate(1.05)'
+              : 'contrast(1.03) brightness(0.96) saturate(1.0)',
+            scale: hovered || detailsActive ? 1.05 : 1,
+          }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        />
 
-        <div style={{
-          border: '1px solid rgba(63,63,70,0.5)', background: 'rgba(0,0,0,0.6)',
-          backdropFilter: 'blur(4px)', padding: '16px',
-        }}>
-          <h3 style={{
-            fontFamily: 'monospace', fontSize: '14px', color: '#fff',
-            letterSpacing: '0.1em', borderBottom: '1px solid #3f3f46',
-            paddingBottom: '8px', marginBottom: '8px',
-          }}>
-            {node.title}
-          </h3>
-          <div style={{ fontFamily: 'monospace', fontSize: '10px', color: '#a1a1aa', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>GEO_LAT</span><span style={{ color: '#22d3ee' }}>{node.lat}</span></div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>GEO_LON</span><span style={{ color: '#22d3ee' }}>{node.lon}</span></div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><span>PHYS_STATE</span><span style={{ color: statusColor[node.status] ?? '#a1a1aa' }}>{node.status}</span></div>
-          </div>
-          
-          <button 
-            onMouseEnter={() => setDetailsActive(true)}
-            onClick={(e) => { e.stopPropagation(); setDetailsActive(!detailsActive); }}
+        {/* Top Warm Ivory Badges: Node ID & Status Pill */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '12px',
+            left: '12px',
+            right: '12px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            zIndex: 15,
+            pointerEvents: 'none',
+          }}
+        >
+          <div
             style={{
-              marginTop: '12px', width: '100%', padding: '6px', 
-              border: '1px solid #22d3ee', color: '#22d3ee', 
-              fontSize: '10px', fontFamily: 'monospace', 
-              background: 'transparent', cursor: 'pointer',
-              textTransform: 'uppercase', letterSpacing: '0.1em'
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '10px',
+              fontWeight: 600,
+              color: '#141413',
+              background: 'rgba(250, 248, 245, 0.92)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(20, 20, 19, 0.15)',
+              padding: '3px 10px',
+              borderRadius: '9999px',
             }}
           >
-            [ THE FORENSIC WHY ]
-          </button>
-        </div>
-      </motion.div>
+            {node.id}
+          </div>
 
-      {/* Forensic Details Overlay */}
-      <motion.div
-        className="absolute inset-0 p-6 flex flex-col justify-end z-30"
-        style={{ pointerEvents: detailsActive ? 'auto' : 'none' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: detailsActive ? 1 : 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div 
-          style={{ background: 'rgba(0,0,0,0.7)', padding: '20px', borderLeft: '2px solid #fff', backdropFilter: 'blur(8px)', overflowY: 'auto', maxHeight: '100%' }}
-        >
-          {node.details && node.details.length > 0 ? (
-            node.details.map((d, idx) => (
-              <div key={idx} style={{ marginBottom: idx === node.details.length - 1 ? 0 : '16px' }}>
-                {(d.id || d.label) && (
-                  <h3 style={{ fontFamily: 'monospace', fontSize: '12px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px', fontWeight: 'bold' }}>
-                    {d.id} {d.id && d.label && <br />}
-                    <span style={{ color: '#a1a1aa' }}>{d.label}</span>
-                  </h3>
-                )}
-                <p style={{ fontSize: '12px', color: '#d4d4d8', lineHeight: '1.6' }}>
-                  {d.description}
-                </p>
-              </div>
-            ))
-          ) : (
-            <div style={{ fontFamily: 'monospace', fontSize: '12px', color: '#a1a1aa', textAlign: 'center', padding: '20px 0' }}>
-              FORENSIC DATA UNAVAILABLE FOR THIS NODE.
-            </div>
-          )}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '9px',
+              fontWeight: 600,
+              letterSpacing: '0.12em',
+              color: statusColor[node.status] ?? '#4A4843',
+              background: 'rgba(250, 248, 245, 0.92)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(20, 20, 19, 0.15)',
+              padding: '3px 10px',
+              borderRadius: '9999px',
+            }}
+          >
+            <span
+              style={{
+                width: '5px',
+                height: '5px',
+                borderRadius: '50%',
+                background: statusColor[node.status] ?? '#4A4843',
+              }}
+            />
+            {node.status}
+          </div>
         </div>
-      </motion.div>
+
+        {/* Warm Editorial Hover Inspection Card */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            padding: '12px',
+            zIndex: 20,
+            pointerEvents: detailsActive ? 'none' : 'auto',
+          }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={hovered && !detailsActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div
+            style={{
+              borderRadius: '10px',
+              border: '1px solid rgba(20, 20, 19, 0.16)',
+              background: 'rgba(250, 248, 245, 0.95)',
+              backdropFilter: 'blur(14px)',
+              WebkitBackdropFilter: 'blur(14px)',
+              padding: '14px 16px',
+              boxShadow: '0 14px 32px rgba(20, 20, 19, 0.22)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '10px',
+                color: '#4A4843',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>GEO_LAT</span>
+                <span style={{ color: '#141413', fontWeight: 600 }}>{node.lat}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>GEO_LON</span>
+                <span style={{ color: '#141413', fontWeight: 600 }}>{node.lon}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>PHYS_STATE</span>
+                <span style={{ color: statusColor[node.status] ?? '#4A4843', fontWeight: 600 }}>{node.status}</span>
+              </div>
+            </div>
+
+            <button
+              onMouseEnter={() => setDetailsActive(true)}
+              onClick={(e) => { e.stopPropagation(); setDetailsActive(!detailsActive); }}
+              style={{
+                marginTop: '12px',
+                width: '100%',
+                padding: '8px 12px',
+                borderRadius: '9999px',
+                border: '1px solid #141413',
+                color: '#FAF8F5',
+                fontSize: '10px',
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontWeight: 600,
+                background: '#141413',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
+                transition: 'all 0.25s ease',
+              }}
+            >
+              THE FORENSIC WHY
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Forensic Details Overlay (Warm Parchment Dossier) */}
+        <motion.div
+          className="absolute inset-0 p-3 flex flex-col justify-end z-30"
+          style={{ pointerEvents: detailsActive ? 'auto' : 'none' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: detailsActive ? 1 : 0 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div
+            style={{
+              background: 'rgba(250, 248, 245, 0.97)',
+              padding: '18px',
+              borderRadius: '10px',
+              border: '1px solid rgba(20, 20, 19, 0.18)',
+              borderLeft: '3px solid #A65E2E',
+              backdropFilter: 'blur(16px)',
+              overflowY: 'auto',
+              maxHeight: '100%',
+              boxShadow: '0 16px 40px rgba(20, 20, 19, 0.25)',
+            }}
+          >
+            {node.details && node.details.length > 0 ? (
+              node.details.map((d, idx) => (
+                <div key={idx} style={{ marginBottom: idx === node.details.length - 1 ? 0 : '14px' }}>
+                  {(d.id || d.label) && (
+                    <h4
+                      style={{
+                        fontFamily: 'var(--font-geist-mono), monospace',
+                        fontSize: '10.5px',
+                        color: '#A65E2E',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        marginBottom: '4px',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {d.id} {d.id && d.label && ' '}
+                      <span style={{ color: '#141413' }}>{d.label}</span>
+                    </h4>
+                  )}
+                  <p style={{ fontSize: '12px', color: '#4A4843', lineHeight: '1.6' }}>
+                    {d.description}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '12px', color: '#78746C', textAlign: 'center', padding: '20px 0' }}>
+                FORENSIC DATA UNAVAILABLE FOR THIS NODE.
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Museum Matting Caption Footer */}
+      <div
+        style={{
+          marginTop: '14px',
+          padding: '0 4px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <h3
+          style={{
+            fontSize: '13px',
+            fontWeight: 600,
+            color: '#141413',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {node.title}
+        </h3>
+        <span
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '10px',
+            color: '#78746C',
+          }}
+        >
+          ISO {node.iso} · {node.shutter}
+        </span>
+      </div>
     </motion.div>
   );
 }
@@ -232,35 +386,73 @@ export default function VisualAudit() {
   const [fullScreenNode, setFullScreenNode] = useState<typeof nodes[0] | null>(null);
 
   return (
-    <div style={{ width: '100%', background: '#000' }}>
+    <div style={{ width: '100%' }}>
       <section
         id="audit"
         style={{
           maxWidth: '1280px',
           margin: '0 auto',
-          padding: '80px 48px',
+          padding: '88px 32px',
         }}
       >
-        <div ref={headerRef} style={{
-          marginBottom: '56px', display: 'flex', alignItems: 'flex-end',
-          justifyContent: 'space-between', borderBottom: '1px solid #27272a', paddingBottom: '16px',
-        }}>
+        <div
+          ref={headerRef}
+          style={{
+            marginBottom: '48px',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+            paddingBottom: '24px',
+            flexWrap: 'wrap',
+            gap: '16px',
+          }}
+        >
           <div>
             <motion.div
-              style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}
               initial={{ opacity: 0 }}
               animate={headerInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6 }}
             >
-              <div style={{ width: '16px', height: '1px', background: '#f43f5e' }} />
-              <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#f43f5e' }}>SECTION 03</span>
+              <div
+                className="cinematic-pill"
+                style={{
+                  padding: '5px 14px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                <span
+                  style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: '#A65E2E',
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.35em',
+                    color: '#A65E2E',
+                    fontWeight: 600,
+                  }}
+                >
+                  SECTION 03
+                </span>
+              </div>
             </motion.div>
             <motion.h2
+              className="font-editorial"
               style={{
-                fontSize: 'clamp(2rem, 5vw, 3rem)',
-                fontWeight: 'bold',
-                letterSpacing: '-0.03em',
-                color: '#ffffff',
+                fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                color: '#141413',
+                lineHeight: 1.05,
               }}
               initial={{ opacity: 0, y: 20 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -270,7 +462,14 @@ export default function VisualAudit() {
             </motion.h2>
           </div>
           <motion.span
-            style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}
+            className="cinematic-pill"
+            style={{
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '11px',
+              color: '#4A4843',
+              padding: '6px 14px',
+              fontWeight: 600,
+            }}
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -279,48 +478,94 @@ export default function VisualAudit() {
           </motion.span>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: '12px',
-        }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: '28px',
+          }}
+        >
           {nodes.map((node, i) => (
             <NodeCard key={node.id} node={node} index={i} onImageClick={() => setFullScreenNode(node)} />
           ))}
         </div>
 
         {/* ADVANCED KINETIC AUDITS */}
-        <div style={{ marginTop: '80px', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '16px', height: '1px', background: '#f43f5e' }} />
-          <h3 style={{ fontFamily: 'monospace', fontSize: '14px', letterSpacing: '0.2em', color: '#f43f5e' }}>
-            ADVANCED KINETIC AUDITS
-          </h3>
+        <div
+          style={{
+            marginTop: '96px',
+            marginBottom: '36px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+            paddingBottom: '20px',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                background: '#A65E2E',
+              }}
+            />
+            <h3
+              className="font-editorial"
+              style={{
+                fontSize: '26px',
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                color: '#141413',
+                textTransform: 'uppercase',
+              }}
+            >
+              ADVANCED KINETIC AUDITS
+            </h3>
+          </div>
+          <span
+            className="cinematic-pill"
+            style={{
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '11px',
+              color: '#4A4843',
+              padding: '6px 14px',
+              fontWeight: 600,
+            }}
+          >
+            {advancedNodes.length} DATA NODES
+          </span>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: '12px',
-        }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: '28px',
+          }}
+        >
           {advancedNodes.map((node, i) => (
             <NodeCard key={node.id} node={node} index={i} onImageClick={() => setFullScreenNode(node)} />
           ))}
         </div>
       </section>
 
-      {/* FULL SCREEN MODAL */}
+      {/* FULL SCREEN GALLERY LIGHTBOX MODAL */}
       <AnimatePresence>
         {fullScreenNode && (
           <motion.div
             initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, backdropFilter: 'blur(12px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(20px)' }}
             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
               inset: 0,
               zIndex: 9999,
-              background: 'rgba(0,0,0,0.85)',
+              background: 'rgba(244, 241, 234, 0.94)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -331,36 +576,66 @@ export default function VisualAudit() {
             <motion.img
               src={fullScreenNode.img}
               alt={fullScreenNode.title}
-              initial={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.94, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
+              exit={{ scale: 0.94, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                maxWidth: '96vw',
-                maxHeight: '96vh',
+                maxWidth: '90vw',
+                maxHeight: '86vh',
                 objectFit: 'contain',
-                boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
+                borderRadius: '12px',
+                background: '#FAF8F5',
+                padding: '12px',
+                border: '1px solid rgba(20, 20, 19, 0.16)',
+                boxShadow: '0 32px 80px rgba(20, 20, 19, 0.22)',
               }}
             />
             {/* Close instruction */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              style={{ position: 'absolute', top: '24px', right: '24px', fontFamily: 'monospace', fontSize: '12px', color: '#a1a1aa', border: '1px solid #3f3f46', padding: '8px 16px', background: 'rgba(0,0,0,0.5)' }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="cinematic-glass"
+              style={{
+                position: 'fixed',
+                top: '28px',
+                right: '28px',
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '11px',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                color: '#141413',
+                padding: '10px 20px',
+                borderRadius: '9999px',
+              }}
             >
-              [ CLICK TO CLOSE ]
+              CLICK TO CLOSE ✕
             </motion.div>
             {/* Context ID */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              style={{ position: 'absolute', bottom: '24px', left: '24px', fontFamily: 'monospace', fontSize: '12px', color: '#fff', borderLeft: '2px solid #22d3ee', paddingLeft: '12px', background: 'rgba(0,0,0,0.5)' }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="cinematic-glass"
+              style={{
+                position: 'fixed',
+                bottom: '28px',
+                left: '28px',
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '12px',
+                color: '#141413',
+                borderLeft: '3px solid #A65E2E',
+                padding: '14px 20px',
+                borderRadius: '12px',
+              }}
             >
-              NODE_ID: {fullScreenNode.id} <br/>
-              <span style={{ color: '#22d3ee' }}>{fullScreenNode.title}</span><br/>
-              <span style={{ fontSize: '10px', color: '#71717a' }}>{fullScreenNode.lat} / {fullScreenNode.lon}</span>
+              NODE_ID: {fullScreenNode.id} <br />
+              <span style={{ color: '#A65E2E', fontWeight: 600 }}>{fullScreenNode.title}</span>
+              <br />
+              <span style={{ fontSize: '10px', color: '#78746C' }}>
+                {fullScreenNode.lat} / {fullScreenNode.lon}
+              </span>
             </motion.div>
           </motion.div>
         )}

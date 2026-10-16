@@ -23,34 +23,63 @@ export default function HookLibrary() {
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <div style={{ width: '100%', background: '#000', padding: '80px 0' }}>
+    <div style={{ width: '100%', padding: '88px 0 112px 0' }}>
       <section
         id="hook"
         ref={ref}
         style={{
-          maxWidth: '896px',
+          maxWidth: '1020px',
           margin: '0 auto',
-          padding: '0 48px',
+          padding: '0 32px',
         }}
       >
         {/* Section Header */}
-        <div style={{ marginBottom: '64px' }}>
+        <div style={{ marginBottom: '48px' }}>
           <motion.div
-            style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div style={{ width: '16px', height: '1px', background: '#a78bfa' }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#a78bfa' }}>SECTION 04</span>
+            <div
+              className="cinematic-pill"
+              style={{
+                padding: '5px 14px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#A65E2E',
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '10px',
+                  letterSpacing: '0.35em',
+                  color: '#A65E2E',
+                  fontWeight: 600,
+                }}
+              >
+                SECTION 04
+              </span>
+            </div>
           </motion.div>
 
           <motion.h2
+            className="font-editorial"
             style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
-              fontWeight: 'bold',
-              letterSpacing: '-0.03em',
-              color: '#ffffff',
+              fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: '#141413',
+              lineHeight: 1.05,
             }}
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -61,46 +90,80 @@ export default function HookLibrary() {
         </div>
 
         {/* 3 Core Statements */}
-        <div style={{ display: 'grid', gap: '32px', marginBottom: '80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '48px' }}>
           {statements.map((s, i) => (
             <motion.div
               key={s.title}
+              className="cinematic-glass-interactive"
               style={{
-                borderLeft: '2px solid #27272a',
-                paddingLeft: '24px',
+                borderRadius: '16px',
+                padding: '32px 28px',
+                position: 'relative',
+                overflow: 'hidden',
               }}
-              initial={{ opacity: 0, x: -24 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.15, duration: 0.6, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.18 + i * 0.12, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h3 style={{ fontFamily: 'monospace', fontSize: '14px', color: '#fff', letterSpacing: '0.1em', marginBottom: '12px' }}>
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #A65E2E, transparent)',
+                }}
+              />
+              <h3
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '11px',
+                  color: '#A65E2E',
+                  letterSpacing: '0.16em',
+                  marginBottom: '14px',
+                  fontWeight: 600,
+                }}
+              >
                 {s.title}
               </h3>
-              <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>
+              <p style={{ color: '#4A4843', fontSize: '15.5px', lineHeight: '1.8' }}>
                 {s.body}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Master Copy */}
+        {/* Master Editorial Quote */}
         <motion.div
+          className="cinematic-glass"
           style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            padding: '40px',
+            borderRadius: '18px',
+            padding: '48px 52px',
             marginBottom: '64px',
-            position: 'relative'
+            position: 'relative',
+            overflow: 'hidden',
+            background: '#EBE6DC',
+            border: '1px solid rgba(20, 20, 19, 0.14)',
+            borderLeft: '4px solid #A65E2E',
           }}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Decorative Corner Accents */}
-          <div style={{ position: 'absolute', top: '-1px', left: '-1px', width: '12px', height: '12px', borderTop: '2px solid #a78bfa', borderLeft: '2px solid #a78bfa' }} />
-          <div style={{ position: 'absolute', bottom: '-1px', right: '-1px', width: '12px', height: '12px', borderBottom: '2px solid #a78bfa', borderRight: '2px solid #a78bfa' }} />
-
-          <p style={{ color: '#d4d4d8', fontSize: '18px', lineHeight: '1.9', fontStyle: 'italic', letterSpacing: '0.02em', textAlign: 'justify' }}>
+          <p
+            className="font-editorial"
+            style={{
+              color: '#141413',
+              fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
+              lineHeight: '1.6',
+              fontWeight: 500,
+              fontStyle: 'italic',
+              letterSpacing: '0.005em',
+              position: 'relative',
+              zIndex: 1,
+            }}
+          >
             &quot;Atmosphere cannot be faked; it must be calculated. By treating light behavior, material friction, and environmental particulate as interconnected data points, we move beyond approximation. This is the architecture of Forensic Realism. Absolute precision. Deterministic output. Visual Systems built for the uncompromising. Engineered Visuals.&quot;
           </p>
         </motion.div>
@@ -112,192 +175,205 @@ export default function HookLibrary() {
           id="contact"
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.85, duration: 0.8 }}
-          style={{ position: 'relative' }}
+          transition={{ delay: 0.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="cinematic-glass"
+          style={{
+            borderRadius: '18px',
+            overflow: 'hidden',
+            position: 'relative',
+          }}
         >
-          {/* Protocol Header Bar */}
-          <div style={{
-            background: 'rgba(167,139,250,0.06)',
-            border: '1px solid rgba(167,139,250,0.2)',
-            borderBottom: 'none',
-            padding: '16px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+          {/* Header Bar */}
+          <div
+            style={{
+              background: '#EBE6DC',
+              borderBottom: '1px solid rgba(20, 20, 19, 0.12)',
+              padding: '20px 36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px',
+            }}
+          >
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{
-                width: '8px', height: '8px',
-                background: '#a78bfa',
-                borderRadius: '50%',
-                boxShadow: '0 0 8px rgba(167,139,250,0.6)',
-                animation: 'pulse 3s infinite',
-              }} />
-              <span style={{
-                fontFamily: 'monospace',
-                fontSize: '13px',
-                letterSpacing: '0.3em',
-                color: '#a78bfa',
-                fontWeight: 'bold',
-              }}>
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  background: '#A65E2E',
+                  borderRadius: '50%',
+                }}
+              />
+              <span
+                style={{
+                  fontSize: '14px',
+                  letterSpacing: '0.24em',
+                  color: '#141413',
+                  fontWeight: 700,
+                }}
+              >
                 CONTACT BSVS
               </span>
             </div>
-            <span style={{
-              fontFamily: 'monospace',
-              fontSize: '10px',
-              color: '#52525b',
-              letterSpacing: '0.15em',
-            }}>
+            <span
+              className="cinematic-pill"
+              style={{
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '10px',
+                color: '#A65E2E',
+                letterSpacing: '0.15em',
+                padding: '4px 12px',
+                fontWeight: 600,
+              }}
+            >
               DIRECT CHANNEL // ACTIVE
             </span>
           </div>
 
-          {/* Main Terminal Panel */}
-          <div style={{
-            background: 'rgba(0,0,0,0.6)',
-            border: '1px solid rgba(167,139,250,0.2)',
-            padding: '40px 32px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            {/* Scan-line overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(167,139,250,0.015) 3px, rgba(167,139,250,0.015) 4px)',
-              pointerEvents: 'none',
-              zIndex: 1,
-            }} />
+          {/* Main Contact Body */}
+          <div style={{ padding: '40px 36px', position: 'relative', zIndex: 2 }}>
+            <div
+              style={{
+                fontSize: '13px',
+                color: '#4A4843',
+                marginBottom: '36px',
+                lineHeight: '1.85',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                fontFamily: 'var(--font-geist-mono), monospace',
+              }}
+            >
+              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>DIRECT COMMUNICATION CHANNEL ACTIVE...</div>
+              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>FOR ENTERPRISE INQUIRIES, CLOUD PARTNERSHIPS, OR TECHNICAL AUDITS.</div>
+              <div><span style={{ color: '#A65E2E', marginRight: '8px' }}>▸</span>DETERMINISTIC RESPONSES ONLY. NO PROBABILISTIC HALLUCINATION.</div>
+            </div>
 
-            {/* Corner brackets */}
-            <div style={{ position: 'absolute', top: '0', left: '0', width: '16px', height: '16px', borderTop: '2px solid #a78bfa', borderLeft: '2px solid #a78bfa' }} />
-            <div style={{ position: 'absolute', top: '0', right: '0', width: '16px', height: '16px', borderTop: '2px solid #a78bfa', borderRight: '2px solid #a78bfa' }} />
-            <div style={{ position: 'absolute', bottom: '0', left: '0', width: '16px', height: '16px', borderBottom: '2px solid #a78bfa', borderLeft: '2px solid #a78bfa' }} />
-            <div style={{ position: 'absolute', bottom: '0', right: '0', width: '16px', height: '16px', borderBottom: '2px solid #a78bfa', borderRight: '2px solid #a78bfa' }} />
-
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              {/* Terminal prompt intro */}
-              <div style={{
-                fontFamily: 'monospace',
-                fontSize: '11px',
-                color: '#52525b',
-                marginBottom: '32px',
-                lineHeight: '1.8',
-              }}>
-                <span style={{ color: '#a78bfa' }}>&gt;</span> DIRECT COMMUNICATION CHANNEL ACTIVE...<br />
-                <span style={{ color: '#a78bfa' }}>&gt;</span> FOR ENTERPRISE INQUIRIES, CLOUD PARTNERSHIPS, OR TECHNICAL AUDITS.<br />
-                <span style={{ color: '#a78bfa' }}>&gt;</span> DETERMINISTIC RESPONSES ONLY. NO PROBABILISTIC HALLUCINATION.<br />
-              </div>
-
-              {/* Email addresses */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-
-                {/* Primary */}
-                <div style={{
-                  borderLeft: '2px solid #a78bfa',
-                  paddingLeft: '20px',
-                }}>
-                  <div style={{
-                    fontFamily: 'monospace',
+            {/* Email cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+              {/* Primary */}
+              <a
+                href="mailto:mkd@bestillvisualstudio.com"
+                data-hover
+                style={{
+                  textDecoration: 'none',
+                  padding: '24px 28px',
+                  borderRadius: '14px',
+                  background: '#F4F1EA',
+                  border: '1px solid rgba(20, 20, 19, 0.14)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  display: 'block',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#A65E2E';
+                  e.currentTarget.style.background = '#EBE6DC';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(20, 20, 19, 0.14)';
+                  e.currentTarget.style.background = '#F4F1EA';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
-                    letterSpacing: '0.25em',
-                    color: '#52525b',
-                    marginBottom: '8px',
+                    letterSpacing: '0.22em',
+                    color: '#78746C',
+                    marginBottom: '10px',
                     textTransform: 'uppercase',
-                  }}>
-                    <span style={{ color: '#a78bfa', marginRight: '8px' }}>01</span>
-                    PRIMARY CHANNEL
-                  </div>
-                  <a
-                    href="mailto:mkd@bestillvisualstudio.com"
-                    data-hover
-                    style={{
-                      fontFamily: 'monospace',
-                      fontSize: '16px',
-                      color: '#e4e4e7',
-                      letterSpacing: '0.04em',
-                      textDecoration: 'none',
-                      display: 'inline-block',
-                      padding: '8px 0',
-                      borderBottom: '1px solid #27272a',
-                      transition: 'color 0.3s, border-color 0.3s',
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.target as HTMLElement).style.color = '#a78bfa';
-                      (e.target as HTMLElement).style.borderColor = '#a78bfa';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.target as HTMLElement).style.color = '#e4e4e7';
-                      (e.target as HTMLElement).style.borderColor = '#27272a';
-                    }}
-                  >
-                    mkd@bestillvisualstudio.com
-                  </a>
+                  }}
+                >
+                  <span style={{ color: '#A65E2E', marginRight: '8px', fontWeight: 600 }}>01</span>
+                  PRIMARY CHANNEL
                 </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
+                    fontSize: '15px',
+                    color: '#141413',
+                    fontWeight: 600,
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  mkd@bestillvisualstudio.com
+                </div>
+              </a>
 
-                {/* Secondary */}
-                <div style={{
-                  borderLeft: '2px solid #a78bfa',
-                  paddingLeft: '20px',
-                }}>
-                  <div style={{
-                    fontFamily: 'monospace',
+              {/* Secondary */}
+              <a
+                href="mailto:marvin@thezeromandate.com"
+                data-hover
+                style={{
+                  textDecoration: 'none',
+                  padding: '24px 28px',
+                  borderRadius: '14px',
+                  background: '#F4F1EA',
+                  border: '1px solid rgba(20, 20, 19, 0.14)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  display: 'block',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#A65E2E';
+                  e.currentTarget.style.background = '#EBE6DC';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(20, 20, 19, 0.14)';
+                  e.currentTarget.style.background = '#F4F1EA';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
                     fontSize: '10px',
-                    letterSpacing: '0.25em',
-                    color: '#52525b',
-                    marginBottom: '8px',
+                    letterSpacing: '0.22em',
+                    color: '#78746C',
+                    marginBottom: '10px',
                     textTransform: 'uppercase',
-                  }}>
-                    <span style={{ color: '#a78bfa', marginRight: '8px' }}>02</span>
-                    ZERO MANDATE ENGINE DIRECT
-                  </div>
-                  <a
-                    href="mailto:marvin@thezeromandate.com"
-                    data-hover
-                    style={{
-                      fontFamily: 'monospace',
-                      fontSize: '16px',
-                      color: '#e4e4e7',
-                      letterSpacing: '0.04em',
-                      textDecoration: 'none',
-                      display: 'inline-block',
-                      padding: '8px 0',
-                      borderBottom: '1px solid #27272a',
-                      transition: 'color 0.3s, border-color 0.3s',
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.target as HTMLElement).style.color = '#a78bfa';
-                      (e.target as HTMLElement).style.borderColor = '#a78bfa';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.target as HTMLElement).style.color = '#e4e4e7';
-                      (e.target as HTMLElement).style.borderColor = '#27272a';
-                    }}
-                  >
-                    marvin@thezeromandate.com
-                  </a>
+                  }}
+                >
+                  <span style={{ color: '#A65E2E', marginRight: '8px', fontWeight: 600 }}>02</span>
+                  ZERO MANDATE ENGINE DIRECT
                 </div>
-              </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
+                    fontSize: '15px',
+                    color: '#141413',
+                    fontWeight: 600,
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  marvin@thezeromandate.com
+                </div>
+              </a>
+            </div>
 
-              {/* Divider */}
-              <div style={{
+            {/* Divider */}
+            <div
+              style={{
                 width: '100%',
                 height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
-                margin: '32px 0',
-              }} />
+                background: 'linear-gradient(90deg, transparent, rgba(20,20,19,0.16), transparent)',
+                margin: '32px 0 24px 0',
+              }}
+            />
 
-              {/* Status line */}
-              <div style={{
-                fontFamily: 'monospace',
+            {/* Status line */}
+            <div
+              style={{
+                fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '10px',
-                color: '#27272a',
+                color: '#78746C',
                 textAlign: 'center',
                 letterSpacing: '0.15em',
-              }}>
-                ▸ ALL CHANNELS MONITORED — DETERMINISTIC RESPONSES WITHIN 48-72 HOURS
-              </div>
+              }}
+            >
+              ▸ ALL CHANNELS MONITORED — DETERMINISTIC RESPONSES WITHIN 48-72 HOURS
             </div>
           </div>
         </motion.div>

@@ -24,14 +24,14 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-          animate={{ opacity: 1, backdropFilter: 'blur(12px)' }}
+          animate={{ opacity: 1, backdropFilter: 'blur(20px)' }}
           exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            background: 'rgba(0,0,0,0.92)',
+            background: 'rgba(244, 241, 234, 0.94)',
             overflowY: 'auto',
           }}
           onClick={onClose}
@@ -40,132 +40,205 @@ export default function AboutModal({ isOpen, onClose }: { isOpen: boolean; onClo
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
             onClick={onClose}
+            className="cinematic-glass"
             style={{
-              position: 'fixed', top: '24px', right: '24px',
-              fontFamily: 'monospace', fontSize: '12px', color: '#a1a1aa',
-              border: '1px solid #3f3f46', padding: '8px 16px',
-              background: 'rgba(0,0,0,0.5)', cursor: 'pointer',
+              position: 'fixed',
+              top: '28px',
+              right: '28px',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '11px',
+              fontWeight: 600,
+              letterSpacing: '0.14em',
+              color: '#141413',
+              padding: '10px 22px',
+              borderRadius: '9999px',
+              cursor: 'pointer',
               zIndex: 10000,
             }}
           >
-            [ CLOSE ]
+            CLOSE ✕
           </motion.div>
 
           {/* Content container */}
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              maxWidth: '896px',
+              maxWidth: '880px',
               margin: '0 auto',
-              padding: '120px 48px 80px 48px',
+              padding: '100px 32px 96px 32px',
             }}
           >
-            {/* Section tag */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}
-            >
-              <div style={{ width: '16px', height: '1px', background: '#f59e0b' }} />
-              <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#f59e0b' }}>SECTION 05</span>
-            </motion.div>
-
-            {/* Title */}
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            <div
+              className="cinematic-glass"
               style={{
-                fontSize: 'clamp(2rem, 5vw, 3rem)',
-                fontWeight: 'bold',
-                letterSpacing: '-0.03em',
-                color: '#ffffff',
-                marginBottom: '64px',
+                borderRadius: '20px',
+                padding: 'clamp(32px, 6vw, 64px)',
+                position: 'relative',
+                overflow: 'hidden',
+                background: '#FAF8F5',
+                border: '1px solid rgba(20, 20, 19, 0.14)',
               }}
             >
-              ABOUT
-            </motion.h2>
-
-            {/* Paragraphs — styled like protocol cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-              {paragraphs.map((text, i) => (
-                <div key={i}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + i * 0.06, duration: 0.6, ease: 'easeOut' }}
+              {/* Section tag */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.15, duration: 0.6 }}
+                style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
+              >
+                <div
+                  className="cinematic-pill"
+                  style={{
+                    padding: '5px 14px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                  }}
+                >
+                  <span
                     style={{
-                      borderLeft: '2px solid #27272a',
-                      paddingLeft: '24px',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: '#A65E2E',
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-geist-mono), monospace',
+                      fontSize: '10px',
+                      letterSpacing: '0.35em',
+                      color: '#A65E2E',
+                      fontWeight: 600,
                     }}
                   >
-                    <p style={{ color: '#a1a1aa', fontSize: '16px', lineHeight: '1.8', maxWidth: '65ch' }}>
-                      {text}
-                    </p>
-                  </motion.div>
-
-                  {/* Video embed after the "constraint structure" paragraph */}
-                  {i === 4 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6, duration: 0.8, ease: 'easeOut' }}
-                      style={{
-                        marginTop: '40px',
-                        border: '1px solid #27272a',
-                        background: '#000',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <video
-                        src="/images/video_bsvs_040820261135.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        controls
-                        style={{
-                          width: '100%',
-                          display: 'block',
-                        }}
-                      />
-                    </motion.div>
-                  )}
+                    SECTION 05
+                  </span>
                 </div>
-              ))}
-            </div>
+              </motion.div>
 
-            {/* Inquiries footer */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              style={{
-                marginTop: '80px',
-                paddingTop: '32px',
-                borderTop: '1px solid #27272a',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                gap: '8px',
-              }}
-            >
-              <span style={{ fontFamily: 'monospace', fontSize: '10px', letterSpacing: '0.2em', color: '#52525b', textTransform: 'uppercase' }}>
-                INQUIRIES
-              </span>
-              <a
-                href="mailto:mkd@bestillvisualstudio.com"
+              {/* Title */}
+              <motion.h2
+                className="font-editorial"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.1em',
-                  color: '#f59e0b', textDecoration: 'none',
+                  fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
+                  color: '#141413',
+                  marginBottom: '48px',
                 }}
               >
-                mkd@bestillvisualstudio.com
-              </a>
-            </motion.div>
+                ABOUT
+              </motion.h2>
+
+              {/* Paragraphs */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                {paragraphs.map((text, i) => (
+                  <div key={i}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 + i * 0.05, duration: 0.6, ease: 'easeOut' }}
+                      style={{
+                        borderLeft: i === 0 || i === 3 || i === 7 ? '3px solid #A65E2E' : '2px solid rgba(20, 20, 19, 0.14)',
+                        paddingLeft: '24px',
+                      }}
+                    >
+                      <p
+                        className={i === 0 || i === 3 || i === 7 ? 'font-editorial' : undefined}
+                        style={{
+                          color: i === 0 || i === 3 || i === 7 ? '#141413' : '#4A4843',
+                          fontWeight: i === 0 || i === 3 || i === 7 ? 600 : 400,
+                          fontSize: i === 0 || i === 3 || i === 7 ? '22px' : '16.5px',
+                          lineHeight: '1.8',
+                          maxWidth: '68ch',
+                        }}
+                      >
+                        {text}
+                      </p>
+                    </motion.div>
+
+                    {/* Video embed after the "constraint structure" paragraph */}
+                    {i === 4 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+                        style={{
+                          marginTop: '36px',
+                          borderRadius: '14px',
+                          border: '1px solid rgba(20, 20, 19, 0.16)',
+                          background: '#EBE6DC',
+                          padding: '10px',
+                          overflow: 'hidden',
+                          boxShadow: '0 20px 48px rgba(20, 20, 19, 0.12)',
+                        }}
+                      >
+                        <video
+                          src="/images/video_bsvs_040820261135.mp4"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          controls
+                          style={{
+                            width: '100%',
+                            display: 'block',
+                            borderRadius: '8px',
+                          }}
+                        />
+                      </motion.div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Inquiries footer */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.75, duration: 0.6 }}
+                style={{
+                  marginTop: '64px',
+                  paddingTop: '32px',
+                  borderTop: '1px solid rgba(20, 20, 19, 0.12)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '10px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.22em',
+                    color: '#78746C',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  INQUIRIES
+                </span>
+                <a
+                  href="mailto:mkd@bestillvisualstudio.com"
+                  style={{
+                    fontFamily: 'var(--font-geist-mono), monospace',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
+                    color: '#A65E2E',
+                    textDecoration: 'none',
+                  }}
+                >
+                  mkd@bestillvisualstudio.com
+                </a>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       )}

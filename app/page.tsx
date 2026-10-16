@@ -14,15 +14,21 @@ import HookLibrary from './components/HookLibrary';
 
 export default function PortfolioUI() {
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     document.addEventListener("contextmenu", handleContextMenu);
-    return () => document.removeEventListener("contextmenu", handleContextMenu);
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-cyan-900 selection:text-cyan-50">
+    <div className="min-h-screen bg-[#F4F1EA] text-[#141413] relative overflow-x-hidden arch-grid noise">
       {/* CURSOR */}
       <CursorRig />
 
@@ -30,28 +36,66 @@ export default function PortfolioUI() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10"
       >
-        {/* ── HEADER / NAV ── */}
-        <header className="fixed top-0 w-full z-50 h-16 flex items-center px-6 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
-            <div className="flex items-center gap-3">
+        {/* ── FLOATING ARCHITECTURAL HEADER / NAV ── */}
+        <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4 transition-all duration-500">
+          <div
+            style={{
+              maxWidth: '1320px',
+              margin: '0 auto',
+              height: scrolled ? '58px' : '68px',
+              padding: '0 28px',
+              borderRadius: '9999px',
+              background: scrolled
+                ? 'rgba(250, 248, 245, 0.92)'
+                : 'rgba(250, 248, 245, 0.82)',
+              backdropFilter: 'blur(20px) saturate(140%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(140%)',
+              border: '1px solid rgba(20, 20, 19, 0.14)',
+              boxShadow: scrolled
+                ? '0 16px 40px rgba(20, 20, 19, 0.08)'
+                : '0 8px 24px rgba(20, 20, 19, 0.04)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <a
+              href="#index"
+              data-hover
+              className="flex items-center gap-3 no-underline"
+            >
               <div
-                className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"
-                style={{ animationDuration: '3s' }}
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#A65E2E',
+                }}
               />
-              <span className="font-mono text-xl font-bold tracking-tighter text-white">BSVS</span>
-              <span className="hidden md:inline font-mono text-[10px] text-zinc-600 border-l border-zinc-800 pl-3 ml-1">
+              <span className="font-editorial text-2xl font-bold tracking-tight text-[#141413]">
+                BSVS
+              </span>
+              <span className="hidden sm:inline font-mono text-[10px] tracking-[0.22em] text-[#78746C] border-l border-[#141413]/15 pl-3 ml-1">
                 SYS.OP.NODE
               </span>
-            </div>
+            </a>
 
-            <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-500">
-              <a href="#index"   className="hover:text-cyan-400 transition-colors" data-hover>01. INDEX</a>
-              <a href="#mandate" className="hover:text-amber-400 transition-colors" data-hover>02. ZERO MANDATE</a>
-              <a href="#audit"   className="hover:text-rose-400 transition-colors" data-hover>03. VISUAL AUDIT</a>
-              <a href="#hook"    className="hover:text-violet-400 transition-colors" data-hover>04. HOOK LIBRARY</a>
-              <a href="/telemetry_benchmarks" className="hover:text-emerald-400 transition-colors" data-hover>05. TELEMETRY</a>
+            <nav className="flex items-center gap-4 md:gap-8 font-mono text-[10.5px] font-semibold tracking-[0.14em] text-[#4A4843]">
+              <a href="#index"   className="hover:text-[#A65E2E] transition-colors" data-hover>01. INDEX</a>
+              <a href="#mandate" className="hover:text-[#A65E2E] transition-colors" data-hover>02. ZERO MANDATE</a>
+              <a href="#audit"   className="hover:text-[#A65E2E] transition-colors" data-hover>03. VISUAL AUDIT</a>
+              <a href="#hook"    className="hover:text-[#A65E2E] transition-colors" data-hover>04. HOOK LIBRARY</a>
+              <a
+                href="/telemetry_benchmarks"
+                className="hover:bg-[#141413] hover:text-[#FAF8F5] transition-all px-4 py-1.5 rounded-full bg-[#EBE6DC] border border-[#141413]/15 text-[#141413]"
+                data-hover
+              >
+                05. TELEMETRY
+              </a>
             </nav>
           </div>
         </header>
@@ -60,44 +104,58 @@ export default function PortfolioUI() {
         <main>
           <HeroSection />
 
-          {/* SPACER: Hero → Zero Mandate */}
-          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          {/* ARCHITECTURAL HAIRLINE DIVIDER: Hero → Zero Mandate */}
+          <div style={{ height: '96px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '85%', maxWidth: '1280px', height: '1px', background: 'rgba(20, 20, 19, 0.14)' }} />
           </div>
 
           <ZeroMandate />
 
-          {/* SPACER: Zero Mandate → Visual Audit */}
-          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          {/* ARCHITECTURAL HAIRLINE DIVIDER: Zero Mandate → Visual Audit */}
+          <div style={{ height: '96px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '85%', maxWidth: '1280px', height: '1px', background: 'rgba(20, 20, 19, 0.14)' }} />
           </div>
 
           <VisualAudit />
 
-          {/* SPACER: Visual Audit → Hook Library */}
-          <div style={{ height: '120px', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '60%', height: '1px', background: 'linear-gradient(90deg, transparent, #3f3f46, transparent)' }} />
+          {/* ARCHITECTURAL HAIRLINE DIVIDER: Visual Audit → Hook Library */}
+          <div style={{ height: '96px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '85%', maxWidth: '1280px', height: '1px', background: 'rgba(20, 20, 19, 0.14)' }} />
           </div>
 
           <HookLibrary />
         </main>
 
         {/* ── FOOTER ── */}
-        <footer className="border-t border-zinc-800 bg-black">
-          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-600">
-              <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+        <footer
+          style={{
+            borderTop: '1px solid rgba(20, 20, 19, 0.14)',
+            background: '#EBE6DC',
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2.5 font-mono text-[10.5px] tracking-[0.16em] text-[#4A4843]">
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#2E6F40',
+                }}
+              />
               <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
             </div>
             <div className="flex items-center gap-6">
               <button
                 onClick={() => setAboutOpen(true)}
-                className="font-mono text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors uppercase cursor-pointer bg-transparent border-0"
+                data-hover
+                className="cinematic-btn cinematic-btn-secondary"
+                style={{ padding: '10px 24px', fontSize: '10.5px' }}
               >
-                [ DESIGN MANIFESTO ]
+                DESIGN MANIFESTO
               </button>
             </div>
-            <div className="font-mono text-[10px] text-zinc-700">
+            <div className="font-mono text-[10.5px] tracking-[0.12em] text-[#78746C]">
               &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL PROTOCOLS ENFORCED.
             </div>
           </div>
@@ -109,4 +167,6 @@ export default function PortfolioUI() {
     </div>
   );
 }
+
+
 

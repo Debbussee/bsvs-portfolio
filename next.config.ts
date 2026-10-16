@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/thezeromandate',
+        destination: '/thezeromandate/index.html',
+      },
+      {
+        source: '/thezeromandate/',
+        destination: '/thezeromandate/index.html',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
+

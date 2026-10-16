@@ -115,7 +115,7 @@ const SECTIONS = [
       { label: 'ID_LOCK', value: '1.000' },
       { label: 'DRIFT', value: 'NONE', pass: true },
     ],
-    accent: '#22d3ee',
+    accent: '#A65E2E',
   },
   {
     id: 'audio2emotion-02',
@@ -142,7 +142,7 @@ const SECTIONS = [
       { label: 'SPEC_CEIL', value: '0.880' },
       { label: 'BILAB_MATCH', value: '0.994' },
     ],
-    accent: '#f59e0b',
+    accent: '#141413',
   },
   {
     id: 'audio2emotion-03',
@@ -165,12 +165,12 @@ const SECTIONS = [
       { label: 'INFERENCE', value: '3.41ms' },
       { label: 'TENSOR_UTIL', value: '94.7%' },
     ],
-    accent: '#a78bfa',
+    accent: '#2D6A4F',
   },
 ];
 
 /* ═══════════════════════════════════════════════════════════════
-   UTILITY — JSON Syntax Highlighting (inline styles, no deps)
+   UTILITY — JSON Syntax Highlighting (Warm Editorial Palette)
    ═══════════════════════════════════════════════════════════════ */
 
 function syntaxHighlight(json: string): string {
@@ -182,22 +182,22 @@ function syntaxHighlight(json: string): string {
   return escaped.replace(
     /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g,
     (match) => {
-      let style = 'color:#34d399'; // numbers → emerald-400
+      let style = 'color:#2D6A4F;font-weight:600'; // numbers → forest green
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
-          style = 'color:#22d3ee'; // keys → cyan-400
+          style = 'color:#141413;font-weight:600'; // keys → obsidian
         } else if (match.includes('PASSED')) {
           style =
-            'color:#34d399;font-weight:bold;text-shadow:0 0 6px rgba(52,211,153,0.4)';
+            'color:#2D6A4F;font-weight:700';
         } else {
-          style = 'color:#fbbf24'; // strings → amber-400
+          style = 'color:#A65E2E'; // strings → bronze
         }
       } else if (/true/.test(match)) {
-        style = 'color:#34d399';
+        style = 'color:#2D6A4F;font-weight:600';
       } else if (/false/.test(match)) {
-        style = 'color:#fb7185'; // rose-400
+        style = 'color:#B43E3E;font-weight:600';
       } else if (/null/.test(match)) {
-        style = 'color:#71717a';
+        style = 'color:#78746C';
       }
       return `<span style="${style}">${match}</span>`;
     },
@@ -223,10 +223,9 @@ function TerminalPanel({
 
   return (
     <div
+      className="cinematic-glass"
       style={{
-        background: '#0c0c0f',
-        border: '1px solid #27272a',
-        borderRadius: '0',
+        borderRadius: '16px',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
@@ -239,45 +238,25 @@ function TerminalPanel({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '10px 16px',
-          background: '#111114',
-          borderBottom: '1px solid #1e1e22',
+          padding: '14px 20px',
+          background: '#EBE6DC',
+          borderBottom: '1px solid rgba(20, 20, 19, 0.12)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ display: 'flex', gap: '5px' }}>
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#27272a',
-              }}
-            />
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#27272a',
-              }}
-            />
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#27272a',
-              }}
-            />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(20,20,19,0.2)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(20,20,19,0.2)' }} />
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: accent }} />
           </div>
-          <Terminal size={11} style={{ color: '#52525b' }} />
+          <Terminal size={12} style={{ color: '#4A4843' }} />
           <span
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '10px',
-              color: '#52525b',
-              letterSpacing: '0.05em',
+              fontSize: '10.5px',
+              color: '#141413',
+              fontWeight: 600,
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
             }}
           >
@@ -288,7 +267,7 @@ function TerminalPanel({
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '9px',
-            color: '#3f3f46',
+            color: '#78746C',
           }}
         >
           {lines.length} LINES
@@ -300,15 +279,17 @@ function TerminalPanel({
         style={{
           flex: 1,
           overflow: 'auto',
-          padding: '16px 0',
+          padding: '18px 0',
+          background: '#FAF8F5',
         }}
       >
         <pre
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
-            fontSize: '11px',
-            lineHeight: '1.7',
+            fontSize: '11.5px',
+            lineHeight: '1.75',
             margin: 0,
+            color: '#4A4843',
           }}
         >
           {highlighted.map((line, i) => (
@@ -316,8 +297,8 @@ function TerminalPanel({
               key={i}
               style={{
                 display: 'flex',
-                paddingLeft: '16px',
-                paddingRight: '16px',
+                paddingLeft: '18px',
+                paddingRight: '18px',
               }}
             >
               <span
@@ -326,7 +307,7 @@ function TerminalPanel({
                   minWidth: '32px',
                   textAlign: 'right',
                   marginRight: '20px',
-                  color: '#3f3f46',
+                  color: '#A5A096',
                   userSelect: 'none',
                   fontSize: '10px',
                 }}
@@ -345,30 +326,29 @@ function TerminalPanel({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '8px 16px',
-          borderTop: '1px solid #1e1e22',
-          background: '#111114',
+          padding: '12px 20px',
+          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
+          background: '#EBE6DC',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div
             className="animate-pulse"
             style={{
-              width: '6px',
-              height: '6px',
+              width: '7px',
+              height: '7px',
               borderRadius: '50%',
-              background: '#34d399',
-              boxShadow: '0 0 6px rgba(52,211,153,0.4)',
+              background: '#2D6A4F',
               animationDuration: '2s',
             }}
           />
           <span
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '9px',
-              color: '#34d399',
+              fontSize: '10px',
+              color: '#2D6A4F',
               letterSpacing: '0.1em',
-              fontWeight: 'bold',
+              fontWeight: 600,
             }}
           >
             VALIDATION_GATE: PASSED
@@ -377,8 +357,8 @@ function TerminalPanel({
         <span
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
-            fontSize: '9px',
-            color: '#3f3f46',
+            fontSize: '9.5px',
+            color: '#78746C',
           }}
         >
           SCHEMA V1.0
@@ -403,62 +383,24 @@ function VideoViewport({
 }) {
   return (
     <div
+      className="cinematic-glass-interactive group"
       style={{
-        border: '1px solid #27272a',
-        background: '#0c0c0f',
+        borderRadius: '16px',
+        padding: '10px',
+        overflow: 'hidden',
         position: 'relative',
       }}
-      className="group"
     >
-      {/* HUD corner brackets */}
+      {/* Top accent highlight */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '8px',
-          height: '8px',
-          borderTop: `1px solid ${accent}33`,
-          borderLeft: `1px solid ${accent}33`,
-          zIndex: 2,
-          transition: 'border-color 0.3s',
-        }}
-        className="group-hover:!border-opacity-80"
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
           right: 0,
-          width: '8px',
-          height: '8px',
-          borderTop: `1px solid ${accent}33`,
-          borderRight: `1px solid ${accent}33`,
-          zIndex: 2,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '8px',
-          height: '8px',
-          borderBottom: `1px solid ${accent}33`,
-          borderLeft: `1px solid ${accent}33`,
-          zIndex: 2,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          width: '8px',
-          height: '8px',
-          borderBottom: `1px solid ${accent}33`,
-          borderRight: `1px solid ${accent}33`,
-          zIndex: 2,
+          height: '3px',
+          background: `linear-gradient(90deg, ${accent}, transparent)`,
+          zIndex: 3,
         }}
       />
 
@@ -476,7 +418,8 @@ function VideoViewport({
         style={{
           width: '100%',
           display: 'block',
-          background: '#000',
+          background: '#141413',
+          borderRadius: '10px',
         }}
       />
 
@@ -486,29 +429,30 @@ function VideoViewport({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '8px 12px',
-          borderTop: '1px solid #1e1e22',
-          background: '#111114',
+          padding: '12px 10px 4px 10px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Radio size={9} style={{ color: accent, opacity: 0.6 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Radio size={11} style={{ color: accent }} />
           <span
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '9px',
-              color: '#52525b',
-              letterSpacing: '0.05em',
+              fontSize: '10px',
+              color: '#141413',
+              fontWeight: 600,
+              letterSpacing: '0.06em',
             }}
           >
             {label}
           </span>
         </div>
         <span
+          className="cinematic-pill"
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '9px',
-            color: '#3f3f46',
+            color: '#4A4843',
+            padding: '2px 10px',
           }}
         >
           .MP4
@@ -533,21 +477,20 @@ function MetricBadge({
 }) {
   return (
     <div
+      className="cinematic-pill"
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
-        padding: '6px 10px',
-        border: '1px solid #1e1e22',
-        background: '#0c0c0f',
+        gap: '10px',
+        padding: '7px 14px',
       }}
     >
       <span
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
-          fontSize: '9px',
-          color: '#52525b',
-          letterSpacing: '0.05em',
+          fontSize: '9.5px',
+          color: '#78746C',
+          letterSpacing: '0.06em',
         }}
       >
         {label}
@@ -555,10 +498,10 @@ function MetricBadge({
       <span
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
-          fontSize: '9px',
-          color: pass ? '#34d399' : '#a1a1aa',
-          fontWeight: pass ? 'bold' : 'normal',
-          letterSpacing: '0.03em',
+          fontSize: '10px',
+          color: pass ? '#2D6A4F' : '#141413',
+          fontWeight: 600,
+          letterSpacing: '0.04em',
         }}
       >
         {value}
@@ -584,9 +527,9 @@ function BenchmarkSection({
       ref={ref}
       id={section.id}
       style={{
-        scrollMarginTop: '96px',
-        paddingTop: '64px',
-        paddingBottom: '64px',
+        scrollMarginTop: '120px',
+        paddingTop: '56px',
+        paddingBottom: '56px',
       }}
     >
       <motion.div
@@ -599,8 +542,8 @@ function BenchmarkSection({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '16px',
-            marginBottom: '12px',
+            gap: '14px',
+            marginBottom: '14px',
           }}
         >
           <span
@@ -608,28 +551,23 @@ function BenchmarkSection({
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '11px',
               color: section.accent,
-              fontWeight: 'bold',
+              background: `${section.accent}18`,
+              border: `1px solid ${section.accent}44`,
+              padding: '4px 12px',
+              borderRadius: '9999px',
+              fontWeight: 600,
               letterSpacing: '0.1em',
             }}
           >
             {section.index}
           </span>
-          <div
-            style={{
-              width: '16px',
-              height: '1px',
-              background: section.accent,
-              opacity: 0.4,
-            }}
-          />
           <h2
+            className="font-editorial"
             style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              color: '#ffffff',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
+              fontSize: 'clamp(1.65rem, 3vw, 2.35rem)',
+              fontWeight: 600,
+              color: '#141413',
+              letterSpacing: '-0.015em',
               margin: 0,
             }}
           >
@@ -642,18 +580,19 @@ function BenchmarkSection({
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
-            marginBottom: '16px',
+            marginBottom: '18px',
           }}
         >
           <span
+            className="cinematic-pill"
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '10px',
-              color: '#52525b',
-              padding: '2px 8px',
-              border: '1px solid #27272a',
+              color: '#4A4843',
+              padding: '4px 12px',
               textTransform: 'uppercase',
-              letterSpacing: '0.08em',
+              letterSpacing: '0.1em',
+              fontWeight: 600,
             }}
           >
             {section.subtitle}
@@ -662,25 +601,26 @@ function BenchmarkSection({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
+              gap: '6px',
             }}
           >
             <div
               className="animate-pulse"
               style={{
-                width: '5px',
-                height: '5px',
+                width: '6px',
+                height: '6px',
                 borderRadius: '50%',
-                background: '#34d399',
+                background: '#2D6A4F',
                 animationDuration: '2.5s',
               }}
             />
             <span
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: '9px',
-                color: '#34d399',
-                letterSpacing: '0.1em',
+                fontSize: '9.5px',
+                color: '#2D6A4F',
+                letterSpacing: '0.12em',
+                fontWeight: 600,
               }}
             >
               ACTIVE
@@ -690,12 +630,11 @@ function BenchmarkSection({
 
         <p
           style={{
-            fontFamily: 'var(--font-geist-mono), monospace',
-            fontSize: '11px',
-            color: '#71717a',
+            fontSize: '15.5px',
+            color: '#4A4843',
             lineHeight: '1.8',
-            maxWidth: '80ch',
-            marginBottom: '20px',
+            maxWidth: '78ch',
+            marginBottom: '24px',
           }}
         >
           {section.description}
@@ -706,8 +645,8 @@ function BenchmarkSection({
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '6px',
-            marginBottom: '24px',
+            gap: '10px',
+            marginBottom: '28px',
           }}
         >
           {section.metrics.map((m) => (
@@ -733,7 +672,7 @@ function BenchmarkSection({
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '16px',
+              gap: '20px',
             }}
           >
             {section.videos.map((v) => (
@@ -771,7 +710,7 @@ function SystemDivider() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '16px 0',
+        padding: '24px 0',
       }}
     >
       <div
@@ -779,26 +718,7 @@ function SystemDivider() {
           flex: 1,
           height: '1px',
           background:
-            'linear-gradient(90deg, transparent, #27272a 30%, #27272a 70%, transparent)',
-        }}
-      />
-      <span
-        style={{
-          fontFamily: 'var(--font-geist-mono), monospace',
-          fontSize: '8px',
-          color: '#27272a',
-          padding: '0 16px',
-          letterSpacing: '0.2em',
-        }}
-      >
-        ■ ■ ■
-      </span>
-      <div
-        style={{
-          flex: 1,
-          height: '1px',
-          background:
-            'linear-gradient(90deg, transparent, #27272a 30%, #27272a 70%, transparent)',
+            'linear-gradient(90deg, transparent, rgba(20, 20, 19, 0.14) 20%, rgba(20, 20, 19, 0.14) 80%, transparent)',
         }}
       />
     </div>
@@ -864,123 +784,58 @@ export default function TelemetryBenchmarksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 selection:bg-cyan-900 selection:text-cyan-50 relative overflow-hidden scanlines noise">
+    <div className="min-h-screen bg-[#F4F1EA] text-[#141413] selection:bg-[#A65E2E]/20 selection:text-[#141413] relative overflow-hidden arch-grid noise">
       <CursorRig />
 
       {/* ══════════════════════════════════════════
-          HEADER / NAV
+          FLOATING WARM STONE HEADER / NAV
           ══════════════════════════════════════════ */}
-      <header className="fixed top-0 w-full z-50 h-16 flex items-center px-6 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
+        <div
+          style={{
+            maxWidth: '1440px',
+            margin: '0 auto',
+            height: '62px',
+            padding: '0 24px',
+            borderRadius: '9999px',
+            background: 'rgba(244, 241, 234, 0.88)',
+            backdropFilter: 'blur(20px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(140%)',
+            border: '1px solid rgba(20, 20, 19, 0.12)',
+            boxShadow: '0 12px 32px rgba(20, 20, 19, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <div className="flex items-center gap-3">
             <div
-              className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"
-              style={{ animationDuration: '3s' }}
+              className="w-2 h-2 bg-[#A65E2E] rounded-full"
             />
             <Link
               href="/"
-              className="font-mono text-xl font-bold tracking-tighter text-white uppercase"
+              className="font-editorial text-2xl font-bold tracking-tight text-[#141413] uppercase no-underline"
               data-hover
             >
               BSVS
             </Link>
-            <span className="hidden md:inline font-mono text-[10px] text-zinc-600 border-l border-zinc-800 pl-3 ml-1">
+            <span className="hidden md:inline font-mono text-[10px] tracking-[0.18em] text-[#78746C] border-l border-[#141413]/15 pl-3 ml-1">
               SYS.OP.NODE // TELEMETRY_BENCHMARKS
             </span>
           </div>
 
-          <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-500">
+          <nav className="flex gap-8 font-mono text-xs tracking-widest">
             <Link
               href="/"
-              className="hover:text-cyan-400 transition-colors flex items-center gap-2"
+              className="cinematic-btn cinematic-btn-secondary"
+              style={{ padding: '7px 18px', fontSize: '10px' }}
               data-hover
             >
-              <ArrowLeft size={12} /> [ RETURN TO PORTAL ]
+              <ArrowLeft size={12} /> RETURN TO PORTAL
             </Link>
           </nav>
         </div>
       </header>
-
-      {/* ══════════════════════════════════════════
-          LIVE SESSION STATUS BAR
-          ══════════════════════════════════════════ */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '64px',
-          left: 0,
-          right: 0,
-          zIndex: 49,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '6px 24px',
-          background: 'rgba(9,9,11,0.92)',
-          borderBottom: '1px solid #1e1e22',
-          backdropFilter: 'blur(8px)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <div
-              className="animate-pulse"
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: '#ef4444',
-                boxShadow: '0 0 8px rgba(239,68,68,0.6)',
-                animationDuration: '1.5s',
-              }}
-            />
-            <span
-              style={{
-                fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: '9px',
-                color: '#ef4444',
-                letterSpacing: '0.1em',
-                fontWeight: 'bold',
-              }}
-            >
-              LIVE DIAGNOSTIC SESSION
-            </span>
-          </div>
-          <span
-            style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '9px',
-              color: '#3f3f46',
-            }}
-          >
-            UPTIME {formatUptime(uptime)}
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '9px',
-              color: '#3f3f46',
-            }}
-          >
-            UTC {utcTime}
-          </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <ShieldCheck size={10} style={{ color: '#34d399' }} />
-            <span
-              style={{
-                fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: '9px',
-                color: '#34d399',
-                letterSpacing: '0.05em',
-              }}
-            >
-              3/3 GATES PASSED
-            </span>
-          </div>
-        </div>
-      </div>
 
       {/* ══════════════════════════════════════════
           MAIN CONTENT
@@ -991,14 +846,90 @@ export default function TelemetryBenchmarksPage() {
           margin: '0 auto',
           paddingLeft: 'clamp(24px, 5vw, 80px)',
           paddingRight: 'clamp(24px, 5vw, 80px)',
-          paddingTop: '160px',
+          paddingTop: '128px',
           paddingBottom: '96px',
           position: 'relative',
           zIndex: 10,
         }}
       >
+        {/* LIVE DIAGNOSTIC SESSION PILL BAR */}
+        <div
+          className="cinematic-glass"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '12px',
+            padding: '12px 24px',
+            borderRadius: '9999px',
+            marginBottom: '48px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div
+                className="animate-pulse"
+                style={{
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  background: '#B43E3E',
+                  animationDuration: '1.5s',
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '10px',
+                  color: '#B43E3E',
+                  letterSpacing: '0.14em',
+                  fontWeight: 600,
+                }}
+              >
+                LIVE DIAGNOSTIC SESSION
+              </span>
+            </div>
+            <span
+              style={{
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '10px',
+                color: '#78746C',
+              }}
+            >
+              UPTIME {formatUptime(uptime)}
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <span
+              style={{
+                fontFamily: 'var(--font-geist-mono), monospace',
+                fontSize: '10px',
+                color: '#78746C',
+              }}
+            >
+              UTC {utcTime}
+            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <ShieldCheck size={12} style={{ color: '#2D6A4F' }} />
+              <span
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '10px',
+                  color: '#2D6A4F',
+                  letterSpacing: '0.08em',
+                  fontWeight: 600,
+                }}
+              >
+                3/3 GATES PASSED
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* ── Page header ── */}
-        <div ref={headerRef} style={{ marginBottom: '64px' }}>
+        <div ref={headerRef} style={{ marginBottom: '56px' }}>
           <motion.div
             style={{
               display: 'flex',
@@ -1010,20 +941,32 @@ export default function TelemetryBenchmarksPage() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <Activity size={14} style={{ color: '#22d3ee' }} />
-            <span
+            <div
+              className="cinematic-pill"
               style={{
-                fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: '11px',
-                letterSpacing: '0.4em',
-                color: '#22d3ee',
+                padding: '5px 14px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
               }}
             >
-              TELEMETRY BENCHMARKS
-            </span>
+              <Activity size={13} style={{ color: '#A65E2E' }} />
+              <span
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '10px',
+                  letterSpacing: '0.35em',
+                  color: '#A65E2E',
+                  fontWeight: 600,
+                }}
+              >
+                TELEMETRY BENCHMARKS
+              </span>
+            </div>
           </motion.div>
 
           <motion.h1
+            className="font-editorial"
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{
@@ -1032,14 +975,13 @@ export default function TelemetryBenchmarksPage() {
               ease: [0.16, 1, 0.3, 1],
             }}
             style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: 'clamp(1.5rem, 4vw, 2.8rem)',
-              fontWeight: 'bold',
-              letterSpacing: '-0.03em',
-              color: '#ffffff',
-              marginBottom: '32px',
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: '#141413',
+              marginBottom: '28px',
               textTransform: 'uppercase',
-              lineHeight: '1.15',
+              lineHeight: '1.06',
             }}
           >
             Audio-to-Emotion
@@ -1056,15 +998,12 @@ export default function TelemetryBenchmarksPage() {
               ease: [0.16, 1, 0.3, 1],
             }}
             style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '11px',
-              lineHeight: '1.9',
-              color: '#71717a',
-              maxWidth: '80ch',
-              borderLeft: '2px solid #27272a',
+              fontSize: '15.5px',
+              lineHeight: '1.85',
+              color: '#4A4843',
+              maxWidth: '78ch',
+              borderLeft: '3px solid #A65E2E',
               paddingLeft: '24px',
-              paddingTop: '4px',
-              paddingBottom: '4px',
             }}
           >
             Diagnostic telemetry payloads for sub-dermal mesh tracking,
@@ -1086,8 +1025,8 @@ export default function TelemetryBenchmarksPage() {
             style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '8px',
-              marginTop: '28px',
+              gap: '10px',
+              marginTop: '32px',
             }}
           >
             {SECTIONS.map((s) => (
@@ -1095,23 +1034,16 @@ export default function TelemetryBenchmarksPage() {
                 key={s.id}
                 href={`#${s.id}`}
                 data-hover
+                className="cinematic-pill"
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
-                  fontSize: '10px',
-                  color: '#71717a',
-                  padding: '6px 14px',
-                  border: '1px solid #27272a',
-                  letterSpacing: '0.05em',
+                  fontSize: '10.5px',
+                  color: '#141413',
+                  fontWeight: 600,
+                  padding: '8px 18px',
+                  letterSpacing: '0.06em',
                   textDecoration: 'none',
-                  transition: 'color 0.2s, border-color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.color = s.accent;
-                  (e.target as HTMLElement).style.borderColor = s.accent + '66';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.color = '#71717a';
-                  (e.target as HTMLElement).style.borderColor = '#27272a';
+                  transition: 'all 0.25s ease',
                 }}
               >
                 {s.index} — {s.id.toUpperCase()}
@@ -1134,29 +1066,31 @@ export default function TelemetryBenchmarksPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="cinematic-glass"
           style={{
-            border: '1px solid #27272a',
-            background: '#0c0c0f',
-            padding: '24px 32px',
+            borderRadius: '18px',
+            padding: '32px 36px',
             marginTop: '64px',
+            background: '#EBE6DC',
+            border: '1px solid rgba(20, 20, 19, 0.14)',
           }}
         >
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
+              gap: '10px',
               marginBottom: '12px',
             }}
           >
-            <Cpu size={12} style={{ color: '#22d3ee', opacity: 0.6 }} />
+            <Cpu size={14} style={{ color: '#A65E2E' }} />
             <span
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: '10px',
-                color: '#52525b',
-                fontWeight: 'bold',
-                letterSpacing: '0.1em',
+                fontSize: '11px',
+                color: '#141413',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
               }}
             >
               CLASSIFICATION_NODE // PUBLIC_TELEMETRY_PAYLOAD
@@ -1164,9 +1098,8 @@ export default function TelemetryBenchmarksPage() {
           </div>
           <p
             style={{
-              fontFamily: 'var(--font-geist-mono), monospace',
-              fontSize: '10px',
-              color: '#3f3f46',
+              fontSize: '13.5px',
+              color: '#4A4843',
               lineHeight: '1.8',
               maxWidth: '90ch',
             }}
@@ -1184,13 +1117,21 @@ export default function TelemetryBenchmarksPage() {
       {/* ══════════════════════════════════════════
           FOOTER
           ══════════════════════════════════════════ */}
-      <footer className="border-t border-zinc-900 bg-black relative z-10">
-        <div className="max-w-7xl mx-auto px-8 md:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-600">
-            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+      <footer
+        style={{
+          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
+          background: '#EBE6DC',
+        }}
+        className="relative z-10"
+      >
+        <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em] text-[#4A4843]">
+            <div
+              className="w-2 h-2 bg-[#2D6A4F] rounded-full"
+            />
             <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
           </div>
-          <div className="font-mono text-[10px] text-zinc-500">
+          <div className="font-mono text-[10px] tracking-[0.12em] text-[#78746C]">
             &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL
             PROTOCOLS ENFORCED.
           </div>

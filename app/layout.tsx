@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,9 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const editorialSerif = Cormorant_Garamond({
+  variable: "--font-editorial",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "Be Still Visual Studio | Forensic Architecture & Kinetic Rendering",
-  description: "Strict dark-mode tactical portfolio enforcing absolute forensic truth in architectural visualization.",
+  description: "Architectural Warm Studio portfolio enforcing absolute forensic truth in architectural visualization.",
   keywords: ["portfolio", "3d", "architecture", "forensic", "kinetic rendering", "be still visual studio"],
   openGraph: {
     title: "Be Still Visual Studio",
@@ -42,10 +49,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} antialiased`}
       >
         {children}
       </body>
     </html>
   );
 }
+

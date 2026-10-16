@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { ArrowLeft, Cpu, ShieldCheck, Linkedin, Briefcase, Award, Crosshair } from 'lucide-react';
+import { ArrowLeft, Cpu, Linkedin } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const CursorRig = dynamic(() => import('../components/CursorRig'), { ssr: false });
@@ -13,7 +13,7 @@ function TimelineItem({
   title, 
   body, 
   index, 
-  glowColor = '#22d3ee' 
+  glowColor = '#A65E2E' 
 }: { 
   badge: string; 
   title: string; 
@@ -27,34 +27,64 @@ function TimelineItem({
   return (
     <motion.div
       ref={ref}
-      className="relative"
-      initial={{ opacity: 0, x: -24 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="cinematic-glass-interactive relative"
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       style={{
-        borderLeft: '2px solid #27272a',
-        paddingLeft: '40px',
-        paddingTop: '16px',
-        paddingBottom: '16px',
+        borderRadius: '16px',
+        padding: '32px 36px',
+        overflow: 'hidden',
       }}
     >
-      {/* Animated Left Glow Line */}
+      {/* Animated Top Bronze Rule */}
       <motion.div
-        className="absolute left-[-2px] top-0 w-[2px]"
-        style={{ background: glowColor }}
-        initial={{ height: 0 }}
-        animate={inView ? { height: '100%' } : { height: 0 }}
-        transition={{ delay: index * 0.1 + 0.2, duration: 0.5, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          height: '3px',
+          background: `linear-gradient(90deg, ${glowColor}, transparent)`,
+        }}
+        initial={{ width: 0 }}
+        animate={inView ? { width: '100%' } : { width: 0 }}
+        transition={{ delay: index * 0.08 + 0.2, duration: 0.6, ease: 'easeOut' }}
       />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-        <span style={{ fontFamily: 'monospace', fontSize: '9px', padding: '2px 8px', border: '1px solid #27272a', backgroundColor: 'rgba(24, 24, 27, 0.6)', color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+        <span
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '10px',
+            padding: '4px 12px',
+            borderRadius: '9999px',
+            border: `1px solid ${glowColor}55`,
+            backgroundColor: `${glowColor}14`,
+            color: glowColor,
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            fontWeight: 600,
+          }}
+        >
           {badge}
         </span>
       </div>
 
-      <h3 style={{ fontFamily: 'monospace', fontSize: '14px', fontWeight: 'bold', color: '#ffffff', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.05em' }}>{title}</h3>
-      <p style={{ color: '#a1a1aa', fontSize: '14px', lineHeight: '1.8', maxWidth: '65ch', whiteSpace: 'pre-wrap' }}>{body}</p>
+      <h3
+        className="font-editorial"
+        style={{
+          fontSize: '23px',
+          fontWeight: 600,
+          color: '#141413',
+          marginBottom: '12px',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        {title}
+      </h3>
+      <p style={{ color: '#4A4843', fontSize: '15.5px', lineHeight: '1.8', maxWidth: '72ch', whiteSpace: 'pre-wrap' }}>
+        {body}
+      </p>
     </motion.div>
   );
 }
@@ -76,29 +106,49 @@ export default function TransparencyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 selection:bg-cyan-900 selection:text-cyan-50 relative overflow-hidden scanlines noise">
+    <div className="min-h-screen bg-[#F4F1EA] text-[#141413] selection:bg-[#A65E2E]/20 selection:text-[#141413] relative overflow-hidden arch-grid noise">
       
       <CursorRig />
 
-      {/* ── HEADER / NAV ── */}
-      <header className="fixed top-0 w-full z-50 h-16 flex items-center px-6 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+      {/* ── FLOATING WARM STONE HEADER / NAV ── */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
+        <div
+          style={{
+            maxWidth: '1280px',
+            margin: '0 auto',
+            height: '62px',
+            padding: '0 24px',
+            borderRadius: '9999px',
+            background: 'rgba(244, 241, 234, 0.88)',
+            backdropFilter: 'blur(20px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(140%)',
+            border: '1px solid rgba(20, 20, 19, 0.12)',
+            boxShadow: '0 12px 32px rgba(20, 20, 19, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <div className="flex items-center gap-3">
             <div
-              className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"
-              style={{ animationDuration: '3s' }}
+              className="w-2 h-2 bg-[#A65E2E] rounded-full"
             />
-            <Link href="/" className="font-mono text-xl font-bold tracking-tighter text-white uppercase" data-hover>
+            <Link href="/" className="font-editorial text-2xl font-bold tracking-tight text-[#141413] uppercase no-underline" data-hover>
               BSVS
             </Link>
-            <span className="hidden md:inline font-mono text-[10px] text-zinc-600 border-l border-zinc-800 pl-3 ml-1">
+            <span className="hidden md:inline font-mono text-[10px] tracking-[0.18em] text-[#78746C] border-l border-[#141413]/15 pl-3 ml-1">
               SYS.OP.NODE // TRANSPARENCY
             </span>
           </div>
 
-          <nav className="flex gap-8 font-mono text-xs tracking-widest text-zinc-500">
-            <Link href="/" className="hover:text-cyan-400 transition-colors flex items-center gap-2" data-hover>
-              <ArrowLeft size={12} /> [ RETURN TO PORTAL ]
+          <nav className="flex gap-8 font-mono text-xs tracking-widest">
+            <Link
+              href="/"
+              className="cinematic-btn cinematic-btn-secondary"
+              style={{ padding: '7px 18px', fontSize: '10px' }}
+              data-hover
+            >
+              <ArrowLeft size={12} /> RETURN TO PORTAL
             </Link>
           </nav>
         </div>
@@ -107,45 +157,63 @@ export default function TransparencyPage() {
       {/* ── MAIN CONTENT ── */}
       <main
         style={{
-          maxWidth: '1280px',
+          maxWidth: '1160px',
           margin: '0 auto',
-          paddingLeft: 'clamp(32px, 8vw, 144px)',
-          paddingRight: 'clamp(24px, 5vw, 80px)',
-          paddingTop: '180px',
-          paddingBottom: '128px',
+          paddingLeft: 'clamp(24px, 6vw, 64px)',
+          paddingRight: 'clamp(24px, 6vw, 64px)',
+          paddingTop: '148px',
+          paddingBottom: '120px',
           position: 'relative',
           zIndex: 10
         }}
       >
-        
         {/* Intro / Header */}
-        <div ref={headerRef} style={{ marginBottom: '80px' }}>
+        <div ref={headerRef} style={{ marginBottom: '72px' }}>
           <motion.div
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div style={{ width: '16px', height: '1px', background: '#00d2ef' }} />
-            <span style={{ fontFamily: 'monospace', fontSize: '12px', letterSpacing: '0.5em', color: '#00d2ef' }}>TRANSPARENCY AUDIT</span>
+            <div
+              className="cinematic-pill"
+              style={{
+                padding: '5px 14px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#A65E2E',
+                }}
+              />
+              <span style={{ fontFamily: 'var(--font-geist-mono), monospace', fontSize: '10px', letterSpacing: '0.35em', color: '#A65E2E', fontWeight: 600 }}>
+                TRANSPARENCY AUDIT
+              </span>
+            </div>
           </motion.div>
 
           <motion.h1
+            className="font-editorial"
             initial={{ opacity: 0, y: 24 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: 'monospace',
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              fontWeight: 'bold',
-              letterSpacing: '-0.03em',
-              color: '#ffffff',
-              marginBottom: '48px',
+              fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: '#141413',
+              marginBottom: '32px',
               textTransform: 'uppercase',
-              lineHeight: '1.1',
+              lineHeight: '1.05',
             }}
           >
-            Executive Leadership &<br />Origin History
+            Executive Leadership &amp;<br />Origin History
           </motion.h1>
 
           <motion.p
@@ -153,15 +221,12 @@ export default function TransparencyPage() {
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              lineHeight: '1.8',
-              color: '#a1a1aa',
-              maxWidth: '65ch',
-              borderLeft: '2px solid #27272a',
-              paddingLeft: '32px',
-              paddingTop: '8px',
-              paddingBottom: '8px',
+              fontSize: '16px',
+              lineHeight: '1.85',
+              color: '#4A4843',
+              maxWidth: '72ch',
+              borderLeft: '3px solid #A65E2E',
+              paddingLeft: '24px',
             }}
           >
             Be Still Visual Studio LLC operates on a foundational paradigm where raw physical science intersects with high-fidelity digital systems. Founded by Marvin DeBouse and partnered with La Chaunia DeBouse, the studio’s corporate and technical architecture is forged from over two decades of deep industrial process engineering, telecom infrastructure, and enterprise operations.
@@ -172,116 +237,154 @@ export default function TransparencyPage() {
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
-            marginBottom: '120px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '32px',
+            marginBottom: '104px',
           }}
         >
-          
           {/* Marvin DeBouse */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="border border-zinc-800 bg-zinc-950 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
+            className="cinematic-glass-interactive flex flex-col justify-between relative overflow-hidden"
             style={{
-              padding: '48px 40px',
+              padding: '44px 36px',
+              borderRadius: '18px',
             }}
           >
-            {/* HUD Bounding Corner Brackets */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-800 group-hover:border-cyan-500/50 transition-colors"></div>
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: 'linear-gradient(90deg, #A65E2E, transparent)',
+              }}
+            />
 
             <div>
               <div className="flex justify-between items-start" style={{ marginBottom: '32px' }}>
                 <div>
-                  <h2 className="font-mono text-lg font-bold text-white uppercase tracking-wide">Marvin DeBouse</h2>
-                  <p className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest mt-1">Founder & Technical Director</p>
+                  <h2 className="font-editorial text-2xl font-bold text-[#141413] tracking-tight">Marvin DeBouse</h2>
+                  <p className="font-mono text-[11px] text-[#A65E2E] font-semibold uppercase tracking-[0.18em] mt-1.5">
+                    Founder &amp; Technical Director
+                  </p>
                 </div>
                 <a
                   href="https://www.linkedin.com/in/marvin-debouse-148a673b9/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-none border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-cyan-400 hover:border-cyan-400 transition-all bg-zinc-950"
+                  className="w-10 h-10 rounded-full border border-[#141413]/15 flex items-center justify-center text-[#4A4843] hover:text-[#A65E2E] hover:border-[#A65E2E] transition-all bg-[#F4F1EA]"
                   data-hover
                 >
-                  <Linkedin size={14} />
+                  <Linkedin size={15} />
                 </a>
               </div>
 
-              <div className="font-mono text-[11px] text-zinc-400" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <div>
-                  <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Core Mandate ]</span>
-                  <p className="text-zinc-300 leading-relaxed">Systems architecture, Zero Mandate Engine Core development, and forensic AI pipeline design.</p>
+                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                    CORE MANDATE
+                  </span>
+                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                    Systems architecture, Zero Mandate Engine Core development, and forensic AI pipeline design.
+                  </p>
                 </div>
                 <div>
-                  <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Specialization ]</span>
-                  <p className="text-zinc-300 leading-relaxed">High-scale GPU compute orchestration, hardware-level simulation logic, and the eradication of subjective generative drift through deterministic physical laws.</p>
+                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                    SPECIALIZATION
+                  </span>
+                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                    High-scale GPU compute orchestration, hardware-level simulation logic, and the eradication of subjective generative drift through deterministic physical laws.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-zinc-800 mt-10 pt-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></span>
-              <span className="font-mono text-[8px] text-zinc-600">NODE: ZME_CORE_ARCHITECT</span>
+            <div className="border-t border-[#141413]/10 mt-10 pt-6 flex items-center gap-2.5">
+              <span
+                className="w-2 h-2 bg-[#A65E2E] rounded-full"
+              />
+              <span className="font-mono text-[10px] tracking-[0.15em] text-[#78746C] font-medium">
+                NODE: ZME_CORE_ARCHITECT
+              </span>
             </div>
           </motion.div>
 
           {/* La Chaunia DeBouse */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="border border-zinc-800 bg-zinc-950 rounded-none relative group hover:border-zinc-700 transition-all flex flex-col justify-between"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="cinematic-glass-interactive flex flex-col justify-between relative overflow-hidden"
             style={{
-              padding: '48px 40px',
+              padding: '44px 36px',
+              borderRadius: '18px',
             }}
           >
-            {/* HUD Bounding Corner Brackets */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-800 group-hover:border-amber-500/50 transition-colors"></div>
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: 'linear-gradient(90deg, #141413, transparent)',
+              }}
+            />
 
             <div>
               <div className="flex justify-between items-start" style={{ marginBottom: '32px' }}>
                 <div>
-                  <h2 className="font-mono text-lg font-bold text-white uppercase tracking-wide">La Chaunia DeBouse</h2>
-                  <p className="font-mono text-[10px] text-amber-500 uppercase tracking-widest mt-1">Partner & Operations Review</p>
+                  <h2 className="font-editorial text-2xl font-bold text-[#141413] tracking-tight">La Chaunia DeBouse</h2>
+                  <p className="font-mono text-[11px] text-[#A65E2E] font-semibold uppercase tracking-[0.18em] mt-1.5">
+                    Partner &amp; Operations Review
+                  </p>
                 </div>
                 <a
                   href="https://www.linkedin.com/in/la-chaunia-debouse-05756a47/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-none border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-amber-500 hover:border-amber-500 transition-all bg-zinc-950"
+                  className="w-10 h-10 rounded-full border border-[#141413]/15 flex items-center justify-center text-[#4A4843] hover:text-[#A65E2E] hover:border-[#A65E2E] transition-all bg-[#F4F1EA]"
                   data-hover
                 >
-                  <Linkedin size={14} />
+                  <Linkedin size={15} />
                 </a>
               </div>
 
-              <div className="font-mono text-[11px] text-zinc-400" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <div>
-                  <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Core Mandate ]</span>
-                  <p className="text-zinc-300 leading-relaxed">Managing the studio's corporate legal infrastructure, fiscal compliance, and enterprise market deployment.</p>
+                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                    CORE MANDATE
+                  </span>
+                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                    Managing the studio&apos;s corporate legal infrastructure, fiscal compliance, and enterprise market deployment.
+                  </p>
                 </div>
                 <div>
-                  <span className="block text-zinc-500 uppercase tracking-widest mb-2 text-[9px]">[ Specialization ]</span>
-                  <p className="text-zinc-300 leading-relaxed">Structuring institutional joint ventures, risk mitigation, human capital optimization, and operational scalability.</p>
+                  <span className="block font-mono text-[#78746C] uppercase tracking-[0.2em] mb-2 text-[10px] font-semibold">
+                    SPECIALIZATION
+                  </span>
+                  <p className="text-[#4A4843] text-sm leading-relaxed">
+                    Structuring institutional joint ventures, risk mitigation, human capital optimization, and operational scalability.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-zinc-800 mt-10 pt-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
-              <span className="font-mono text-[8px] text-zinc-600">NODE: GOV_CORP_OFFICER</span>
+            <div className="border-t border-[#141413]/10 mt-10 pt-6 flex items-center gap-2.5">
+              <span
+                className="w-2 h-2 bg-[#141413] rounded-full"
+              />
+              <span className="font-mono text-[10px] tracking-[0.15em] text-[#78746C] font-medium">
+                NODE: GOV_CORP_OFFICER
+              </span>
             </div>
           </motion.div>
-
         </div>
 
         {/* ── TIMELINE SECTION ── */}
@@ -290,38 +393,42 @@ export default function TransparencyPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: '120px' }}
+          style={{ marginBottom: '96px' }}
         >
           <div 
             style={{
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
               gap: '16px',
-              marginBottom: '48px',
-              borderBottom: '1px solid #27272a',
-              paddingBottom: '24px',
+              marginBottom: '28px',
+              borderBottom: '1px solid rgba(20, 20, 19, 0.14)',
+              paddingBottom: '20px',
             }}
           >
-            <Cpu className="text-cyan-500 animate-pulse" size={20} />
-            <h2 style={{ fontFamily: 'monospace', fontSize: '16px', letterSpacing: '0.1em', color: '#ffffff', textTransform: 'uppercase' }}>Technical & Corporate Timeline</h2>
-            <div style={{ flex: 1, height: '1px', backgroundColor: '#27272a', marginLeft: '16px' }}></div>
-            <span style={{ fontFamily: 'monospace', fontSize: '12px', color: '#52525b' }}>TIMELINE_LOG</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <Cpu className="text-[#A65E2E]" size={20} />
+              <h2 className="font-editorial" style={{ fontSize: '26px', fontWeight: 600, letterSpacing: '0.04em', color: '#141413', textTransform: 'uppercase' }}>
+                Technical &amp; Corporate Timeline
+              </h2>
+            </div>
+            <span className="cinematic-pill font-mono text-[10px] text-[#4A4843] font-semibold px-3 py-1">
+              TIMELINE_LOG
+            </span>
           </div>
 
           <p 
             style={{
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              color: '#52525b',
-              marginBottom: '48px',
+              fontSize: '15.5px',
+              color: '#4A4843',
+              marginBottom: '36px',
             }}
           >
-            The cross-disciplinary expertise that defines the studio's operational framework spans technical precision, engineering discipline, and corporate governance:
+            The cross-disciplinary expertise that defines the studio&apos;s operational framework spans technical precision, engineering discipline, and corporate governance:
           </p>
 
-          {/* Vertical Timeline with ProtocolCard style items */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
-            
+          {/* Timeline Cards */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <TimelineItem 
               index={0}
               badge="Academic Matrix" 
@@ -348,7 +455,7 @@ export default function TransparencyPage() {
               badge="Corporate Matrix" 
               title="Strategic Enterprise & Human Capital Operations" 
               body="La Chaunia DeBouse establishes an extensive operational footprint across high-stakes corporate environments. Her background includes driving Human Resource Operations for the Dallas Independent School District, managing complex liability frameworks as a Claims Adjuster for State Farm Mutual Insurance, and steering asset administration as an Associate Manager for the Tivoli Apartment Community." 
-              glowColor="#f59e0b"
+              glowColor="#141413"
             />
 
             <TimelineItem 
@@ -356,7 +463,7 @@ export default function TransparencyPage() {
               badge="Academic Matrix" 
               title="Institutional Alignment & Communications Governance" 
               body="La Chaunia completes her Bachelor’s degree in Communications at Dallas Baptist University, cementing an executive skill set tailored for high-authority negotiation, strategic organizational scaling, and institutional partnership structures." 
-              glowColor="#f59e0b"
+              glowColor="#141413"
             />
 
             <TimelineItem 
@@ -364,9 +471,8 @@ export default function TransparencyPage() {
               badge="Current Epoch" 
               title="Consolidation: Be Still Visual Studio LLC" 
               body="The lifetimes of engineering rigor, network infrastructure, corporate liability management, and systemic design converge. Marvin DeBouse steps into the role of Founder & Technical Director to engineer the Zero Mandate Engine Core and pilot GPU compute orchestration. La Chaunia DeBouse assumes command of Corporate Governance, Entity Operations, & Strategic Partnership Management, establishing the legal, fiscal, and enterprise runway for the studio's deployments." 
-              glowColor="#10b981"
+              glowColor="#2D6A4F"
             />
-
           </div>
         </motion.div>
 
@@ -376,29 +482,42 @@ export default function TransparencyPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-zinc-500 leading-relaxed relative"
+          className="cinematic-glass leading-relaxed relative"
           style={{
-            padding: '32px 40px',
-            marginBottom: '80px',
+            padding: '32px 36px',
+            borderRadius: '18px',
+            background: '#EBE6DC',
+            border: '1px solid rgba(20, 20, 19, 0.14)',
           }}
         >
-          <div className="text-zinc-400 font-bold mb-4 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-emerald-500 inline-block rounded-full"></span>
+          <div className="font-mono text-xs text-[#141413] font-semibold mb-3 flex items-center gap-2.5 tracking-wider">
+            <span
+              className="w-2 h-2 bg-[#2D6A4F] inline-block rounded-full"
+            />
             GOVERNANCE_NODE // ZME_ENTITY_REGISTRY
           </div>
-          Corporate Governance Node: Be Still Visual Studio LLC is a legally registered corporate entity in the State of Texas, USA. Technical operations, bare-metal container orchestration pipelines, and deterministic asset validation schemas are maintained under active Texas LLC filing matrices.
+          <p className="text-sm text-[#4A4843] leading-relaxed">
+            Corporate Governance Node: Be Still Visual Studio LLC is a legally registered corporate entity in the State of Texas, USA. Technical operations, bare-metal container orchestration pipelines, and deterministic asset validation schemas are maintained under active Texas LLC filing matrices.
+          </p>
         </motion.div>
-
       </main>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-zinc-900 bg-black relative z-10">
-        <div className="max-w-7xl mx-auto px-8 md:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-600">
-            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+      <footer
+        style={{
+          borderTop: '1px solid rgba(20, 20, 19, 0.12)',
+          background: '#EBE6DC',
+        }}
+        className="relative z-10"
+      >
+        <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.16em] text-[#4A4843]">
+            <div
+              className="w-2 h-2 bg-[#2D6A4F] rounded-full"
+            />
             <span>SYSTEM ONLINE // BSVS INFRASTRUCTURE</span>
           </div>
-          <div className="font-mono text-[10px] text-zinc-500">
+          <div className="font-mono text-[10px] tracking-[0.12em] text-[#78746C]">
             &copy; {new Date().getFullYear()} BE STILL VISUAL STUDIO. ALL PROTOCOLS ENFORCED.
           </div>
         </div>
